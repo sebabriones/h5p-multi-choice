@@ -1,28 +1,29 @@
 {
-  "title": "Multiple Choice",
+  "machineName": "H5P.MultiChoiceCFRD",
+  "title": "Multiple Choice (CFRD)",
+  "description": "Create multiple choice tasks",
   "contentType": "Question",
+  "license": "MIT",
+  "author": "sbriones (CFRD-UDEC)",
   "majorVersion": 1,
-  "minorVersion": 16,
-  "patchVersion": 27,
+  "minorVersion": 1,
+  "patchVersion": 0,
   "runnable": 1,
   "embedTypes": [
     "iframe"
   ],
-  "machineName": "H5P.MultiChoice",
-  "author": "Joubel",
-  "license": "MIT",
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 28
   },
   "preloadedJs": [
     {
-      "path": "js/multichoice.js"
+      "path": "js/multi-choice-cfrd.js"
     }
   ],
   "preloadedCss": [
     {
-      "path": "css/multichoice.css"
+      "path": "css/multi-choice-cfrd.css"
     }
   ],
   "preloadedDependencies": [

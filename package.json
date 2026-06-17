@@ -1,0 +1,11 @@
+{
+  "name": "h5p-multi-choice-cfrd",
+  "version": "1.1.0",
+  "description": "Multiple Choice (CFRD) — fork upstream 1.16 sobre coreApi 1.28.",
+  "private": true,
+  "scripts": {
+    "sync:h5p-cli": "powershell -ExecutionPolicy Bypass -File ..\\scripts\\sync-h5p-cli.ps1"
+  },
+  "author": "sbriones (CFRD-UDEC)",
+  "license": "MIT"
+}
