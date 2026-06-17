@@ -7,7 +7,7 @@
   "author": "sbriones (CFRD-UDEC)",
   "majorVersion": 1,
   "minorVersion": 1,
-  "patchVersion": 0,
+  "patchVersion": 8,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -17,6 +17,9 @@
     "minorVersion": 28
   },
   "preloadedJs": [
+    {
+      "path": "js/play-area-scale.js"
+    },
     {
       "path": "js/multi-choice-cfrd.js"
     }
@@ -33,14 +36,24 @@
       "minorVersion": 5
     },
     {
-      "machineName": "H5P.JoubelUI",
+      "machineName": "H5P.JoubelUICFRD",
       "majorVersion": 1,
-      "minorVersion": 3
+      "minorVersion": 1
     },
     {
-      "machineName": "H5P.Question",
+      "machineName": "H5P.QuestionCFRD",
       "majorVersion": 1,
-      "minorVersion": 5
+      "minorVersion": 1
+    },
+    {
+      "machineName": "H5P.Instructions",
+      "majorVersion": 1,
+      "minorVersion": 0
+    },
+    {
+      "machineName": "H5P.Image",
+      "majorVersion": 1,
+      "minorVersion": 1
     }
   ],
   "editorDependencies": [

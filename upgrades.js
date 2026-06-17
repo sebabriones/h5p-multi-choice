@@ -317,6 +317,53 @@ H5PUpgrades['H5P.MultiChoiceCFRD'] = (function () {
           delete parameters.behaviour.disableImageZooming;
         }
         finished(null, parameters);
+      },
+      /**
+       * Replace top-level media with context (CFRD: image beside question).
+       *
+       * @param {object} parameters
+       * @param {function} finished
+       */
+      15: function (parameters, finished) {
+        if (parameters && parameters.media && parameters.media.type) {
+          var media = parameters.media;
+          var library = media.type;
+
+          if (library && library.library && library.library.indexOf('H5P.Image') === 0) {
+            parameters.context = parameters.context || {};
+            parameters.context.media = {
+              type: library,
+              disableImageZooming: media.disableImageZooming || false
+            };
+          }
+
+          delete parameters.media;
+        }
+
+        finished(null, parameters);
+      },
+      /**
+       * Wrap legacy overallFeedback array in CFRD popup config object.
+       *
+       * @param {object} parameters
+       * @param {function} finished
+       */
+      16: function (parameters, finished) {
+        var overallFeedback = parameters && parameters.overallFeedback;
+
+        if (Array.isArray(overallFeedback)) {
+          parameters.overallFeedback = {
+            popupBackgroundColor: '#ffffff',
+            feedbackTextColor: '#333333',
+            overallFeedback: overallFeedback
+          };
+        }
+        else if (overallFeedback && typeof overallFeedback === 'object' && !overallFeedback.popupBackgroundColor) {
+          overallFeedback.popupBackgroundColor = '#ffffff';
+          overallFeedback.feedbackTextColor = '#333333';
+        }
+
+        finished(null, parameters);
       }
     }
   };

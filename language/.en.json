@@ -1,14 +1,76 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Show instructions"
         },
         {
-          "label": "Disable image zooming"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
         }
       ]
     },
@@ -68,6 +130,38 @@
               {
                 "label": "Feedback for defined score range",
                 "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered)."
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -101,6 +195,14 @@
           "label": "Textual representation of the score bar for those using a readspeaker",
           "description": "Available variables are :num and :total",
           "default": "You got :num out of :total points"
+        },
+        {
+          "label": "Feedback popup close button label",
+          "default": "Close"
+        },
+        {
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
           "label": "Tip Available (not displayed)",

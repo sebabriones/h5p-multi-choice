@@ -18,6 +18,183 @@
 var H5P = H5P || {};
 
 /**
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isTruthy(value) {
+  return value === true || value === 1 || value === '1' || value === 'true';
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ * @returns {Object|null}
+ */
+function getInstructionsOptions(instance) {
+  var instructions = instance && instance.options && instance.options.instructions;
+  var text;
+
+  if (!instructions || !isTruthy(instructions.enabled)) {
+    return null;
+  }
+
+  text = (instructions.text === undefined || instructions.text === null) ?
+    '' :
+    String(instructions.text).trim();
+
+  if (!text) {
+    return null;
+  }
+
+  return {
+    id: instance.contentId || instance.id,
+    text: text,
+    displayMode: instructions.displayMode || 'both',
+    introButtonLabel: instructions.introButtonLabel || 'Start',
+    tabButtonLabel: instructions.tabButtonLabel || 'Instructions',
+    animation: H5P.jQuery.extend(true, {}, instructions.animation || {}),
+    startCollapsed: instructions.startCollapsed === undefined ?
+      true :
+      isTruthy(instructions.startCollapsed)
+  };
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ * @param {H5P.jQuery} $fallbackContainer
+ */
+function scheduleInstructionsAttach(instance, $fallbackContainer) {
+  [0, 200, 500].forEach(function (delay) {
+    setTimeout(function () {
+      var instructions = getInstructionsOptions(instance);
+      var $target = (instance.$playArea && instance.$playArea.length) ?
+        instance.$playArea :
+        ((instance.$container && instance.$container.length) ?
+          instance.$container :
+          $fallbackContainer);
+      var attached;
+
+      if (!instructions || !$target || !$target.length) {
+        return;
+      }
+
+      if ($target.find('.h5p-instructions-root').length) {
+        instance.trigger('resize');
+        return;
+      }
+
+      if (H5P.Instructions && typeof H5P.Instructions.attach === 'function') {
+        attached = H5P.Instructions.attach($target, instructions);
+
+        if (attached) {
+          instance.trigger('resize');
+        }
+      }
+    }, delay);
+  });
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function scheduleDeferredResize(instance) {
+  requestAnimationFrame(function () {
+    instance.trigger('resize');
+
+    requestAnimationFrame(function () {
+      instance.trigger('resize');
+    });
+  });
+
+  [50, 150, 350].forEach(function (delay) {
+    setTimeout(function () {
+      instance.trigger('resize');
+    }, delay);
+  });
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function refreshInstructionsScale(instance) {
+  var instructions = getInstructionsOptions(instance);
+
+  if (!instructions || !instance.$playArea || !instance.$playArea.length) {
+    return;
+  }
+
+  if (H5P.Instructions && typeof H5P.Instructions.updateScale === 'function') {
+    H5P.Instructions.updateScale(instance.$playArea, instructions);
+  }
+}
+
+/**
+ * @param {string} html
+ * @returns {string}
+ */
+function stripHtmlText(html) {
+  var decoder = document.createElement('div');
+  decoder.innerHTML = html || '';
+  return (decoder.textContent || decoder.innerText || '').replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+}
+
+/**
+ * @param {object} context
+ * @returns {boolean}
+ */
+function hasContextText(context) {
+  return !!(context && context.text && stripHtmlText(context.text));
+}
+
+/**
+ * @param {object} context
+ * @returns {boolean}
+ */
+function hasContextImage(context) {
+  var media = context && context.media;
+  var type = media && media.type;
+  return !!(type && type.library && type.params && type.params.file);
+}
+
+/**
+ * @param {object} context
+ * @returns {string|null}
+ */
+function getContextLayoutClass(context) {
+  var hasText = hasContextText(context);
+  var hasImage = hasContextImage(context);
+
+  if (!hasText && !hasImage) {
+    return null;
+  }
+
+  if (hasText && hasImage) {
+    return 'h5p-mc-context--both';
+  }
+
+  if (hasText) {
+    return 'h5p-mc-context--text-only';
+  }
+
+  return 'h5p-mc-context--image-only';
+}
+
+/**
+ * @param {object} context
+ * @param {number} contentId
+ * @param {H5P.jQuery} $container
+ */
+function attachContextImage(context, contentId, $container) {
+  var media = context && context.media;
+  var library = media && media.type;
+
+  if (!library || !library.library || !$container || !$container.length) {
+    return;
+  }
+
+  H5P.newRunnable(library, contentId, $container);
+}
+
+/**
  * @typedef {Object} Options
  *   Options for multiple choice
  *
@@ -50,13 +227,15 @@ var H5P = H5P || {};
  * @returns {H5P.MultiChoiceCFRD}
  * @constructor
  */
+var PlayArea = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.PlayArea;
+
 H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   if (!(this instanceof H5P.MultiChoiceCFRD))
     return new H5P.MultiChoiceCFRD(options, contentId, contentData);
   var self = this;
   this.contentId = contentId;
   this.contentData = contentData;
-  H5P.Question.call(self, 'multichoice', { theme: true });
+  H5P.QuestionCFRD.call(self, 'multichoice', { theme: true });
   var $ = H5P.jQuery;
 
   var defaults = {
@@ -73,7 +252,11 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
         correct: true
       }
     ],
-    overallFeedback: [],
+    overallFeedback: {
+      popupBackgroundColor: '#ffffff',
+      feedbackTextColor: '#333333',
+      overallFeedback: []
+    },
     weight: 1,
     userAnswers: [],
     UI: {
@@ -82,6 +265,8 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       showSolutionButton: 'Show solution',
       tryAgainButton: 'Try again',
       scoreBarLabel: 'You got :num out of :total points',
+      feedbackPopupCloseLabel: 'Close',
+      showFeedbackButtonLabel: 'Show feedback',
       tipAvailable: "Tip available",
       feedbackAvailable: "Feedback available",
       readFeedback: 'Read feedback',
@@ -94,18 +279,97 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     },
     behaviour: {
       enableRetry: true,
-      enableSolutionsButton: true,
+      enableSolutionsButton: false,
       enableCheckButton: true,
       type: 'auto',
       singlePoint: true,
       randomAnswers: false,
-      showSolutionsRequiresInput: true,
+      showSolutionsRequiresInput: false,
       autoCheck: false,
       passPercentage: 100,
-      showScorePoints: true
+      showScorePoints: false
     }
   };
   var params = $.extend(true, defaults, options);
+  self.options = params;
+
+  if (Array.isArray(params.overallFeedback)) {
+    params.overallFeedback = {
+      popupBackgroundColor: '#ffffff',
+      feedbackTextColor: '#333333',
+      overallFeedback: params.overallFeedback
+    };
+  }
+
+  self.playAreaSize = PlayArea.getDesignSize();
+
+  var originalAttach = self.attach;
+  self.attach = function ($container) {
+    originalAttach.call(self, $container);
+    self.$playArea = $container.addClass('h5p-mc-play-area');
+    scheduleInstructionsAttach(self, self.$playArea);
+
+    if (window.ResizeObserver && !self.playAreaResizeObserver && self.$playArea.length) {
+      self.playAreaResizeObserver = new ResizeObserver(function () {
+        self.trigger('resize');
+      });
+      self.playAreaResizeObserver.observe(self.$playArea[0]);
+    }
+
+    scheduleDeferredResize(self);
+  };
+
+  self.on('resize', function (event) {
+    if (event && event.data && event.data.repositionOnly) {
+      return;
+    }
+
+    var design = self.playAreaSize;
+    var $parent;
+    var width;
+    var scale;
+    var fontSize;
+
+    if (!self.$playArea || !self.$playArea.length || !PlayArea) {
+      return;
+    }
+
+    if (!self.$playArea.is(':visible')) {
+      scheduleDeferredResize(self);
+      return;
+    }
+
+    $parent = self.$playArea.parent();
+    width = self.$playArea.width();
+
+    if (width <= 0) {
+      width = $parent.width() || design.baseWidth;
+    }
+
+    scale = PlayArea.getScale(width);
+    fontSize = (design.baseFontSize * scale) + 'px';
+
+    self.$playArea.css({
+      width: '100%',
+      height: '',
+      fontSize: fontSize,
+      '--mc-scale': scale.toFixed(4)
+    });
+
+    if (self.$playArea) {
+      var $popup = self.$playArea.find('.h5p-question-feedback.h5p-question-popup');
+      $popup.css('fontSize', fontSize);
+
+      if ($popup.length && $popup.hasClass('h5p-question-visible')) {
+        setTimeout(function () {
+          self.trigger('resize', {repositionOnly: true});
+        }, 0);
+      }
+    }
+
+    refreshInstructionsScale(self);
+  });
+
   // Keep track of number of correct choices
   var numCorrect = 0;
 
@@ -188,43 +452,15 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
    * Register the different parts of the task with the H5P.Question structure.
    */
   self.registerDomElements = function () {
-    var media = params.media;
-    if (media && media.type && media.type.library) {
-      media = media.type;
-      var type = media.library.split(' ')[0];
-      if (type === 'H5P.Image') {
-        if (media.params.file) {
-          // Register task image
-          self.setImage(media.params.file.path, {
-            disableImageZooming: params.media.disableImageZooming || false,
-            alt: media.params.alt,
-            title: media.params.title,
-            expandImage: media.params.expandImage,
-            minimizeImage: media.params.minimizeImage
-          });
-        }
-      }
-      else if (type === 'H5P.Video') {
-        if (media.params.sources) {
-          // Register task video
-          self.setVideo(media);
-        }
-      }
-      else if (type === 'H5P.Audio') {
-        if (media.params.files) {
-          // Register task audio
-          self.setAudio(media);
-        }
-      }
-    }
+    var context = params.context;
+    var contextLayoutClass = getContextLayoutClass(context);
+    var contextTextId = 'multichoice-' + self.contentId + '-context';
+    var $contextMedia;
 
     // Determine if we're using checkboxes or radio buttons
     for (var i = 0; i < params.answers.length; i++) {
       params.answers[i].checkboxOrRadioIcon = getCheckboxOrRadioIcon(params.behaviour.singleAnswer, params.userAnswers.indexOf(i) > -1);
     }
-
-    // Register Introduction
-    self.setIntroduction('<div id="' + params.labelId + '">' + params.question + '</div>');
 
     // Register task content area
     $myDom = $('<ul>', {
@@ -247,9 +483,65 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       });
     }
 
-    self.setContent($myDom, {
-      'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
-    });
+    if (contextLayoutClass) {
+      var $layout = $('<div>', {
+        'class': 'h5p-mc-slide-layout'
+      });
+      var $contextAside = $('<aside>', {
+        'class': 'h5p-mc-context',
+        'aria-label': 'Context'
+      });
+      var $questionColumn = $('<div>', {
+        'class': 'h5p-mc-question-column'
+      });
+      var questionAttrs = {
+        id: params.labelId,
+        'class': 'h5p-mc-question-intro h5p-question-introduction',
+        html: params.question
+      };
+
+      if (hasContextText(context)) {
+        questionAttrs['aria-describedby'] = contextTextId;
+      }
+
+      if (hasContextText(context)) {
+        $contextAside.append($('<div>', {
+          id: contextTextId,
+          'class': 'h5p-mc-context-text',
+          html: context.text
+        }));
+      }
+
+      if (hasContextImage(context)) {
+        $contextMedia = $('<div>', {
+          'class': 'h5p-mc-context-media'
+        });
+        $contextAside.append($contextMedia);
+      }
+
+      $questionColumn.append($('<div>', questionAttrs));
+      $questionColumn.append($myDom);
+      $layout.append($contextAside);
+      $layout.append($questionColumn);
+
+      self.setContent($('<div>', {
+        'class': 'h5p-mc-has-context ' + contextLayoutClass
+      }).append($layout), {
+        'class': (params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check') + ' h5p-mc-with-context'
+      });
+
+      if ($contextMedia && $contextMedia.length) {
+        attachContextImage(context, self.contentId, $contextMedia);
+      }
+    }
+    else {
+      // Register Introduction
+      self.setIntroduction('<div id="' + params.labelId + '">' + params.question + '</div>');
+
+      self.setContent($myDom, {
+        'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
+      });
+    }
 
     // Create tips:
     var $answers = $('.h5p-answer', $myDom).each(function (i) {
@@ -566,6 +858,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     hideSolution($('.h5p-answer', $myDom));
 
     this.removeFeedback(); // Reset feedback
+    self.hideButton('show-feedback');
 
     self.trigger('resize');
   };
@@ -590,6 +883,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     self.showButton('check-answer');
     self.hideButton('try-again');
     self.hideButton('show-solution');
+    self.hideButton('show-feedback');
     enableInput();
     $myDom?.find('.h5p-feedback-available').remove();
   };
@@ -630,6 +924,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     }
     self.hideButton('check-answer');
 
+    calcScore();
     self.showCheckSolution();
     disableInput();
 
@@ -742,21 +1037,52 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       styleType: 'secondary',
       icon: 'retry'
     });
+
+    self.addButton('show-feedback', params.UI.showFeedbackButtonLabel, function () {
+      self.showFeedbackPopup();
+      self.hideButton('show-feedback');
+    }, false);
+    self.hideButton('show-feedback');
   };
 
   /**
-   * Determine which feedback text to display
-   *
-   * @param {number} score
-   * @param {number} max
-   * @return {string}
+   * Show overall feedback in a dismissible popup (QuestionCFRD).
    */
-  var getFeedbackText = function (score, max) {
-    var ratio = (score / max);
+  var showOverallFeedback = function () {
+    var max = self.getMaxScore();
+    var ratio = max > 0 ? score / max : 0;
+    var resolved = H5P.QuestionCFRD.resolveOverallFeedback(
+      params.overallFeedback,
+      ratio,
+      self.contentId,
+      score,
+      max
+    );
+    var popupSettings;
 
-    var feedback = H5P.Question.determineOverallFeedback(params.overallFeedback, ratio);
+    if (resolved && resolved.html && resolved.html.trim().length > 0) {
+      popupSettings = {
+        showAsPopup: true,
+        closeText: params.UI.feedbackPopupCloseLabel || 'Close',
+        alwaysShowClose: true,
+        dismissible: true,
+        popupBackgroundColor: resolved.popupBackgroundColor,
+        plainText: resolved.plainText,
+        onClose: function () {
+          self.showButton('show-feedback');
+        }
+      };
+      self.hideButton('show-feedback');
+    }
 
-    return feedback.replace('@score', score).replace('@total', max);
+    self.setFeedback(
+      resolved ? resolved.html : '',
+      score,
+      max,
+      params.UI.scoreBarLabel,
+      false,
+      popupSettings
+    );
   };
 
   /**
@@ -767,7 +1093,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   this.showCheckSolution = function (skipFeedback) {
     var scorePoints;
     if (!(params.behaviour.singleAnswer || params.behaviour.singlePoint || !params.behaviour.showScorePoints)) {
-      scorePoints = new H5P.Question.ScorePoints();
+      scorePoints = new H5P.QuestionCFRD.ScorePoints();
     }
 
     $myDom.find('.h5p-answer').each(function (i, e) {
@@ -828,7 +1154,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
 
     // Show feedback
     if (!skipFeedback) {
-      this.setFeedback(getFeedbackText(score, max), score, max, params.UI.scoreBarLabel);
+      showOverallFeedback();
     }
 
     self.trigger('resize');
@@ -1127,5 +1453,6 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   };
 };
 
-H5P.MultiChoiceCFRD.prototype = Object.create(H5P.Question.prototype);
+H5P.MultiChoiceCFRD.prototype = Object.create(H5P.QuestionCFRD.prototype);
 H5P.MultiChoiceCFRD.prototype.constructor = H5P.MultiChoiceCFRD;
+H5P.MultiChoiceCFRD.PlayArea = PlayArea;
