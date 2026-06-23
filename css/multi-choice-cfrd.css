@@ -455,6 +455,17 @@
 
 .h5p-multichoice.h5p-mc-play-area {
   --mc-scale: 1;
+  --h5p-theme-spacing-xl: calc(3em * 0.8);
+  --h5p-theme-spacing-l: calc(2em * 0.8);
+  --h5p-theme-spacing-m: calc(1.5em * 0.8);
+  --h5p-theme-spacing-s: calc(1em * 0.8);
+  --h5p-theme-spacing-xs: calc(0.65em * 0.8);
+  --h5p-theme-spacing-xxs: calc(0.5em * 0.8);
+  --h5p-theme-font-size-xxl: 1.5em;
+  --h5p-theme-font-size-xl: 1.25em;
+  --h5p-theme-font-size-l: 1.125em;
+  --h5p-theme-font-size-m: 1em;
+  --h5p-theme-font-size-s: 0.85em;
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -503,6 +514,16 @@
   line-height: 1.5;
 }
 
+.h5p-mc-play-area .feedback-text {
+  height: auto;
+  min-height: var(--h5p-theme-spacing-l);
+  line-height: 1.5;
+}
+
+.h5p-mc-play-area .h5p-feedback-button {
+  line-height: 1.2;
+}
+
 .h5p-mc-play-area .h5p-question-content.h5p-mc-with-context {
   display: flex;
   flex-direction: column;
@@ -531,6 +552,10 @@
 .h5p-mc-has-context .h5p-mc-slide-layout {
   padding-top: var(--h5p-theme-spacing-m);
   box-sizing: border-box;
+}
+
+.h5p-mc-play-area:has(.h5p-instructions-tab-root) .h5p-mc-has-context .h5p-mc-slide-layout {
+  padding-top: 0;
 }
 
 .h5p-mc-context {
