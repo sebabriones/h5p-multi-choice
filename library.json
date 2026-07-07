@@ -7,7 +7,7 @@
   "author": "sbriones (CFRD-UDEC)",
   "majorVersion": 1,
   "minorVersion": 0,
-  "patchVersion": 1,
+  "patchVersion": 3,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -17,6 +17,9 @@
     "minorVersion": 23
   },
   "preloadedJs": [
+    {
+      "path": "js/play-area-scale.js"
+    },
     {
       "path": "js/multi-choice-cfrd.js"
     }

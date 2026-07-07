@@ -115,6 +115,151 @@ function refreshInstructionsScale(instance) {
 }
 
 /**
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function scheduleDeferredResize(instance) {
+  requestAnimationFrame(function () {
+    instance.trigger('resize');
+
+    requestAnimationFrame(function () {
+      instance.trigger('resize');
+    });
+  });
+
+  [50, 150, 350].forEach(function (delay) {
+    setTimeout(function () {
+      instance.trigger('resize');
+    }, delay);
+  });
+}
+
+/**
+ * Attach context image after the play area is in the DOM.
+ *
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function scheduleContextImageAttach(instance) {
+  var pending = instance.pendingContextImage;
+
+  if (!pending || !pending.$container || !pending.$container.length) {
+    return;
+  }
+
+  [0, 50, 200].forEach(function (delay) {
+    setTimeout(function () {
+      if (!pending.$container || !pending.$container.length) {
+        return;
+      }
+
+      if (pending.$container.children().length) {
+        return;
+      }
+
+      attachContextImage(pending.context, instance.contentId, pending.$container);
+    }, delay);
+  });
+}
+
+/**
+ * @param {string} html
+ * @returns {string}
+ */
+function stripHtmlText(html) {
+  var decoder = document.createElement('div');
+  decoder.innerHTML = html || '';
+  return (decoder.textContent || decoder.innerText || '').replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
+}
+
+/**
+ * @param {object} context
+ * @returns {boolean}
+ */
+function hasContextText(context) {
+  return !!(context && context.text && stripHtmlText(context.text));
+}
+
+/**
+ * @param {object} context
+ * @returns {boolean}
+ */
+function hasContextImage(context) {
+  var media = context && context.media;
+  var type = media && media.type;
+  return !!(type && type.library && type.params && type.params.file);
+}
+
+/**
+ * @param {object} context
+ * @returns {string|null}
+ */
+function getContextLayoutClass(context) {
+  var hasText = hasContextText(context);
+  var hasImage = hasContextImage(context);
+
+  if (!hasText && !hasImage) {
+    return null;
+  }
+
+  if (hasText && hasImage) {
+    return 'h5p-mc-context--both';
+  }
+
+  if (hasText) {
+    return 'h5p-mc-context--text-only';
+  }
+
+  return 'h5p-mc-context--image-only';
+}
+
+/**
+ * @param {object} context
+ * @param {number} contentId
+ * @param {H5P.jQuery} $container
+ */
+function attachContextImage(context, contentId, $container) {
+  var media = context && context.media;
+  var library = media && media.type;
+
+  if (!library || !library.library || !$container || !$container.length) {
+    return;
+  }
+
+  H5P.newRunnable(library, contentId, $container);
+}
+
+/**
+ * Migrate legacy top-level media (image above question) to context.media.
+ *
+ * @param {object} params
+ */
+function migrateMediaToContext(params) {
+  var media;
+  var library;
+
+  if (!params || params.context || !params.media) {
+    return;
+  }
+
+  media = params.media;
+  if (!media.type) {
+    delete params.media;
+    return;
+  }
+
+  library = media.type;
+  if (library && library.library && library.library.indexOf('H5P.Image') === 0) {
+    params.context = {
+      media: {
+        type: library,
+        disableImageZooming: media.disableImageZooming || false
+      }
+    };
+  }
+
+  delete params.media;
+}
+
+/**
  * @typedef {Object} Options
  *   Options for multiple choice
  *
@@ -147,6 +292,8 @@ function refreshInstructionsScale(instance) {
  * @returns {H5P.MultiChoiceCFRD}
  * @constructor
  */
+var PlayArea = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.PlayArea;
+
 H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   if (!(this instanceof H5P.MultiChoiceCFRD))
     return new H5P.MultiChoiceCFRD(options, contentId, contentData);
@@ -204,15 +351,75 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   };
   var params = $.extend(true, defaults, options);
   self.options = params;
+  migrateMediaToContext(params);
+
+  self.playAreaSize = PlayArea ? PlayArea.getDesignSize() : null;
 
   var originalAttach = self.attach;
   self.attach = function ($container) {
     originalAttach.call(self, $container);
-    self.$instructionsTarget = $container;
-    scheduleInstructionsAttach(self, self.$instructionsTarget);
+    self.$playArea = $container.addClass('h5p-mc-play-area');
+    scheduleContextImageAttach(self);
+    scheduleInstructionsAttach(self, self.$playArea);
+
+    if (window.ResizeObserver && !self.playAreaResizeObserver && self.$playArea.length) {
+      self.playAreaResizeObserver = new ResizeObserver(function () {
+        self.trigger('resize');
+      });
+      self.playAreaResizeObserver.observe(self.$playArea[0]);
+    }
+
+    scheduleDeferredResize(self);
   };
 
-  self.on('resize', function () {
+  self.on('resize', function (event) {
+    if (event && event.data && event.data.repositionOnly) {
+      return;
+    }
+
+    var design = self.playAreaSize;
+    var $parent;
+    var width;
+    var scale;
+    var fontSize;
+
+    if (!self.$playArea || !self.$playArea.length || !PlayArea || !design) {
+      return;
+    }
+
+    if (!self.$playArea.is(':visible')) {
+      scheduleDeferredResize(self);
+      return;
+    }
+
+    $parent = self.$playArea.parent();
+    width = self.$playArea.width();
+
+    if (width <= 0) {
+      width = $parent.width() || design.baseWidth;
+    }
+
+    scale = PlayArea.getScale(width);
+    fontSize = (design.baseFontSize * scale) + 'px';
+
+    self.$playArea.css({
+      width: '100%',
+      height: '',
+      fontSize: fontSize,
+      '--mc-scale': scale.toFixed(4)
+    });
+
+    if (self.$playArea) {
+      var $popup = self.$playArea.find('.h5p-question-feedback.h5p-question-popup');
+      $popup.css('fontSize', fontSize);
+
+      if ($popup.length && $popup.hasClass('h5p-question-visible')) {
+        setTimeout(function () {
+          self.trigger('resize', {repositionOnly: true});
+        }, 0);
+      }
+    }
+
     refreshInstructionsScale(self);
   });
 
@@ -298,43 +505,15 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
    * Register the different parts of the task with the H5P.QuestionCFRD structure.
    */
   self.registerDomElements = function () {
-    var media = params.media;
-    if (media && media.type && media.type.library) {
-      media = media.type;
-      var type = media.library.split(' ')[0];
-      if (type === 'H5P.Image') {
-        if (media.params.file) {
-          // Register task image
-          self.setImage(media.params.file.path, {
-            disableImageZooming: params.media.disableImageZooming || false,
-            alt: media.params.alt,
-            title: media.params.title,
-            expandImage: media.params.expandImage,
-            minimizeImage: media.params.minimizeImage
-          });
-        }
-      }
-      else if (type === 'H5P.Video') {
-        if (media.params.sources) {
-          // Register task video
-          self.setVideo(media);
-        }
-      }
-      else if (type === 'H5P.Audio') {
-        if (media.params.files) {
-          // Register task audio
-          self.setAudio(media);
-        }
-      }
-    }
+    var context = params.context;
+    var contextLayoutClass = getContextLayoutClass(context);
+    var contextTextId = 'multichoice-' + self.contentId + '-context';
+    var $contextMedia;
 
     // Determine if we're using checkboxes or radio buttons
     for (var i = 0; i < params.answers.length; i++) {
       params.answers[i].checkboxOrRadioIcon = getCheckboxOrRadioIcon(params.behaviour.singleAnswer, params.userAnswers.indexOf(i) > -1);
     }
-
-    // Register Introduction
-    self.setIntroduction('<div id="' + params.labelId + '">' + params.question + '</div>');
 
     // Register task content area
     $myDom = $('<ul>', {
@@ -357,9 +536,68 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       });
     }
 
-    self.setContent($myDom, {
-      'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
-    });
+    if (contextLayoutClass) {
+      var $layout = $('<div>', {
+        'class': 'h5p-mc-slide-layout'
+      });
+      var $contextAside = $('<aside>', {
+        'class': 'h5p-mc-context',
+        'aria-label': 'Context'
+      });
+      var $questionColumn = $('<div>', {
+        'class': 'h5p-mc-question-column'
+      });
+      var questionAttrs = {
+        id: params.labelId,
+        'class': 'h5p-mc-question-intro h5p-question-introduction',
+        html: params.question
+      };
+
+      if (hasContextText(context)) {
+        questionAttrs['aria-describedby'] = contextTextId;
+      }
+
+      if (hasContextText(context)) {
+        $contextAside.append($('<div>', {
+          id: contextTextId,
+          'class': 'h5p-mc-context-text',
+          html: context.text
+        }));
+      }
+
+      if (hasContextImage(context)) {
+        $contextMedia = $('<div>', {
+          'class': 'h5p-mc-context-media'
+        });
+        $contextAside.append($contextMedia);
+      }
+
+      $questionColumn.append($('<div>', questionAttrs));
+      $questionColumn.append($myDom);
+      $layout.append($contextAside);
+      $layout.append($questionColumn);
+
+      self.setContent($('<div>', {
+        'class': 'h5p-mc-has-context ' + contextLayoutClass
+      }).append($layout), {
+        'class': (params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check') + ' h5p-mc-with-context'
+      });
+
+      if ($contextMedia && $contextMedia.length) {
+        self.pendingContextImage = {
+          context: context,
+          $container: $contextMedia
+        };
+      }
+    }
+    else {
+      // Register Introduction
+      self.setIntroduction('<div id="' + params.labelId + '">' + params.question + '</div>');
+
+      self.setContent($myDom, {
+        'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
+      });
+    }
 
     // Create tips:
     var $answers = $('.h5p-answer', $myDom).each(function (i) {
