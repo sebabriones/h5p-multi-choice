@@ -207,6 +207,28 @@
   display: inline;
 }
 
+.h5p-multichoice .h5p-alternative-inner:has(.h5p-mc-alternative-prefix),
+.h5p-mc-play-area .h5p-alternative-inner:has(.h5p-mc-alternative-prefix) {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  text-indent: 0;
+}
+
+.h5p-multichoice .h5p-mc-alternative-prefix,
+.h5p-mc-play-area .h5p-mc-alternative-prefix {
+  flex: 0 0 auto;
+  font-weight: 600;
+  line-height: inherit;
+  color: var(--mc-label-prefix-color, #333333);
+}
+
+.h5p-multichoice .h5p-mc-alternative-label,
+.h5p-mc-play-area .h5p-mc-alternative-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .h5p-clearfix {
   clear: both;
 }

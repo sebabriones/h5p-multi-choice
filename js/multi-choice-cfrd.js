@@ -170,6 +170,48 @@ function stripHtmlText(html) {
   return (decoder.textContent || decoder.innerText || '').replace(/[\n\r]+|[\s]{2,}/g, ' ').trim();
 }
 
+var AlternativeLabelModule = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.AlternativeLabel;
+
+/**
+ * @param {number} displayIndex
+ * @param {string} text
+ * @param {object} alternativeLabels
+ * @returns {string}
+ */
+function getAnswerInnerHtml(displayIndex, text, alternativeLabels) {
+  var prefix = AlternativeLabelModule ?
+    AlternativeLabelModule.getAlternativeLabel(displayIndex, alternativeLabels) :
+    '';
+
+  if (!prefix) {
+    return text;
+  }
+
+  return '<span class="h5p-mc-alternative-prefix" aria-hidden="true">' +
+    prefix +
+    '</span><span class="h5p-mc-alternative-label">' +
+    text +
+    '</span>';
+}
+
+/**
+ * @param {number} displayIndex
+ * @param {string} text
+ * @param {object} alternativeLabels
+ * @returns {string|undefined}
+ */
+function getAnswerAriaLabel(displayIndex, text, alternativeLabels) {
+  var prefix = AlternativeLabelModule ?
+    AlternativeLabelModule.getAlternativeLabel(displayIndex, alternativeLabels) :
+    '';
+
+  if (!prefix || !AlternativeLabelModule) {
+    return undefined;
+  }
+
+  return AlternativeLabelModule.prependLabel(prefix, stripHtmlText(text));
+}
+
 /**
  * @param {object} context
  * @returns {boolean}
@@ -384,6 +426,11 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       passPercentage: 100,
       showScorePoints: true
     },
+    alternativeLabels: {
+      enabled: false,
+      style: 'uppercase',
+      separator: 'period'
+    },
     appearance: {}
   };
   var params = $.extend(true, defaults, options);
@@ -565,15 +612,23 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     for (let i = 0; i < params.answers.length; i++) {
       const answer = params.answers[i];
       answer.text = answer.text ?? '<div></div>';
-      $('<li>', {
+      const innerHtml = getAnswerInnerHtml(i, answer.text, params.alternativeLabels);
+      const ariaLabel = getAnswerAriaLabel(i, answer.text, params.alternativeLabels);
+      const liAttrs = {
         'class': 'h5p-answer',
         role: answer.role,
         tabindex: answer.tabindex,
         'aria-checked': answer.checked,
         'data-id': i,
-        html: '<div class="h5p-alternative-container"><span class="h5p-alternative-inner">' + answer.text + '</span></div>',
+        html: '<div class="h5p-alternative-container"><span class="h5p-alternative-inner">' + innerHtml + '</span></div>',
         appendTo: $myDom
-      });
+      };
+
+      if (ariaLabel) {
+        liAttrs['aria-label'] = ariaLabel;
+      }
+
+      $('<li>', liAttrs);
     }
 
     if (contextLayoutClass) {
@@ -1104,7 +1159,19 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
        // Those two loops cannot be merged or you'll screw up your tips
        for (i = 0; i < answersDisplayed.length; i++) {
          // move tips and answers on display
-         $(answersDisplayed[i]).find('.h5p-alternative-inner').html(params.answers[i].text);
+         var innerHtml = getAnswerInnerHtml(i, params.answers[i].text, params.alternativeLabels);
+         var ariaLabel = getAnswerAriaLabel(i, params.answers[i].text, params.alternativeLabels);
+         var $answer = $(answersDisplayed[i]);
+
+         $answer.find('.h5p-alternative-inner').html(innerHtml);
+
+         if (ariaLabel) {
+           $answer.attr('aria-label', ariaLabel);
+         }
+         else {
+           $answer.removeAttr('aria-label');
+         }
+
          $(tip[i]).detach().appendTo($(answersDisplayed[idMap.indexOf(oldIdMap[i])]).find('.h5p-alternative-container'));
        }
      }
