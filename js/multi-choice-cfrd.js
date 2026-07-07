@@ -115,6 +115,103 @@ function refreshInstructionsScale(instance) {
 }
 
 /**
+ * Wrap activity content in an inner play area; keep evaluation footer outside flex 16:9.
+ *
+ * @param {H5P.jQuery} $container
+ * @returns {H5P.jQuery}
+ */
+function setupPlayAreaLayout($container) {
+  var $ = H5P.jQuery;
+  var $playArea = $container.children('.h5p-mc-play-area').first();
+  var playAreaSelectors = [
+    '.h5p-question-image',
+    '.h5p-question-video',
+    '.h5p-question-audio',
+    '.h5p-question-introduction',
+    '.h5p-question-content'
+  ];
+
+  if (!$playArea.length) {
+    $playArea = $('<div>', { 'class': 'h5p-mc-play-area' });
+    $container.prepend($playArea);
+  }
+
+  playAreaSelectors.forEach(function (selector) {
+    $container.children(selector).appendTo($playArea);
+  });
+
+  return $playArea;
+}
+
+/**
+ * Whether setFeedback will show overall feedback as a popup in the play area.
+ *
+ * @param {string} content
+ * @param {object} [popupSettings]
+ * @returns {boolean}
+ */
+function usesFeedbackPopup(content, popupSettings) {
+  return popupSettings != null &&
+    popupSettings.showAsPopup === true &&
+    content !== undefined &&
+    String(content).trim().length > 0;
+}
+
+/**
+ * Move inline scorebar/feedback out of the play area (QuestionCFRD insert() anchors
+ * after content, which lives inside .h5p-mc-play-area after setupPlayAreaLayout).
+ *
+ * @param {H5P.jQuery} $container
+ */
+function normalizeInlineEvaluationLayout($container) {
+  var $ = H5P.jQuery;
+  var $playArea = $container.children('.h5p-mc-play-area').first();
+  var $feedback;
+  var $scorebar;
+  var $buttons;
+
+  if (!$playArea.length) {
+    return;
+  }
+
+  $playArea.children('.h5p-question-feedback:not(.h5p-question-popup)').appendTo($container);
+  $playArea.children('.h5p-question-scorebar').appendTo($container);
+
+  $feedback = $container.children('.h5p-question-feedback:not(.h5p-question-popup)');
+  $scorebar = $container.children('.h5p-question-scorebar');
+  $buttons = $container.children('.h5p-question-buttons');
+
+  if ($scorebar.length && $buttons.length) {
+    $scorebar.insertBefore($buttons);
+  }
+
+  if ($feedback.length && $scorebar.length) {
+    $feedback.insertBefore($scorebar);
+  }
+  else if ($feedback.length && $buttons.length) {
+    $feedback.insertBefore($buttons);
+  }
+}
+
+/**
+ * @param {H5P.jQuery} $container
+ * @param {H5P.MultiChoiceCFRD} [instance]
+ */
+function scheduleInlineEvaluationLayout($container, instance) {
+  [0, 50, 160, 350].forEach(function (delay) {
+    setTimeout(function () {
+      if ($container && $container.length) {
+        normalizeInlineEvaluationLayout($container);
+
+        if (instance && typeof instance.trigger === 'function') {
+          instance.trigger('resize');
+        }
+      }
+    }, delay);
+  });
+}
+
+/**
  * @param {H5P.MultiChoiceCFRD} instance
  */
 function scheduleDeferredResize(instance) {
@@ -395,7 +492,11 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
         correct: true
       }
     ],
-    overallFeedback: [],
+    overallFeedback: {
+      popupBackgroundColor: '#ffffff',
+      feedbackTextColor: '#333333',
+      overallFeedback: []
+    },
     weight: 1,
     userAnswers: [],
     UI: {
@@ -404,6 +505,8 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       showSolutionButton: 'Show solution',
       tryAgainButton: 'Try again',
       scoreBarLabel: 'You got :num out of :total points',
+      feedbackPopupCloseLabel: 'Close',
+      showFeedbackButtonLabel: 'Show feedback',
       tipAvailable: "Tip available",
       feedbackAvailable: "Feedback available",
       readFeedback: 'Read feedback',
@@ -437,12 +540,40 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   self.options = params;
   migrateMediaToContext(params);
 
+  if (Array.isArray(params.overallFeedback)) {
+    params.overallFeedback = {
+      popupBackgroundColor: '#ffffff',
+      feedbackTextColor: '#333333',
+      overallFeedback: params.overallFeedback
+    };
+  }
+  else if (params.overallFeedback && typeof params.overallFeedback === 'object' &&
+      !params.overallFeedback.popupBackgroundColor) {
+    params.overallFeedback.popupBackgroundColor = '#ffffff';
+    params.overallFeedback.feedbackTextColor = '#333333';
+  }
+
   self.playAreaSize = PlayArea ? PlayArea.getDesignSize() : null;
+
+  var originalSetFeedback = self.setFeedback;
+  if (typeof originalSetFeedback === 'function') {
+    self.setFeedback = function (content, score, maxScore, scoreBarLabel, helpText, popupSettings) {
+      var result = originalSetFeedback.apply(self, arguments);
+
+      if (self.$container && self.$container.length &&
+          !usesFeedbackPopup(content, popupSettings)) {
+        scheduleInlineEvaluationLayout(self.$container, self);
+      }
+
+      return result;
+    };
+  }
 
   var originalAttach = self.attach;
   self.attach = function ($container) {
+    self.$container = $container;
     originalAttach.call(self, $container);
-    self.$playArea = $container.addClass('h5p-mc-play-area');
+    self.$playArea = setupPlayAreaLayout($container);
     scheduleContextImageAttach(self);
     scheduleInstructionsAttach(self, self.$playArea);
 
@@ -1007,6 +1138,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     hideSolution($('.h5p-answer', $myDom));
 
     this.removeFeedback(); // Reset feedback
+    self.hideButton('show-feedback');
 
     self.trigger('resize');
   };
@@ -1031,6 +1163,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     self.showButton('check-answer');
     self.hideButton('try-again');
     self.hideButton('show-solution');
+    self.hideButton('show-feedback');
     enableInput();
     $myDom?.find('.h5p-feedback-available').remove();
   };
@@ -1185,21 +1318,52 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
         $parentElement: $container
       }
     });
+
+    self.addButton('show-feedback', params.UI.showFeedbackButtonLabel, function () {
+      self.showFeedbackPopup();
+      self.hideButton('show-feedback');
+    }, false);
+    self.hideButton('show-feedback');
   };
 
   /**
-   * Determine which feedback text to display
-   *
-   * @param {number} score
-   * @param {number} max
-   * @return {string}
+   * Show overall feedback in a dismissible popup (QuestionCFRD).
    */
-  var getFeedbackText = function (score, max) {
-    var ratio = (score / max);
+  var showOverallFeedback = function () {
+    var max = self.getMaxScore();
+    var ratio = max > 0 ? score / max : 0;
+    var resolved = H5P.QuestionCFRD.resolveOverallFeedback(
+      params.overallFeedback,
+      ratio,
+      self.contentId,
+      score,
+      max
+    );
+    var popupSettings;
 
-    var feedback = H5P.QuestionCFRD.determineOverallFeedback(params.overallFeedback, ratio);
+    if (resolved && resolved.html && resolved.html.trim().length > 0) {
+      popupSettings = {
+        showAsPopup: true,
+        closeText: params.UI.feedbackPopupCloseLabel || 'Close',
+        alwaysShowClose: true,
+        dismissible: true,
+        popupBackgroundColor: resolved.popupBackgroundColor,
+        plainText: resolved.plainText,
+        onClose: function () {
+          self.showButton('show-feedback');
+        }
+      };
+      self.hideButton('show-feedback');
+    }
 
-    return feedback.replace('@score', score).replace('@total', max);
+    self.setFeedback(
+      resolved ? resolved.html : '',
+      score,
+      max,
+      params.UI.scoreBarLabel,
+      false,
+      popupSettings
+    );
   };
 
   /**
@@ -1269,7 +1433,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
 
     // Show feedback
     if (!skipFeedback) {
-      this.setFeedback(getFeedbackText(score, max), score, max, params.UI.scoreBarLabel);
+      showOverallFeedback();
     }
 
     self.trigger('resize');

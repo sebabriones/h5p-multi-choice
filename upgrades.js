@@ -317,6 +317,30 @@ H5PUpgrades['H5P.MultiChoiceCFRD'] = (function () {
           delete parameters.behaviour.disableImageZooming;
         }
         finished(null, parameters);
+      },
+
+      /**
+       * Wrap legacy overallFeedback array in CFRD popup config object.
+       *
+       * @param {object} parameters
+       * @param {function} finished
+       */
+      16: function (parameters, finished) {
+        var overallFeedback = parameters && parameters.overallFeedback;
+
+        if (Array.isArray(overallFeedback)) {
+          parameters.overallFeedback = {
+            popupBackgroundColor: '#ffffff',
+            feedbackTextColor: '#333333',
+            overallFeedback: overallFeedback
+          };
+        }
+        else if (overallFeedback && typeof overallFeedback === 'object' && !overallFeedback.popupBackgroundColor) {
+          overallFeedback.popupBackgroundColor = '#ffffff';
+          overallFeedback.feedbackTextColor = '#333333';
+        }
+
+        finished(null, parameters);
       }
     }
   };

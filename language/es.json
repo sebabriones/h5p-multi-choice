@@ -299,6 +299,14 @@
       "label": "Retroalimentación Global",
       "fields": [
         {
+          "label": "Color de fondo de zona de retroalimentación",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Color de texto de la zona de retroalimentación",
+          "default": "#333333"
+        },
+        {
           "widgets": [
             {
               "label": "Por defecto"
@@ -314,8 +322,56 @@
               },
               {},
               {
-                "label": "Realimentación para rango de puntuación definido",
+                "label": "Retroalimentación para el rango de puntuación definido",
                 "placeholder": "Escribe tu retroalimentación"
+              },
+              {
+                "label": "Configuración de apariencia",
+                "fields": [
+                  {
+                    "label": "Texto destacado inicial",
+                    "placeholder": "p. ej. ¡Correcto! o Incorrecto"
+                  },
+                  {
+                    "label": "Texto destacado en negrita"
+                  },
+                  {
+                    "label": "Color del texto destacado",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Alineación del texto",
+                    "description": "Solo se usa cuando no hay imagen de retroalimentación. Con imagen, la alineación depende de su posición (izquierda/derecha: alineado a la izquierda; encima: centrado).",
+                    "options": [
+                      {
+                        "label": "Izquierda"
+                      },
+                      {
+                        "label": "Centro"
+                      },
+                      {
+                        "label": "Derecha"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Imagen de retroalimentación"
+                  },
+                  {
+                    "label": "Posición de la imagen",
+                    "options": [
+                      {
+                        "label": "Encima del texto"
+                      },
+                      {
+                        "label": "A la izquierda del texto"
+                      },
+                      {
+                        "label": "A la derecha del texto"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -349,6 +405,14 @@
           "label": "Representación textual de la barra de puntuación cuando se usa un lector de pantalla",
           "description": "Las variables disponibles son :num y :total",
           "default": "Has conseguido :num de un total de :total puntos"
+        },
+        {
+          "label": "Etiqueta del botón cerrar popup de retroalimentación",
+          "default": "Cerrar"
+        },
+        {
+          "label": "Etiqueta del botón mostrar retroalimentación",
+          "default": "Ver retroalimentación"
         },
         {
           "label": "Pista Disponible (no se muestra)",
