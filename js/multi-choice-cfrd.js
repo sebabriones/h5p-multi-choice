@@ -18,6 +18,103 @@
 var H5P = H5P || {};
 
 /**
+ * @param {*} value
+ * @returns {boolean}
+ */
+function isTruthy(value) {
+  return value === true || value === 1 || value === '1' || value === 'true';
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ * @returns {Object|null}
+ */
+function getInstructionsOptions(instance) {
+  var instructions = instance && instance.options && instance.options.instructions;
+  var text;
+
+  if (!instructions || !isTruthy(instructions.enabled)) {
+    return null;
+  }
+
+  text = (instructions.text === undefined || instructions.text === null) ?
+    '' :
+    String(instructions.text).trim();
+
+  if (!text) {
+    return null;
+  }
+
+  return {
+    id: instance.contentId || instance.id,
+    text: text,
+    displayMode: instructions.displayMode || 'both',
+    introButtonLabel: instructions.introButtonLabel || 'Start',
+    tabButtonLabel: instructions.tabButtonLabel || 'Instructions',
+    appearance: H5P.jQuery.extend(true, {}, instructions.appearance || {}),
+    animation: H5P.jQuery.extend(true, {}, instructions.animation || {}),
+    startCollapsed: instructions.startCollapsed === undefined ?
+      true :
+      isTruthy(instructions.startCollapsed)
+  };
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ * @param {H5P.jQuery} $fallbackContainer
+ */
+function scheduleInstructionsAttach(instance, $fallbackContainer) {
+  [0, 200, 500].forEach(function (delay) {
+    setTimeout(function () {
+      var instructions = getInstructionsOptions(instance);
+      var $target = (instance.$playArea && instance.$playArea.length) ?
+        instance.$playArea :
+        ((instance.$instructionsTarget && instance.$instructionsTarget.length) ?
+          instance.$instructionsTarget :
+          $fallbackContainer);
+      var attached;
+
+      if (!instructions || !$target || !$target.length) {
+        return;
+      }
+
+      if ($target.find('.h5p-instructions-root').length) {
+        instance.trigger('resize');
+        return;
+      }
+
+      if (H5P.Instructions && typeof H5P.Instructions.attach === 'function') {
+        attached = H5P.Instructions.attach($target, instructions);
+
+        if (attached) {
+          instance.trigger('resize');
+        }
+      }
+    }, delay);
+  });
+}
+
+/**
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function refreshInstructionsScale(instance) {
+  var instructions = getInstructionsOptions(instance);
+  var $target = (instance.$playArea && instance.$playArea.length) ?
+    instance.$playArea :
+    ((instance.$instructionsTarget && instance.$instructionsTarget.length) ?
+      instance.$instructionsTarget :
+      null);
+
+  if (!instructions || !$target || !$target.length) {
+    return;
+  }
+
+  if (H5P.Instructions && typeof H5P.Instructions.updateScale === 'function') {
+    H5P.Instructions.updateScale($target, instructions);
+  }
+}
+
+/**
  * @typedef {Object} Options
  *   Options for multiple choice
  *
@@ -106,6 +203,19 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     }
   };
   var params = $.extend(true, defaults, options);
+  self.options = params;
+
+  var originalAttach = self.attach;
+  self.attach = function ($container) {
+    originalAttach.call(self, $container);
+    self.$instructionsTarget = $container;
+    scheduleInstructionsAttach(self, self.$instructionsTarget);
+  };
+
+  self.on('resize', function () {
+    refreshInstructionsScale(self);
+  });
+
   // Keep track of number of correct choices
   var numCorrect = 0;
 
