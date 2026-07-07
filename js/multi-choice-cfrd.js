@@ -435,20 +435,28 @@ var PlayArea = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.PlayArea;
 var AppearanceModule = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.Appearance;
 
 /**
- * Apply activity appearance CSS variables to the play area.
+ * Apply activity appearance CSS variables to the play area and root wrapper.
  *
  * @param {H5P.MultiChoiceCFRD} instance
  */
 function applyActivityAppearance(instance) {
-  if (!AppearanceModule || !instance || !instance.$playArea || !instance.$playArea.length) {
+  var appearance;
+  var overallFeedback;
+
+  if (!AppearanceModule || !instance) {
     return;
   }
 
-  AppearanceModule.scheduleAppearance(
-    instance.$playArea,
-    instance.options.appearance,
-    instance.options.overallFeedback
-  );
+  appearance = instance.options.appearance;
+  overallFeedback = instance.options.overallFeedback;
+
+  if (instance.$playArea && instance.$playArea.length) {
+    AppearanceModule.scheduleAppearance(instance.$playArea, appearance, overallFeedback);
+  }
+
+  if (instance.$container && instance.$container.length) {
+    AppearanceModule.schedulePlayAreaRootBackground(instance.$container, appearance, overallFeedback);
+  }
 }
 
 /**

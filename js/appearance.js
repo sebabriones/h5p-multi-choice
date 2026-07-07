@@ -295,6 +295,55 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   }
 
   /**
+   * Apply play area background on the question wrapper so the evaluation footer
+   * (siblings of .h5p-mc-play-area) shares the same card color.
+   *
+   * @param {jQuery} $root
+   * @param {Object} [appearance]
+   * @param {Object|Array} [overallFeedback]
+   * @returns {Object}
+   */
+  function applyPlayAreaRootBackground($root, appearance, overallFeedback) {
+    var merged = mergeAppearance(appearance, overallFeedback);
+    var i;
+    var el;
+    var bg = merged.playAreaBackground;
+
+    if (!$root || !$root.length) {
+      return merged;
+    }
+
+    for (i = 0; i < $root.length; i++) {
+      el = $root[i];
+
+      if (!el || !el.style) {
+        continue;
+      }
+
+      el.style.setProperty('--mc-play-area-bg', bg);
+      el.style.backgroundColor = bg;
+    }
+
+    return merged;
+  }
+
+  /**
+   * @param {jQuery} $root
+   * @param {Object} [appearance]
+   * @param {Object|Array} [overallFeedback]
+   */
+  function schedulePlayAreaRootBackground($root, appearance, overallFeedback) {
+    var apply = function () {
+      applyPlayAreaRootBackground($root, appearance, overallFeedback);
+    };
+
+    apply();
+    setTimeout(apply, 0);
+    setTimeout(apply, 50);
+    setTimeout(apply, 200);
+  }
+
+  /**
    * @param {jQuery} $container
    * @param {Object} [appearance]
    * @param {Object|Array} [overallFeedback]
@@ -314,6 +363,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     APPEARANCE_DEFAULTS: APPEARANCE_DEFAULTS,
     mergeAppearance: mergeAppearance,
     applyAppearanceVars: applyAppearanceVars,
-    scheduleAppearance: scheduleAppearance
+    applyPlayAreaRootBackground: applyPlayAreaRootBackground,
+    scheduleAppearance: scheduleAppearance,
+    schedulePlayAreaRootBackground: schedulePlayAreaRootBackground
   };
 })();
