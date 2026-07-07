@@ -293,6 +293,42 @@ function migrateMediaToContext(params) {
  * @constructor
  */
 var PlayArea = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.PlayArea;
+var AppearanceModule = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.Appearance;
+
+/**
+ * Apply activity appearance CSS variables to the play area.
+ *
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function applyActivityAppearance(instance) {
+  if (!AppearanceModule || !instance || !instance.$playArea || !instance.$playArea.length) {
+    return;
+  }
+
+  AppearanceModule.scheduleAppearance(
+    instance.$playArea,
+    instance.options.appearance,
+    instance.options.overallFeedback
+  );
+}
+
+/**
+ * Apply shared action button appearance.
+ *
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function applyActionButtonAppearance(instance) {
+  var actionButtons = instance.options.appearance && instance.options.appearance.actionButtons;
+
+  if (!actionButtons || typeof instance.setActionButtonAppearance !== 'function') {
+    return;
+  }
+
+  if (H5P.QuestionCFRD.hasActionButtonAppearance &&
+      H5P.QuestionCFRD.hasActionButtonAppearance(actionButtons)) {
+    instance.setActionButtonAppearance(actionButtons);
+  }
+}
 
 H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
   if (!(this instanceof H5P.MultiChoiceCFRD))
@@ -347,7 +383,8 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       autoCheck: false,
       passPercentage: 100,
       showScorePoints: true
-    }
+    },
+    appearance: {}
   };
   var params = $.extend(true, defaults, options);
   self.options = params;
@@ -370,6 +407,8 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     }
 
     scheduleDeferredResize(self);
+    applyActivityAppearance(self);
+    applyActionButtonAppearance(self);
   };
 
   self.on('resize', function (event) {
@@ -421,6 +460,7 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     }
 
     refreshInstructionsScale(self);
+    applyActivityAppearance(self);
   });
 
   // Keep track of number of correct choices
