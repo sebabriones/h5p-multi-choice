@@ -1,46 +1,332 @@
 {
   "semantics": [
     {
-      "label": "Média",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "Típus",
-          "description": "Lehetséges Média ami a kérdés felett jelenik meg."
+          "label": "Show instructions"
         },
         {
-          "label": "Kép ráközelítés tiltása"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Kérdés"
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
     },
     {
-      "label": "Elérehtő lehetőségek",
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
       "entity": "option",
       "field": {
-        "label": "Lehetőség",
+        "label": "Option",
         "fields": [
           {
-            "label": "Szöveg"
+            "label": "Text"
           },
           {
-            "label": "Helyes"
+            "label": "Correct"
           },
           {
-            "label": "Tippek és visszajelzések",
+            "label": "Tips and feedback",
             "fields": [
               {
-                "label": "Tipp szövege",
-                "description": "Célzás a felhasználó számára. Megjelnik mielőtt választ/válaszokat bejelölné."
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
               },
               {
-                "label": "Megjelenített szöveg, ha megjelölte a választ",
-                "description": "Ez az üzenet jelenik meg a válasz alatt az \"Ellenőrzés\"-nél ha megjelölte a választ."
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
               },
               {
-                "label": "Megjelenített szöveg, ha nem megjelölte meg a választ",
-                "description": "Ez az üzenet jelenik meg a válasz alatt az \"Ellenőrzés\"-nél ha nem jelölte meg a választ."
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
               }
             ]
           }
@@ -48,26 +334,82 @@
       }
     },
     {
-      "label": "Átfogó visszajelzés",
+      "label": "Overall Feedback",
       "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
         {
           "widgets": [
             {
-              "label": "Alapértelmezett"
+              "label": "Default"
             }
           ],
-          "label": "Határozza meg a visszajelzést bármelyik pontszámhoz",
-          "description": "Klikkeljen az \"Tartomány hozzáadása\" gombra a tartományok megadásához. Például: 0-20% Rossz eredmény, 21-91% Átlagos eredmény, 91-100% Nagyszerű eredmény!",
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
           "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "Pontszámok"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "Visszajelzés a pontszámokhoz",
-                "placeholder": "Töltes ki a visszajelzést"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -75,69 +417,77 @@
       ]
     },
     {
-      "label": "Felhasználói interface fordítások",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "label": "Ellenőrzés gomb címkéje",
-          "default": "Ellenőrzés"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
           "label": "Submit answer button label",
           "default": "Submit"
         },
         {
-          "label": "Mutasd a megoldást gomb címkéje",
-          "default": "Mutasd a megoldást"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "label": "Újra gomb címkéje",
-          "default": "Újra"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "label": "Tipp megmutatása címkéje",
-          "default": "Tipp megmutatása"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "label": "Elért pontok száma azoknak, akik readspeaker-t használnak",
-          "description": "Elérhető változók :num és összesen :total",
-          "default": "Ön :num pontot szerzett a elérhető maximális :total pontból"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "Elérhető tipp (nincs megjelenítve)",
-          "default": "Elérhető tipp",
-          "description": "Hozzáférhető szöveg readspeaker-ek számára"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "label": "Visszajelzés elérhető (nincs megjelenítve)",
-          "default": "Visszajelzés elérhető",
-          "description": "Hozzáférhető szöveg readspeaker-ek számára"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "Visszajelzés olvasása (nincs megjelenítve)",
-          "default": "Visszajelzés olvasása",
-          "description": "Hozzáférhető szöveg readspeaker-ek számára"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Helytelen válasz (nincs megjelenítve)",
-          "default": "Helytelen válasz",
-          "description": "Hozzáférhető szöveg readspeaker-ek számára"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Helyes válasz (nincs megjelenítve)",
-          "default": "Helyes válasz",
-          "description": "Hozzáférhető szöveg readspeaker-ek számára"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Be kellett volna jelölni",
-          "default": "Be kellett volna jelölni"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Nem kellett volna bejelölni",
-          "default": "Nem kellett volna bejelölni"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Kérjük válaszoljon üzenet szövege",
-          "default": "Kérjük válaszoljon, mielőtt a megoldás megjelenne!"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
+        },
+        {
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
+        },
+        {
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
           "label": "Assistive technology description for \"Check\" button",
@@ -154,103 +504,331 @@
       ]
     },
     {
-      "label": "Viselkedéssel kapcsolatos beállítások",
-      "description": "Ezek a lehetőségek megengedik az Ön számára, hogy a feladatok hogyan viselkedjenek.",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "Újra gomb engedélyezése"
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "Mutasd a megoldást gomb engedélyezése"
-        },
-        {
-          "label": "Ellenőrzés gomb engedélyezése"
-        },
-        {
-          "label": "Kérdés típusok",
-          "description": "Válassza ki a kérdés kinézetét és viselkedését.",
+          "label": "Label style",
+          "default": "uppercase",
           "options": [
             {
-              "label": "Automatikus"
+              "label": "Numbers (1, 2, 3)"
             },
             {
-              "label": "Több válasz lehetséges (Checkbox-ok)"
+              "label": "Uppercase letters (A, B, C)"
             },
             {
-              "label": "Csak 1 válasz lehetséges (Radio Button-ök)"
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
             }
           ]
         },
         {
-          "label": "A teljes feladatra egy pontot ad",
-          "description": "Több helyes válasz estén 1 pontot ad összesen. Ez a lehetőség nem működik ha a Csak 1 válasz lhetőséget választotta."
-        },
-        {
-          "label": "Véletlen válaszok",
-          "description": "Ezzel engedélyezi, hogy a lehetséges válaszok véletlen sorrendben jelenjenek meg."
-        },
-        {
-          "label": "Válasz adása a megoldás megmutatása előtt"
-        },
-        {
-          "label": "Megerősítést kérő dialógus megjelenítése \"Ellenőrzés\" esetén"
-        },
-        {
-          "label": "Megerősítést kérő dialógus megjelenítése  \"Újra\" estén"
-        },
-        {
-          "label": "Automatikus válasz ellenőrzés",
-          "description": "Ennek az opciónak az engedélyezése veszélyekkel járhat! Legyen biztos benne, hogy mit csinál."
-        },
-        {
-          "label": "Szükséges százalék",
-          "description": "Ennek a beállításnak gyakran nincs hatása. Ez a százalék a 'teljes feladtért kapható 1 pont' egnedélyezésénél lehetséges, és a result.success eléréséhez az xAPI statement-eknél."
-        },
-        {
-          "label": "Elért eredmény pontok mutatása",
-          "description": "Megmutatja az egyes válaszokért kapott pontokat. Nem választható opció '1 válasz' módban vagy ha 'Az egész feladatra 1 pont' opció engedélyezett."
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Ellenőrző dialógus",
+      "label": "Appearance",
       "fields": [
         {
-          "label": "Fejléc szövege",
-          "default": "Végzett ?"
+          "label": "Play area background color"
         },
         {
-          "label": "Szöveg törzs",
-          "default": "Biztos benne, hogy befejezi ?"
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "Mégsem gomb felirat",
-          "default": "Mégsem"
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "Vége gomb felirat",
-          "default": "Vége"
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Újra dialógus",
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-          "label": "Fejléc szövege",
-          "default": "Újra ?"
+          "label": "Enable \"Retry\" button"
         },
         {
-          "label": "Szöveg törzs",
-          "default": "Biztos benne, hogy újra megpróbálja ?"
+          "label": "Enable \"Show Solution\" button"
         },
         {
-          "label": "Mégsem gomb felirata",
-          "default": "Mégsem"
+          "label": "Enable \"Check\" button"
         },
         {
-          "label": "Elküld gomb felirata",
-          "default": "Elküld"
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
+          "options": [
+            {
+              "label": "Automatic"
+            },
+            {
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
+        },
+        {
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
+        },
+        {
+          "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\""
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\""
+        },
+        {
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
+        },
+        {
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
+        },
+        {
+          "label": "Show score points",
+          "description": "Show points earned for each answer. This will not be an option in 'Single answer' mode or if 'Give one point for the whole task' option is enabled."
+        }
+      ]
+    },
+    {
+      "label": "Check confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Finish ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Finish"
+        }
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
         }
       ]
     }

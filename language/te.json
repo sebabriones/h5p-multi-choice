@@ -1,258 +1,836 @@
 {
   "semantics": [
     {
+      "label": "Instructions",
       "fields": [
         {
-          "label": "రకం",
-          "description": "ప్రశ్న పైన చూపించాలనుకునే ఐచ్ఛిక మీడియా."
+          "label": "Show instructions"
         },
         {
-          "label": "ఇమేజ్ జూమింగ్ ను డిసేబుల్ చెయ్యి"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
-      ],
-      "label": "మీడియా"
+      ]
     },
     {
-      "label": "ప్రశ్న"
-    },
-    {
-      "label": "అందుబాటులోనున్న ఎంపికలు",
-      "field": {
-        "label": "ఎంపిక/ఆప్షన్",
-        "fields": [
-          {
-            "label": "టెక్స్ట"
-          },
-          {
-            "label": "సరైన సమాధానం"
-          },
-          {
-            "fields": [
-              {
-                "label": "చిట్కా (టిప్) టెక్స్ట్",
-                "description": "యూజరు కోసం సూచన. యూజరు సమాధానం/సమాధానాలను తనిఖీ చేసుకునే ముందు ఇది కనిపిస్తుంది."
-              },
-              {
-                "label": "సమాధానం ఎంపిక చేసుకుంటే ఈ సందేశం ప్రదర్శించబడుతుంది",
-                "description": "ఈ సమాధానం ఎంపిక చేసుకుని, \"తనిఖీ చేయి\" నొక్కితే ఈ సందేశం సమాధానం కింద ప్రదర్శించబడుతుంది."
-              },
-              {
-                "label": "సమాధానం ఎంచుకోకపోతే సందేశం ప్రదర్శించబడుతుంది",
-                "description": "ఈ సమాధానం ఎంపిక చేసుకోకుండా \"తనిఖీ చేయి\" నొక్కినపుడు ఈ సందేశం సమాధానం కింద ప్రదర్శించబడుతుంది."
-              }
-            ],
-            "label": "చిట్కాలు మరియు ఫీడ్ బాక్"
-          }
-        ]
-      },
-      "entity": "ఎంపిక/ఆప్షన్"
-    },
-    {
-      "label": "ఓవర్ ఆల్ ఫీడ్ బాక్",
+      "label": "Context (optional)",
       "fields": [
         {
-          "label": "ఏ స్కోర్ పరిధికైనా అనుకూలమైన ఫీడ్ బ్యాక్ ను డిఫైన్ చెయ్యండి",
-          "entity": "పరిధి",
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
+      "entity": "option",
+      "field": {
+        "label": "Option",
+        "fields": [
+          {
+            "label": "Text"
+          },
+          {
+            "label": "Correct"
+          },
+          {
+            "label": "Tips and feedback",
+            "fields": [
+              {
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
+              },
+              {
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
+              },
+              {
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Overall Feedback",
+      "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
+        {
+          "widgets": [
+            {
+              "label": "Default"
+            }
+          ],
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "స్కోర్ పరిధి"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "డిఫైన్ చేసిన స్కోర్ పరిధికై ఫీడ్ బ్యాక్",
-                "placeholder": "ఫీడ్ బ్యాక్ ను ఫిల్ చేయండి"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
-          },
-          "widgets": [
-            {
-              "label": "డీఫాల్ట్"
-            }
-          ],
-          "description": "\"Add range\" బటన్ ను క్లిక్ చేసి కావల్సినన్ని స్కోర్ పరిధులను చేర్చండి. ఉదాహరణ: 0-20% బ్యాడ్ స్కోర్, 21-91% యావరేజ్ స్కోర్, 91-100% గ్రేట్ స్కోర్!"
+          }
         }
       ]
     },
     {
-      "label": "మల్టీచాయిస్ కోసం యూజర్ ఇంటర్‌ఫేస్ అనువాదాలు",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "default": "చెక్/తనిఖీ",
-          "label": "జవాబు బటన్ లేబుల్‌ని తనిఖీ చేయండి"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
-          "default": "సమర్పించు / సబ్ మిట్",
-          "label": "జవాబు బటన్ లేబుల్‌ని సమర్పించండి"
+          "label": "Submit answer button label",
+          "default": "Submit"
         },
         {
-          "default": "జవాబు చూపించు",
-          "label": "సొల్యుషన్ బటన్ లేబుల్‌ని చూపు"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "default": "తిరిగి ప్రయత్నించు /రి ట్రై",
-          "label": "మళ్లీ ప్రయత్నించండి అనే బటన్ లేబుల్‌"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "default": "చిట్కా చూపించు",
-          "label": "చిట్కా లేబుల్"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "description": "అందుబాటులో ఉన్న వేరియబుల్స్:సంఖ్య మరియు:మొత్తం",
-          "label": "రీడ్‌స్పీకర్‌ని ఉపయోగించే వారి కోసం స్కోర్ బార్ యొక్క టెక్స్టువల్ రిప్రెజెంటేషన్",
-          "default": "మీరు మొత్తం పాయింట్లలో :total points పొందారు"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "చిట్కా అందుబాటులో ఉంది (ప్రదర్శించబడలేదు)",
-          "description": "రీడ్‌స్పీకర్‌ల కోసం ఉపయోగించే యాక్సెసిబిలిటీ టెక్స్ట్",
-          "default": "చిట్కా అందుబాటులో ఉంది"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "default": "ఫీడ్ బాక్ అందుబాటులో ఉంది",
-          "label": "ఫీడ్ బాక్ అందుబాటులో ఉంది (ప్రదర్శించబడలేదు)",
-          "description": "రీడ్‌స్పీకర్‌ల కోసం ఉపయోగించే యాక్సెసిబిలిటీ టెక్స్ట్"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "ఫీడ్ బాక్ చదవండి (డిస్ ప్లే చేయబడలేదు)",
-          "description": "రీడ్‌స్పీకర్‌ల కోసం ఉపయోగించే యాక్సెసిబిలిటీ టెక్స్ట్",
-          "default": "ఫీడ్ బాక్ చదవండి"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "తప్పు జవాబు",
-          "label": "తప్పు సమాధానం (ప్రదర్శించబడలేదు)",
-          "description": "రీడ్‌స్పీకర్‌ల కోసం ఉపయోగించే యాక్సెసిబిలిటీ టెక్స్ట్"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "సరైన సమాధానం (డిస్ ప్లే చేయబడలేదు)",
-          "description": "రీడ్‌స్పీకర్‌ల కోసం ఉపయోగించే యాక్సెసిబిలిటీ టెక్స్ట్",
-          "default": "సరైన సమాధానం"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "తనిఖీ చేసి ఉండాల్సింది",
-          "label": "ఆప్షన్ ను తనిఖీ చేసి ఉండాల్సింది"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "తనిఖీ చేసి ఉండాల్సింది కాదు",
-          "label": "ఆప్షన్ ను తనిఖీ చేసి ఉండాల్సింది కాదు"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "సొల్యూషన్ చూసే ముందు సమాధానం ఇవ్వండి",
-          "label": "\"సమాధానం ఇవ్వాలి\" అనే మెసెజ్ కై టెక్స్ట్"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
         },
         {
-          "default": "సమాధానాలను తనిఖీ చేయండి. సమాధానాలు సరైనవి, తప్పు లేదా సమాధానం ఇవ్వనివిగా గుర్తించబడతాయి.",
-          "label": "\"Check\" బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ"
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
-          "default": "సొల్యూషన్ చూపించు. ఈ టాస్క్ సరైన సమాధానం తో చూపించబడుతుంది.",
-          "label": "\"సొల్యూషన్ చూపించు\" బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ"
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
-          "default": "టాస్క్ ను మళ్లీ ప్రయత్నించండి. అన్ని సమాధానాలను రీసెట్ చేసి, టాస్క్ మళ్లీ ప్రారంభించు.",
-          "label": "\"తిరిగి ప్రయత్నించు\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ"
+          "label": "Assistive technology description for \"Check\" button",
+          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The task will be marked with its correct solution."
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         }
       ]
     },
     {
-      "description": "ఈ ఆప్షన్లు టాస్క్ ఎలా ప్రవర్తించాలో నియంత్రించడానికి పనికివస్తాయి.",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "\"తిరిగి ప్రయత్నించు\" బటన్ ను ఎనేబుల్ చెయ్యి"
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "\"సమాధానాలు చూపించు\" బటన్ ఎనేబుల్ చెయ్యి"
-        },
-        {
-          "label": "\"చెక్\" బటన్ ను ఎనేబుల్ చెయ్యి"
-        },
-        {
-          "label": "ప్రశ్న రకం",
+          "label": "Label style",
+          "default": "uppercase",
           "options": [
             {
-              "label": "ఆటోమేటిక్"
+              "label": "Numbers (1, 2, 3)"
             },
             {
-              "label": "మల్టిపుల్ చాయిస్(చెక్‌బాక్స్‌లు)"
+              "label": "Uppercase letters (A, B, C)"
             },
             {
-              "label": "సింగిల్ చాయిస్ (రేడియో బటన్లు)"
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
             }
-          ],
-          "description": "ప్రశ్న యొక్క రూపాన్ని మరియు ప్రవర్తనను ఎంచుకోండి."
+          ]
         },
         {
-          "description": "ఒకటి కంటె ఎక్కువ సరైన సమాధానాల కోసం మొత్తం ఒక పాయింట్‌ ఇవ్వడాన్ని ఎనేబుల్ చెయ్యండి. ఇది \"సింగిల్ ఆన్సర్\" మోడ్‌లో సాధ్యం కాదు.",
-          "label": "మొత్తం టాస్క్ కు ఒక పాయింట్ ఇవ్వండి"
-        },
-        {
-          "description": "డిస్‌ప్లేలో ఉన్న సమాధానాల క్రమాన్ని యాదృచ్ఛికంగా / రాన్ డమ్ గా మార్చడాన్ని ఎనేబుల్ చెయ్యండి.",
-          "label": "సమాధానాలను రాండమైజ్ చేయండి"
-        },
-        {
-          "label": "సొల్యూషన్ చూడడానికి ముందు సమాధానం అవసరం"
-        },
-        {
-          "label": "\"చెక్\" చేసినపుడు కన్ఫర్మేషన్ డైలాగ్ చూపించు"
-        },
-        {
-          "label": "\"తిరిగి ప్రయత్నించు\" బటన్ నొక్కినపుడు కన్ఫర్మేషన్ డైలాగ్ చూపించు"
-        },
-        {
-          "label": "సమాధానాలను ఆటోమేటిక్ గా తనిఖీ చేయండి",
-          "description": "ఈ ఎంపికను ప్రారంభించడం వలన యాక్సెసిబిలిటీ దెబ్బతింటుంది, మీరు ఏమి చేస్తున్నారో మీకు తెలుసని నిర్ధారించుకోండి."
-        },
-        {
-          "label": "ఉత్తీర్ణత శాతం",
-          "description": "ఈ సెట్టింగ్ తరచుగా ఎటువంటి ప్రభావాన్ని చూపదు. ఇది మొత్తం టాస్క్‌కు ఒక పాయింట్‌ని ఎనేబుల్ చేసినప్పుడు 1 పాయింట్‌ని పొందడానికి మరియు xAPI స్టేట్‌మెంట్‌లలో ఫలితం.సక్సెస్‌ని పొందడానికి అవసరమైన మొత్తం స్కోర్ శాతం."
-        },
-        {
-          "label": "స్కోర్ పాయింట్లను చూపించు",
-          "description": "ప్రతి సమాధానానికి సంపాదించిన పాయింట్లను చూపండి. \"సింగిల్ ఆన్సర్\" మోడ్‌లో లేదా \"మొత్తం టాస్క్ కోసం ఒక పాయింట్ ఇవ్వండి\" ఆప్షన్ ఎనేబుల్ అయి ఉంటే ఇది సాధ్యం కాదు."
-        }
-      ],
-      "label": "బిహేవియరల్ సెట్తింగ్స్/ప్రవర్తించే తీరు"
-    },
-    {
-      "label": "కన్ఫర్మేషన్ డైలాగ్‌ని చెక్ చేయండి",
-      "fields": [
-        {
-          "default": "ముగించాలా /పూర్తి చేయాలా?",
-          "label": "హెడర్ టెక్స్ట్"
-        },
-        {
-          "default": "ఖచ్చితంగా పూర్తి చేసారని అనుకుంటున్నారా?",
-          "label": "బాడీ టెక్స్ట్"
-        },
-        {
-          "default": "కేన్సిల్/రద్దు",
-          "label": "కేన్సిల్ బటన్ లేబుల్"
-        },
-        {
-          "default": "ముగించు / పూర్తిచేయు",
-          "label": "కన్ఫర్మ్ బటన్ లేబుల్"
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
         }
       ]
     },
     {
+      "label": "Appearance",
       "fields": [
         {
-          "label": "హెడర్ టెక్స్ట్",
-          "default": "మళ్లీ ప్రయత్నించాలా?"
+          "label": "Play area background color"
         },
         {
-          "label": "బాడీ టెక్స్ట్",
-          "default": "ఖచ్చితంగా మళ్లీ ప్రయత్నించాలనుకుంటున్నారా?"
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "కేన్సిల్ బటన్ లేబుల్",
-          "default": "కేన్సిల్/రద్దు"
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "కన్ఫర్మ్ బటన్ లేబుల్",
-          "default": "కన్ఫర్మ్"
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
         }
-      ],
-      "label": "కన్ఫర్మేషన్ డైలాగ్ కై తిరిగి ప్రయత్నించు"
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Enable \"Retry\" button"
+        },
+        {
+          "label": "Enable \"Show Solution\" button"
+        },
+        {
+          "label": "Enable \"Check\" button"
+        },
+        {
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
+          "options": [
+            {
+              "label": "Automatic"
+            },
+            {
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
+        },
+        {
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
+        },
+        {
+          "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\""
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\""
+        },
+        {
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
+        },
+        {
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
+        },
+        {
+          "label": "Show score points",
+          "description": "Show points earned for each answer. This will not be an option in 'Single answer' mode or if 'Give one point for the whole task' option is enabled."
+        }
+      ]
+    },
+    {
+      "label": "Check confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Finish ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Finish"
+        }
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
+        }
+      ]
     }
   ]
 }

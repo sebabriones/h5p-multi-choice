@@ -1,46 +1,332 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "Typ",
-          "description": "Opcjonalne zdjęcie lub wideo ponad treścią pytania."
+          "label": "Show instructions"
         },
         {
-          "label": "Zablokuj możliwość powiększania zdjęcia"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Pytanie"
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
     },
     {
-      "label": "Dostępne odpowiedzi",
-      "entity": "Odpowiedź",
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
+      "entity": "option",
       "field": {
-        "label": "Odpowiedź",
+        "label": "Option",
         "fields": [
           {
-            "label": "Tekst"
+            "label": "Text"
           },
           {
-            "label": "Odpowiedź poprawna"
+            "label": "Correct"
           },
           {
-            "label": "Wskazówki",
+            "label": "Tips and feedback",
             "fields": [
               {
-                "label": "Treść wskazówki",
-                "description": "Wskazówki dla użytkownika. Wskazówki pojawią się przed sprawdzeniem odpowiedzi przez użytkownika."
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
               },
               {
-                "label": "Komunikat wyświetlany, gdy użytkownik zaznaczy tę odpowiedź",
-                "description": "Komunikat pojawi się pod odpowiedzią, po wybraniu akcji \"Sprawdź\", jeżeli dana odpowiedź była zaznaczona."
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
               },
               {
-                "label": "Komunikat wyświetlany, gdy użytkownik nie zaznaczy tej odpowiedzi",
-                "description": "Komunikat pojawi się pod odpowiedzią po wybraniu akcji \"Sprawdź\", jeżeli dana odpowiedź nie była zaznaczona."
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
               }
             ]
           }
@@ -48,26 +334,82 @@
       }
     },
     {
-      "label": "Podsumowanie odpowiedzi",
+      "label": "Overall Feedback",
       "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
         {
           "widgets": [
             {
-              "label": "Domyślne"
+              "label": "Default"
             }
           ],
-          "label": "Określ własne kryteria oceny dla wybranych zakresów poprawnych odpowiedzi",
-          "description": "Kliknij przycisk \"Dodaj zakres\", aby dodać tyle zakresów, ile potrzebujesz. Przykład: 0-20% Słaby wynik, 21-91% Przeciętny wynik, 91-100% Bardzo dobry wynik!",
-          "entity": "Zakres",
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "Zakres wyników"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "Komunikat dla danego zakresu",
-                "placeholder": "Wprowadź komunikat"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -75,182 +417,418 @@
       ]
     },
     {
-      "label": "Tłumaczenie interfejsu użytkownika dla obiektu typu multichoice",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "label": "Etykieta przycisku Sprawdź",
-          "default": "Sprawdź"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
-          "label": "Etykieta przycisku Prześlij odpowiedź",
-          "default": "Prześlij"
+          "label": "Submit answer button label",
+          "default": "Submit"
         },
         {
-          "label": "Etykieta przycisku Pokaż odpowiedź",
-          "default": "Pokaż odpowiedź"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "label": "Etykieta przycisku Powtórz",
-          "default": "Powtórz"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "label": "Podpowiedź",
-          "default": "Pokaż podpowiedź"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "label": "Tekstowe przedstawienie punktacji dla osób korzystających z czytnika tekstu",
-          "description": "Dostępne zmienne to :num i :total",
-          "default": "Dostajesz :num punktów z :total points"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "Dodatkowe wskazówki (niewyświetlane)",
-          "default": "Dostępne są dodatkowe wskazówki",
-          "description": "Tekst na potrzeby systemów czytających tekst (readspeakers)"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "label": "Podsumowanie odpowiedzi (niewyświetlane)",
-          "default": "Dostępne jest podsumowanie odpowiedzi",
-          "description": "Tekst na potrzeby systemów czytających tekst (readspeakers)"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "Przeczytaj podsumowanie odpowiedzi (niewyświetlane)",
-          "default": "Przeczytaj podsumowanie odpowiedzi",
-          "description": "Tekst na potrzeby systemów czytających tekst (readspeakers)"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Odpowiedź niepoprawna (niewyświetlane)",
-          "default": "Odpowiedź niepoprawna",
-          "description": "Tekst na potrzeby systemów czytających tekst (readspeakers)"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Odpowiedź poprawna (niewyświetlane)",
-          "default": "Odpowiedź poprawna",
-          "description": "Tekst na potrzeby systemów czytających tekst (readspeakers)"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Odpowiedź powinna być wybrana",
-          "default": "Odpowiedź powinna być wybrana"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Odpowiedź nie powinna być wybrana",
-          "default": "Odpowiedź nie powinna być wybrana"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Komunikat w przypadku \"Odpowiedź wymagana\"",
-          "default": "Podaj odpowiedź przed sprawdzeniem rozwiązania"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
         },
         {
-          "label": "Opis technologii wspomagającej dla przycisku \"Sprawdź\"",
-          "default": "Sprawdź odpowiedzi. Odpowiedzi zostaną oznaczone jako poprawne, niepoprawne lub bez odpowiedzi."
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
-          "label": "Opis technologii wspomagającej dla przycisku \"Pokaż rozwiązanie\"",
-          "default": "Pokaż rozwiązanie. Zadanie zostanie oznaczone poprawnym rozwiązaniem."
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
-          "label": "Opis technologii wspomagającej dla przycisku \"Ponów\"",
-          "default": "Ponów zadanie. Zresetuj wszystkie odpowiedzi i rozpocznij zadanie od nowa."
+          "label": "Assistive technology description for \"Check\" button",
+          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The task will be marked with its correct solution."
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         }
       ]
     },
     {
-      "label": "Ustawienia zachowania",
-      "description": "Poniższe opcje pozwalają określić zachowanie się obiektu.",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "Pokaż przycisk \"Powtórz\""
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "Pokaż przycisk \"Pokaż rozwiązanie\""
-        },
-        {
-          "label": "Pokaż przycisk \"Sprawdź\""
-        },
-        {
-          "label": "Typ pytania",
-          "description": "Wybierz wygląd i sposób działania dla pytania.",
+          "label": "Label style",
+          "default": "uppercase",
           "options": [
             {
-              "label": "Automatyczny"
+              "label": "Numbers (1, 2, 3)"
             },
             {
-              "label": "Wielokrotnego wyboru (Checkboxes)"
+              "label": "Uppercase letters (A, B, C)"
             },
             {
-              "label": "Jedna poprawna odpowiedź (Radio Buttons)"
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
             }
           ]
         },
         {
-          "label": "Przyznaj jeden punkt za całe zadanie",
-          "description": "Przyznaj jeden punkt za wiele poprawnych odpowiedzi. Ta opcja nie będzie miała zastosowania w przypadku pytań typu \"Jedna poprawna odpowiedź\"."
-        },
-        {
-          "label": "Losowa kolejność odpowiedzi",
-          "description": "Pokazuj dostępne odpowiedzi w losowej kolejności."
-        },
-        {
-          "label": "Wymagaj podania odpowiedzi przed pokazaniem poprawnego rozwiązania"
-        },
-        {
-          "label": "Pokazuj prośbę o potwierdzenie akcji \"Sprawdź\""
-        },
-        {
-          "label": "Pokazuj prośbę o potwierdzenie akcji \"Powtórz\""
-        },
-        {
-          "label": "Sprawdzaj odpowiedzi automatycznie",
-          "description": "Użycie tej opcji zakłóci działanie mechanizmów dostępności dla osób z ograniczeniami. Upewnij się, że na pewno znasz konsekwencje użycia tej opcji."
-        },
-        {
-          "label": "Procent wymagany do zaliczenia",
-          "description": "Ta opcja bardzo często nie będzie miała żadnego efektu. Jest to minimalny procent poprawnych odpowiedzi wymagany, aby przyznać jeden punkt, w przypadku gdy dla danego pytania wybrana jest opcja Przyznaj jeden punkt za całe zadanie oraz w celu przekazania danych result.success poprzez xAPI."
-        },
-        {
-          "label": "Pokaż przyznane punkty",
-          "description": "Pokaż punkty przyznane za każdą z odpowiedzi. Nie będzie to opcja w trybie 'Pojedynczej odpowiedzi' lub gdy włączona jest opcja 'Daj jeden punkt za całe zadanie'."
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Tekst potwierdzenia zakończenia",
+      "label": "Appearance",
       "fields": [
         {
-          "label": "Tekst nagłówka",
-          "default": "Zakończyć?"
+          "label": "Play area background color"
         },
         {
-          "label": "Tekst komunikatu",
-          "default": "Czy na pewno chcesz zakończyć?"
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "Etykieta przycisku Anuluj",
-          "default": "Anuluj"
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "Etykieta przycisku Zakończ",
-          "default": "Zakończ"
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Tekst potwierdzenia powtórzenia",
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-          "label": "Tekst nagłówka",
-          "default": "Powtórzyć?"
+          "label": "Enable \"Retry\" button"
         },
         {
-          "label": "Tekst komunikatu",
-          "default": "Czy na pewno chcesz powtórzyć?"
+          "label": "Enable \"Show Solution\" button"
         },
         {
-          "label": "Etykieta przycisku Anuluj",
-          "default": "Anuluj"
+          "label": "Enable \"Check\" button"
         },
         {
-          "label": "Etykieta przycisku Potwierdź",
-          "default": "Potwierdź"
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
+          "options": [
+            {
+              "label": "Automatic"
+            },
+            {
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
+        },
+        {
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
+        },
+        {
+          "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\""
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\""
+        },
+        {
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
+        },
+        {
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
+        },
+        {
+          "label": "Show score points",
+          "description": "Show points earned for each answer. This will not be an option in 'Single answer' mode or if 'Give one point for the whole task' option is enabled."
+        }
+      ]
+    },
+    {
+      "label": "Check confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Finish ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Finish"
+        }
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
         }
       ]
     }

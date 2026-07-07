@@ -1,46 +1,332 @@
 {
   "semantics": [
     {
-      "label": "Medya",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "Tipi",
-          "description": "Soru üzerinde görüntülenecek isteğe bağlı medya."
+          "label": "Show instructions"
         },
         {
-          "label": "Görsel yakınlaştırmasını devre dışı bırakın"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Soru"
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
     },
     {
-      "label": "Kullanılabilir seçenekler",
-      "entity": "seçenek",
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
+      "entity": "option",
       "field": {
-        "label": "Seçenek",
+        "label": "Option",
         "fields": [
           {
-            "label": "Metin"
+            "label": "Text"
           },
           {
-            "label": "Doğru"
+            "label": "Correct"
           },
           {
-            "label": "İpuçları ve geri bildirim",
+            "label": "Tips and feedback",
             "fields": [
               {
-                "label": "İpucu metni",
-                "description": "Kullanıcı için ipucu. Kullanıcı cevabını/cevaplarını kontrol etmeden önce bu görünecektir."
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
               },
               {
-                "label": "Cevap seçilirse görüntülenecek ileti",
-                "description": "Bu cevap seçilirse \"kontrol et\" üzerindeki cevabın altında ileti görünecek."
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
               },
               {
-                "label": "Cevap seçilmezse görüntülenecek ileti",
-                "description": "Bu cevap seçilmezse \"kontrol et\" üzerindeki cevabın altında ileti görünecek."
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
               }
             ]
           }
@@ -48,26 +334,82 @@
       }
     },
     {
-      "label": "Toplam Geribildirim",
+      "label": "Overall Feedback",
       "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
         {
           "widgets": [
             {
-              "label": "Varsayılan"
+              "label": "Default"
             }
           ],
-          "label": "Herhangi bir puan aralığı için özel geri bildirim tanımlayın",
-          "description": "İstediğiniz kadar aralık eklemek için \"Aralık ekle\" düğmesini tıklayın. Örnek: %0-20 Kötü puan, %21-91 Ortalama Puan, %91-100 Büyük Puan!",
-          "entity": "Aralık",
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "Puan Aralığı"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "Tanımlanmış puan aralığı için geri bildirim",
-                "placeholder": "Geri bildirimi doldurun"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -75,182 +417,418 @@
       ]
     },
     {
-      "label": "Çokluseçim için arayüz çevirileri",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "label": "Cevabı kontrol et düğmesi etiketi",
-          "default": "Kontrol Et"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
           "label": "Submit answer button label",
           "default": "Submit"
         },
         {
-          "label": "Çözümü göster düğmesi etiketi",
-          "default": "Çözümü Göster"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "label": "Yeniden dene düğmesi etiketi",
-          "default": "Yeniden Dene"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "label": "İpucu etiketi",
-          "default": "İpucu Göster"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "label": "Ekran okuma kullananlar için puan cetvelinin yazıyla gösterimi",
-          "description": "Mevcut değişkenler: :num and :total",
-          "default": "Toplam :total puan üzerinden :num puan aldınız"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "İpucu Mevcut (gösterilmez)",
-          "default": "İpucu mevcut",
-          "description": "Ekran okuyucular için erişilebilirlik metni"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "label": "Geribildirim Mevcut (gösterilmez)",
-          "default": "Geribildirim mevcut",
-          "description": "Ekran okuyucular için erişilebilirlik metni"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "Geribildirimi Oku (gösterilmez)",
-          "default": "Geribildirimi oku",
-          "description": "Ekran okuyucular için erişilebilirlik metni"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Yanlış Cevap (gösterilmez)",
-          "default": "Yanlış cevap",
-          "description": "Ekran okuyucular için erişilebilirlik metni"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Doğru Cevap (gösterilmez)",
-          "default": "Doğru cevap",
-          "description": "Ekran okuyucular için erişilebilirlik metni"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Seçeneğin seçilmesi gerekirdi",
-          "default": "Seçilmesi gerekirdi"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Seçeneğin seçilmemesi gerekirdi",
-          "default": "Seçilmemesi gerekirdi"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "\"Cevap Gerekir\" mesajı metni",
-          "default": "Lütfen çözümü görüntülemeden önce cevap verin"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
         },
         {
-          "label": "\"Kontrol Et\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Cevapları kontrol edin. Cevaplar doğru, yanlış veya cevapsız olarak işaretlenecektir."
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
-          "label": "\"Çözüm Göster\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Çözümü göster. Görev, doğru çözümü ile işaretlenecektir."
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
-          "label": "\"Yeniden Dene\" düğmesi için yardımcı teknoloji açıklaması",
-          "default": "Görevi yeniden deneyin. Tüm yanıtları sıfırlayın ve görevi yeniden başlatın."
+          "label": "Assistive technology description for \"Check\" button",
+          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The task will be marked with its correct solution."
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         }
       ]
     },
     {
-      "label": "Etkinlik Ayarları",
-      "description": "Bu seçenekler, etkinliğin nasıl davranacağını kontrol etmenizi sağlar.",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "\"Yeniden Dene\" düğmesini etkinleştir"
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "\"Çözümü Göster\" düğmesini etkinleştir"
-        },
-        {
-          "label": "\"Kontrol Et\" düğmesini etkinleştir"
-        },
-        {
-          "label": "Soru Tipi",
-          "description": "Sorunun görünüşünü ve davranışını seçin.",
+          "label": "Label style",
+          "default": "uppercase",
           "options": [
             {
-              "label": "Otomatik"
+              "label": "Numbers (1, 2, 3)"
             },
             {
-              "label": "Çoktan Seçmeli (Onay kutuları)"
+              "label": "Uppercase letters (A, B, C)"
             },
             {
-              "label": "Tekli Seçim (Radyo Düğmeleri)"
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
             }
           ]
         },
         {
-          "label": "Bütün görev için bir puan verin",
-          "description": "Birden çok doğru cevap için toplam bir puan vermek iüzere etkinleştirin. \"Tek cevap\" kipinde böyle bir seçenek olmayacak."
-        },
-        {
-          "label": "Cevapları rastgele dizin",
-          "description": "Gösterimde cevapları rastgele dizmek için etkinleştirin."
-        },
-        {
-          "label": "Çözüm görüntülenmeden önce cevap gereksin"
-        },
-        {
-          "label": "\"Kontrol Et\" diyalog kutunuda teyit iste"
-        },
-        {
-          "label": "\"Yeniden Dene\" diyalog kutunuda teyit iste"
-        },
-        {
-          "label": "Cevapları otomatik olarak kontrol et",
-          "description": "Bu seçeneği etkinleştirmek erişilebilirlik açısından iyi değildir, ne yaptığınızı bildiğinizden emin olun."
-        },
-        {
-          "label": "Geçme Puanı (%)",
-          "description": "Bu ayarın çoğu zaman herhangi bir etkisi olmaz. Tüm görev için bir puan etkinleştirildiğinde 1 puan almak ve eğitim yönetim sisteminde (Ör: EBA) sonucun başarılı olması için gereken toplam puanın yüzdesidir."
-        },
-        {
-          "label": "Puanları göster",
-          "description": "Her bir cevap için kazanılan puanları göster."
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Kontrol etme teyit diyalog kutusu",
+      "label": "Appearance",
       "fields": [
         {
-          "label": "Başlık Metni",
-          "default": "Bitir"
+          "label": "Play area background color"
         },
         {
-          "label": "Gövde Metni",
-          "default": "Bitirmek istediğinize emin misiniz?"
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "İptal et düğmesi etiketi",
-          "default": "Hayır"
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "Onay düğmesi etiketi",
-          "default": "Evet"
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
         }
       ]
     },
     {
-      "label": "Yeniden dene teyit diyalog kutusu",
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-          "label": "Başlık metni",
-          "default": "Yeniden Dene"
+          "label": "Enable \"Retry\" button"
         },
         {
-          "label": "Gövde metni",
-          "default": "Yeniden denemek istediğinize emin misiniz?"
+          "label": "Enable \"Show Solution\" button"
         },
         {
-          "label": "İptal düğmesi etiketi",
-          "default": "Hayır"
+          "label": "Enable \"Check\" button"
         },
         {
-          "label": "Onay düğmesi etiketi",
-          "default": "Evet"
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
+          "options": [
+            {
+              "label": "Automatic"
+            },
+            {
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
+        },
+        {
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
+        },
+        {
+          "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\""
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\""
+        },
+        {
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
+        },
+        {
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
+        },
+        {
+          "label": "Show score points",
+          "description": "Show points earned for each answer. This will not be an option in 'Single answer' mode or if 'Give one point for the whole task' option is enabled."
+        }
+      ]
+    },
+    {
+      "label": "Check confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Finish ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Finish"
+        }
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
         }
       ]
     }

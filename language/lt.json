@@ -1,258 +1,836 @@
 {
   "semantics": [
     {
+      "label": "Instructions",
       "fields": [
         {
-          "label": "Tipas",
-          "description": "Pasirenkama medija, rodoma virš klausimo."
+          "label": "Show instructions"
         },
         {
-          "label": "Išjungti paveikslėlio mastelio keitimą"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
-      ],
-      "label": "Medija"
+      ]
     },
     {
-      "label": "Klausimas"
-    },
-    {
-      "label": "Galimos parinktys",
-      "field": {
-        "label": "Parinktis",
-        "fields": [
-          {
-            "label": "Tekstas"
-          },
-          {
-            "label": "Teisingai"
-          },
-          {
-            "fields": [
-              {
-                "label": "Patarimo tekstas",
-                "description": "Patarimas naudotojui. Tai pasirodys prieš naudotojui patikrinant savo atsakymą / atsakymus."
-              },
-              {
-                "label": "Pranešimas rodomas, jei pasirinktas atsakymas",
-                "description": "Pasirinkus šį atsakymą, pranešimas bus rodomas po atsakymu „Tikrinti“."
-              },
-              {
-                "label": "Pranešimas rodomas, jei atsakymas nepasirinktas",
-                "description": "Jei šis atsakymas nepasirinktas, pranešimas bus rodomas po atsakymu „tikrinti“."
-              }
-            ],
-            "label": "Patarimai ir atsiliepimas"
-          }
-        ]
-      },
-      "entity": "parinktis"
-    },
-    {
-      "label": "Bendras atsiliepimas",
+      "label": "Context (optional)",
       "fields": [
         {
-          "label": "Nustatykite tinkintus atsiliepimus bet kokiam balų diapazonui",
-          "entity": "diapazonas",
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
+      "entity": "option",
+      "field": {
+        "label": "Option",
+        "fields": [
+          {
+            "label": "Text"
+          },
+          {
+            "label": "Correct"
+          },
+          {
+            "label": "Tips and feedback",
+            "fields": [
+              {
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
+              },
+              {
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
+              },
+              {
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Overall Feedback",
+      "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
+        {
+          "widgets": [
+            {
+              "label": "Default"
+            }
+          ],
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "Balų intervalas"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "Atsiliepimai apibrėžtam balų diapazonui",
-                "placeholder": "Užpildykite atsiliepimą"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
-          },
-          "widgets": [
-            {
-              "label": "Numatytasis"
-            }
-          ],
-          "description": "Spustelėkite mygtuką „Pridėti diapazoną“, kad pridėtumėte tiek diapazonų, kiek jums reikia. Pavyzdys: 0–20 % blogas balas, 21–91 % vidutinis balas, 91–100 % puikus rezultatas!"
+          }
         }
       ]
     },
     {
-      "label": "Naudotojo sąsajos vertimai kelių pasirinkimų klausimui",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "default": "Tikrinti",
-          "label": "„Tikrinti atsakymą“ mygtuko pavadinimas"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
-          "default": "Pateikti",
-          "label": "„Pateikti atsakymą“ mygtuko pavadinimas"
+          "label": "Submit answer button label",
+          "default": "Submit"
         },
         {
-          "default": "Rodyti sprendimą",
-          "label": "„Rodyti sprendimą“ mygtuko pavadinimas"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "default": "Bandyti dar kartą",
-          "label": "„Bandyti dar kartą“ mygtuko pavadinimas"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "default": "Rodyti patarimą",
-          "label": "Patarimo pavadinimas"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "description": "Galimi kintamieji yra :num ir :total",
-          "label": "Rezultatų juostos tekstinis atvaizdavimas tiems, kurie naudoja skaitytuvą",
-          "default": "Gavote :num iš :total taškų"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "Galimas patarimas (nerodomas)",
-          "description": "Pritaikymo tekstas, naudojamas skaitymo garsiakalbiams",
-          "default": "Galimas patarimas"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "default": "Galimi atsiliepimai",
-          "label": "Galimi atsiliepimai (nerodomi)",
-          "description": "Pritaikymo tekstas, naudojamas skaitymo garsiakalbiams"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "Skaityti atsiliepimus (nerodomas)",
-          "description": "Pritaikymo tekstas, naudojamas skaitymo garsiakalbiams",
-          "default": "Skaityti atsiliepimus"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "Neteisingas atsakymas",
-          "label": "Neteisingas atsakymas (nerodomas)",
-          "description": "Pritaikomumo tekstas, naudojamas skaitytuvams"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "Teisingas atsakymas (nerodomas)",
-          "description": "Pritaikomumo tekstas, naudojamas skaitytuvams",
-          "default": "Teisingas atsakymas"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "Turėjo būti pažymėtas",
-          "label": "Variantas turėjo būti patikrintas"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "Neturėjo būti pažymėtas",
-          "label": "Nuostata neturėjo būti pažymėtas"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "default": "Prieš peržiūrėdami sprendimą, atsakykite",
-          "label": "Tekstas pranešimui „Reikalingas atsakymas“"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
         },
         {
-          "default": "Tikrinti atsakymus. Atsakymai bus pažymėti kaip teisingi, neteisingi arba neatsakyti.",
-          "label": "Mygtuko „Tikrinti\" pagalbinės technologijos aprašymas"
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
-          "default": "Rodyti sprendimą. Užduotis bus pažymėta teisingu jos sprendimu.",
-          "label": "Mygtuko „Rodyti sprendimą\" pagalbinės technologijos aprašymas"
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
-          "default": "Pabandyti atlikti užduotį dar kartą. Iš naujo nustatyti visus atsakymus ir pradėti užduotį iš naujo.",
-          "label": "Mygtuko „Bandyti dar kartą“ pagalbinės technologijos aprašymas"
+          "label": "Assistive technology description for \"Check\" button",
+          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The task will be marked with its correct solution."
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         }
       ]
     },
     {
-      "description": "Šios parinktys leis jums valdyti, kaip veikia užduotis.",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "Įjungti \"Bandyti dar kartą\" mygtuką"
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "Įjungti mygtuką „Rodyti sprendimą“"
-        },
-        {
-          "label": "Įjungti mygtuką „Tikrinti“"
-        },
-        {
-          "label": "Klausimo tipas",
+          "label": "Label style",
+          "default": "uppercase",
           "options": [
             {
-              "label": "Automatinis"
+              "label": "Numbers (1, 2, 3)"
             },
             {
-              "label": "Keli pasirinkimai (žymimieji langeliai)"
+              "label": "Uppercase letters (A, B, C)"
             },
             {
-              "label": "Vienas pasirinkimas (parinkties akutė)"
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
             }
-          ],
-          "description": "Pasirinkite klausimo išvaizdą ir veikimą."
+          ]
         },
         {
-          "description": "Už kelis teisingus atsakymus galima skirti iš viso vieną tašką. Šios galimybės nebus naudojant \"vieno atsakymo\" režimą.",
-          "label": "Duoti vieną balą už visą užduotį"
-        },
-        {
-          "description": "Įgalinti atsitiktinę rodomų atsakymų tvarką.",
-          "label": "Atsitiktinai sudėlioti atsakymus"
-        },
-        {
-          "label": "Reikalauti atsakymo, kad būtų galima peržiūrėti sprendimą"
-        },
-        {
-          "label": "Rodyti patvirtinimo dialogo langą „Tikrinti“"
-        },
-        {
-          "label": "Rodyti patvirtinimo dialogo langą „Bandyti dar kartą“"
-        },
-        {
-          "label": "Automatiškai patikrinti atsakymus",
-          "description": "Įjungus šią parinktį nukentės pritaikomumas, todėl įsitikinkite, kad žinote, ką darote."
-        },
-        {
-          "label": "Išlaikymo procentas",
-          "description": "Šis nustatymas dažnai neturi jokio poveikio. Tai procentinė viso rezultato dalis, reikalinga 1 taškui gauti, kai įjungtas vienas taškas už visą užduotį, ir result.success gavimas xAPI ataskaitose."
-        },
-        {
-          "label": "Rodyti surinktus balus",
-          "description": "Rodyti už kiekvieną atsakymą gautus balus. Šios galimybės nebus \"Vieno atsakymo\" režime arba jei įjungta parinktis \"Suteikti vieną balą už visą užduotį\"."
-        }
-      ],
-      "label": "Veikimo nustatymai"
-    },
-    {
-      "label": "Patikrinti patvirtinimo dialogo langą",
-      "fields": [
-        {
-          "default": "Baigti ?",
-          "label": "Antraštės tekstas"
-        },
-        {
-          "default": "Ar tikrai norite baigti?",
-          "label": "Turinio tekstas"
-        },
-        {
-          "default": "Atšaukti",
-          "label": "„Atšaukti“ mygtuko pavadinimas"
-        },
-        {
-          "default": "Baigti",
-          "label": "„Patvirtinti“ mygtuko pavadinimas"
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
         }
       ]
     },
     {
+      "label": "Appearance",
       "fields": [
         {
-          "label": "Antraštės tekstas",
-          "default": "Bandyti dar kartą?"
+          "label": "Play area background color"
         },
         {
-          "label": "Turinio tekstas",
-          "default": "Ar tikrai norite bandyti dar kartą?"
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "„Atšaukti“ mygtuko pavadinimas",
-          "default": "Atšaukti"
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
         },
         {
-          "label": "„Patvirtinti“ mygtuko pavadinimas",
-          "default": "Patvirtinti"
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
         }
-      ],
-      "label": "„Bandyti dar kartą“ patvirtinimo langas"
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Enable \"Retry\" button"
+        },
+        {
+          "label": "Enable \"Show Solution\" button"
+        },
+        {
+          "label": "Enable \"Check\" button"
+        },
+        {
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
+          "options": [
+            {
+              "label": "Automatic"
+            },
+            {
+              "label": "Multiple Choice (Checkboxes)"
+            },
+            {
+              "label": "Single Choice (Radio Buttons)"
+            }
+          ]
+        },
+        {
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
+        },
+        {
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
+        },
+        {
+          "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Show confirmation dialog on \"Check\""
+        },
+        {
+          "label": "Show confirmation dialog on \"Retry\""
+        },
+        {
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
+        },
+        {
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
+        },
+        {
+          "label": "Show score points",
+          "description": "Show points earned for each answer. This will not be an option in 'Single answer' mode or if 'Give one point for the whole task' option is enabled."
+        }
+      ]
+    },
+    {
+      "label": "Check confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Finish ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Finish"
+        }
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
+        }
+      ]
     }
   ]
 }

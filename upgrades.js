@@ -320,6 +320,44 @@ H5PUpgrades['H5P.MultiChoiceCFRD'] = (function () {
       },
 
       /**
+       * Move legacy top-level media image into context.media (CFRD layout).
+       *
+       * @param {object} parameters
+       * @param {function} finished
+       */
+      15: function (parameters, finished) {
+        var media;
+        var library;
+
+        if (!parameters || parameters.context || !parameters.media) {
+          finished(null, parameters);
+          return;
+        }
+
+        media = parameters.media;
+
+        if (!media.type) {
+          delete parameters.media;
+          finished(null, parameters);
+          return;
+        }
+
+        library = media.type;
+
+        if (library && library.library && library.library.indexOf('H5P.Image') === 0) {
+          parameters.context = {
+            media: {
+              type: library,
+              disableImageZooming: media.disableImageZooming || false
+            }
+          };
+        }
+
+        delete parameters.media;
+        finished(null, parameters);
+      },
+
+      /**
        * Wrap legacy overallFeedback array in CFRD popup config object.
        *
        * @param {object} parameters
@@ -338,6 +376,33 @@ H5PUpgrades['H5P.MultiChoiceCFRD'] = (function () {
         else if (overallFeedback && typeof overallFeedback === 'object' && !overallFeedback.popupBackgroundColor) {
           overallFeedback.popupBackgroundColor = '#ffffff';
           overallFeedback.feedbackTextColor = '#333333';
+        }
+
+        finished(null, parameters);
+      },
+
+      /**
+       * Ensure CFRD optional groups exist on legacy content.
+       *
+       * @param {object} parameters
+       * @param {function} finished
+       */
+      17: function (parameters, finished) {
+        if (!parameters) {
+          finished(null, parameters);
+          return;
+        }
+
+        if (!parameters.alternativeLabels || typeof parameters.alternativeLabels !== 'object') {
+          parameters.alternativeLabels = {
+            enabled: false,
+            style: 'uppercase',
+            separator: 'period'
+          };
+        }
+
+        if (!parameters.appearance || typeof parameters.appearance !== 'object') {
+          parameters.appearance = {};
         }
 
         finished(null, parameters);

@@ -1,46 +1,332 @@
 {
   "semantics": [
     {
-      "label": "媒體",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "類型",
-          "description": "在問題上方顯示可選的媒體."
+          "label": "Show instructions"
         },
         {
-          "label": "針對圖片停用圖片縮放"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "label": "問題"
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
     },
     {
-      "label": "可用選項",
-      "entity": "選項",
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
+      "entity": "option",
       "field": {
-        "label": "選項",
+        "label": "Option",
         "fields": [
           {
-            "label": "文字"
+            "label": "Text"
           },
           {
-            "label": "正確"
+            "label": "Correct"
           },
           {
-            "label": "提示和回饋",
+            "label": "Tips and feedback",
             "fields": [
               {
-                "label": "提示文字",
-                "description": "提示給使用者. 這將出現在使用者檢查他的答案之前."
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
               },
               {
-                "label": "選擇答案時顯示訊息",
-                "description": "如果選擇此答案, 則會在 \"檢查\" 的答案下方顯示訊息."
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
               },
               {
-                "label": "未選擇答案時顯示訊息",
-                "description": "如果未選擇此答案, 則會在 \"檢查\" 的答案下方顯示訊息."
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
               }
             ]
           }
@@ -50,6 +336,14 @@
     {
       "label": "Overall Feedback",
       "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
         {
           "widgets": [
             {
@@ -68,6 +362,54 @@
               {
                 "label": "Feedback for defined score range",
                 "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -75,10 +417,10 @@
       ]
     },
     {
-      "label": "複選題的使用者界面翻譯",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "label": "檢查答案按鈕標籤",
+          "label": "Check answer button label",
           "default": "Check"
         },
         {
@@ -86,57 +428,65 @@
           "default": "Submit"
         },
         {
-          "label": "顯示解決方案按鈕標籤",
+          "label": "Show solution button label",
           "default": "Show solution"
         },
         {
-          "label": "重試按鈕標籤",
+          "label": "Retry button label",
           "default": "Retry"
         },
         {
-          "label": "提示標籤",
+          "label": "Tip label",
           "default": "Show tip"
         },
         {
-          "label": "正確答案回饋",
+          "label": "Textual representation of the score bar for those using a readspeaker",
           "description": "Available variables are :num and :total",
           "default": "You got :num out of :total points"
         },
         {
-          "label": "接近正確答案回饋",
+          "label": "Feedback popup close button label",
+          "default": "Close"
+        },
+        {
+          "label": "Show feedback button label",
+          "default": "Show feedback"
+        },
+        {
+          "label": "Tip Available (not displayed)",
           "default": "Tip available",
           "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "不正確的答案回饋",
+          "label": "Feedback Available (not displayed)",
           "default": "Feedback available",
           "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "分數欄標籤",
+          "label": "Read Feedback (not displayed)",
           "default": "Read feedback",
           "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "可用的提示 (不顯示)",
+          "label": "Wrong Answer (not displayed)",
           "default": "Wrong answer",
-          "description": "用於閱讀器的輔助功能文字"
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "可用的回饋 (不顯示)",
+          "label": "Correct Answer (not displayed)",
           "default": "Correct answer",
-          "description": "用於閱讀器的輔助功能文字"
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "閱讀回饋 (不顯示)",
+          "label": "Option should have been checked",
           "default": "Should have been checked"
         },
         {
-          "label": "錯誤答案 (不顯示)",
+          "label": "Option should not have been checked",
           "default": "Should not have been checked"
         },
         {
-          "label": "正確答案 (不顯示)",
+          "label": "Text for \"Requires answer\" message",
           "default": "Please answer before viewing the solution"
         },
         {
@@ -154,57 +504,285 @@
       ]
     },
     {
-      "label": "行為設定",
-      "description": "這些選項將允許您控制任務的行為",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "啟用 \"重試\" 按鈕"
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "啟用 \"顯示解決方案\" 按鈕"
+          "label": "Label style",
+          "default": "uppercase",
+          "options": [
+            {
+              "label": "Numbers (1, 2, 3)"
+            },
+            {
+              "label": "Uppercase letters (A, B, C)"
+            },
+            {
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
+            }
+          ]
+        },
+        {
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Appearance",
+      "fields": [
+        {
+          "label": "Play area background color"
+        },
+        {
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Enable \"Retry\" button"
+        },
+        {
+          "label": "Enable \"Show Solution\" button"
         },
         {
           "label": "Enable \"Check\" button"
         },
         {
-          "label": "問題類型",
-          "description": "選擇問題的外觀和行為.",
+          "label": "Question Type",
+          "description": "Select the look and behaviour of the question.",
           "options": [
             {
-              "label": "自動"
+              "label": "Automatic"
             },
             {
-              "label": "複選題 (勾選框)"
+              "label": "Multiple Choice (Checkboxes)"
             },
             {
-              "label": "單選題 (單選按鈕)"
+              "label": "Single Choice (Radio Buttons)"
             }
           ]
         },
         {
-          "label": "給整個任務一分",
-          "description": "啟用可以給出多個正確答案總分的一分. 這將不會是 \"單一答案\" 模式中的選項."
+          "label": "Give one point for the whole task",
+          "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
         },
         {
-          "label": "隨機回答",
-          "description": "啟用隨機顯示的問題順序."
+          "label": "Randomize answers",
+          "description": "Enable to randomize the order of the answers on display."
         },
         {
-          "label": "在解決方案可被檢視之前要求回答"
+          "label": "Require answer before the solution can be viewed"
         },
         {
-          "label": "顯示確認對話框 \"檢查\""
+          "label": "Show confirmation dialog on \"Check\""
         },
         {
-          "label": "顯示確認對話框 \"重試\""
+          "label": "Show confirmation dialog on \"Retry\""
         },
         {
-          "label": "自動檢查答案",
-          "description": "啟用此選項將使輔助功能受阻, 確保您知道您在做什麼."
+          "label": "Automatically check answers",
+          "description": "Enabling this option will make accessibility suffer, make sure you know what you're doing."
         },
         {
-          "label": "通過率",
-          "description": "這個設定通常不會有任何影響. 當啟用整個任務的一個點，在xAPI語句中獲得result.success時，得到1分佔總分的百分比."
+          "label": "Pass percentage",
+          "description": "This setting often won't have any effect. It is the percentage of the total score required for getting 1 point when one point for the entire task is enabled, and for getting result.success in xAPI statements."
         },
         {
           "label": "Show score points",
@@ -213,43 +791,43 @@
       ]
     },
     {
-      "label": "檢查確認對話框",
+      "label": "Check confirmation dialog",
       "fields": [
         {
-          "label": "標題文字",
-          "default": "Finished?"
+          "label": "Header text",
+          "default": "Finish ?"
         },
         {
-          "label": "內容文字",
+          "label": "Body text",
           "default": "Are you sure you wish to finish ?"
         },
         {
-          "label": "取消按鈕標籤",
+          "label": "Cancel button label",
           "default": "Cancel"
         },
         {
-          "label": "確認按鈕標籤",
+          "label": "Confirm button label",
           "default": "Finish"
         }
       ]
     },
     {
-      "label": "重試確認對話框",
+      "label": "Retry confirmation dialog",
       "fields": [
         {
-          "label": "標題文字",
+          "label": "Header text",
           "default": "Retry ?"
         },
         {
-          "label": "內容文字",
-          "default": "Are you sure you want to retry?"
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
         },
         {
-          "label": "取消按鈕標籤",
+          "label": "Cancel button label",
           "default": "Cancel"
         },
         {
-          "label": "確認按鈕標籤",
+          "label": "Confirm button label",
           "default": "Confirm"
         }
       ]

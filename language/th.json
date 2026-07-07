@@ -1,46 +1,332 @@
 {
   "semantics": [
     {
-      "label": "สื่อ",
+      "label": "Instructions",
       "fields": [
         {
-          "label": "ประเภท",
-          "description": "มีการแสดงสื่อเลือกได้สำหรับคำถามนี้ (ไม่บังคับ)"
+          "label": "Show instructions"
         },
         {
-          "label": "ปิดฟังก์ชั่นซูมภาพ"
+          "label": "Instructions text"
+        },
+        {
+          "label": "Display mode",
+          "options": [
+            {
+              "label": "Intro only"
+            },
+            {
+              "label": "Tab only"
+            },
+            {
+              "label": "Intro and tab"
+            }
+          ]
+        },
+        {
+          "label": "Intro button label",
+          "default": "Start"
+        },
+        {
+          "label": "Tab button label",
+          "default": "Instructions"
+        },
+        {
+          "label": "Collapse tab on load"
+        },
+        {
+          "label": "Animation",
+          "fields": [
+            {
+              "label": "Intro curtain duration",
+              "description": "Opening/closing speed for the intro curtain in milliseconds."
+            },
+            {
+              "label": "Tab open/close duration",
+              "description": "Opening/closing speed for the instructions tab in milliseconds."
+            },
+            {
+              "label": "Tab closed extra offset",
+              "description": "Extra offset (in px) applied when the tab is closed. 0 keeps it flush; higher values hide it more."
+            }
+          ]
+        },
+        {
+          "label": "Instructions appearance",
+          "fields": [
+            {
+              "label": "Intro window",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Intro background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Intro text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Start button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Instructions tab",
+              "fields": [
+                {
+                  "label": "Use gradient background",
+                  "default": false
+                },
+                {
+                  "label": "Tab background color",
+                  "default": "#f5f5f5"
+                },
+                {
+                  "label": "Gradient background",
+                  "fields": [
+                    {
+                      "label": "Gradient angle",
+                      "description": "Direction in degrees (0 = upward, 180 = downward).",
+                      "default": 180
+                    },
+                    {
+                      "label": "Gradient start color",
+                      "default": "#f5f5f5"
+                    },
+                    {
+                      "label": "Gradient end color",
+                      "default": "#f5f5f5"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab text color",
+                  "default": "#333333"
+                },
+                {
+                  "label": "Tab content border color",
+                  "default": "#dbe2e8"
+                },
+                {
+                  "label": "Tab button position",
+                  "default": "left",
+                  "options": [
+                    {
+                      "label": "Left"
+                    },
+                    {
+                      "label": "Center"
+                    },
+                    {
+                      "label": "Right"
+                    }
+                  ]
+                },
+                {
+                  "label": "Tab button",
+                  "fields": [
+                    {
+                      "label": "Use gradient background",
+                      "default": false
+                    },
+                    {
+                      "label": "Button background color",
+                      "default": "#1a73d9"
+                    },
+                    {
+                      "label": "Gradient background",
+                      "fields": [
+                        {
+                          "label": "Gradient angle",
+                          "description": "Direction in degrees (0 = upward, 180 = downward).",
+                          "default": 180
+                        },
+                        {
+                          "label": "Gradient start color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Gradient end color",
+                          "default": "#1a73d9"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Button hover background color",
+                      "default": "#1356a3"
+                    },
+                    {
+                      "label": "Button hover text color",
+                      "default": "#ffffff"
+                    },
+                    {
+                      "label": "Use button border",
+                      "default": false
+                    },
+                    {
+                      "label": "Border settings",
+                      "fields": [
+                        {
+                          "label": "Button border color",
+                          "default": "#1a73d9"
+                        },
+                        {
+                          "label": "Button hover border color",
+                          "default": "#1356a3"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Button border radius",
+                      "description": "Corner roundness in rem units.",
+                      "default": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "label": "คำถาม"
+      "label": "Context (optional)",
+      "fields": [
+        {
+          "label": "Context text",
+          "description": "Optional supporting text shown beside the question."
+        },
+        {
+          "label": "Context image",
+          "fields": [
+            {
+              "label": "Image",
+              "description": "Optional image shown beside the question."
+            },
+            {
+              "label": "Disable image zooming"
+            }
+          ]
+        }
+      ]
     },
     {
-      "label": "ตัวเลือกที่มีให้เลือก",
+      "label": "Question"
+    },
+    {
+      "label": "Available options",
       "entity": "option",
       "field": {
-        "label": "ตัวเลือก",
+        "label": "Option",
         "fields": [
           {
-            "label": "ข้อความ"
+            "label": "Text"
           },
           {
-            "label": "ถูกต้อง"
+            "label": "Correct"
           },
           {
-            "label": "เคล็ดลับและคำติชม",
+            "label": "Tips and feedback",
             "fields": [
               {
-                "label": "ข้อความเคล็ดลับ",
-                "description": "คำแนะนำสำหรับผู้ใช้ จะปรากฏก่อนที่ผู้ใช้จะตรวจสอบคำตอบ"
+                "label": "Tip text",
+                "description": "Hint for the user. This will appear before user checks his answer/answers."
               },
               {
-                "label": "ข้อความที่ปรากฏหากคำตอบถูกเลือก",
-                "description": "ข้อความจะปรากฏใต้คำตอบเมื่อผู้ใช้ตรวจสอบแล้วเลือกคำตอบนี้"
+                "label": "Message displayed if answer is selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is selected."
               },
               {
-                "label": "ข้อความที่ปรากฏหากคำตอบไม่ถูกเลือก",
-                "description": "ข้อความจะปรากฏใต้คำตอบเมื่อผู้ใช้ตรวจสอบแล้วไม่เลือกคำตอบนี้"
+                "label": "Message displayed if answer is not selected",
+                "description": "Message will appear below the answer on \"check\" if this answer is not selected."
               }
             ]
           }
@@ -48,26 +334,82 @@
       }
     },
     {
-      "label": "คำตอบโดยรวม",
+      "label": "Overall Feedback",
       "fields": [
+        {
+          "label": "Popup background color",
+          "default": "#ffffff"
+        },
+        {
+          "label": "Feedback text color",
+          "default": "#333333"
+        },
         {
           "widgets": [
             {
-              "label": "ค่าเริ่มต้น"
+              "label": "Default"
             }
           ],
-          "label": "กำหนดคำติชมที่กำหนดเองสำหรับช่วงคะแนนใด ๆ",
-          "description": "คลิกปุ่ม \"เพิ่มช่วง\" เพื่อเพิ่มช่วงใหม่เท่าที่คุณต้องการ เช่น 0-20% คะแนนไม่ดี, 21-91% คะแนนเฉลี่ย, 91-100% คะแนนดีมาก!",
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
           "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "ช่วงคะแนน"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "คำติชมสำหรับช่วงคะแนนที่กำหนด",
-                "placeholder": "กรอกคำติชม"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              },
+              {
+                "label": "Appearance settings",
+                "fields": [
+                  {
+                    "label": "Highlighted lead text",
+                    "placeholder": "e.g. Correct! or Incorrect"
+                  },
+                  {
+                    "label": "Bold lead text"
+                  },
+                  {
+                    "label": "Highlighted lead text color",
+                    "default": "#1a73d9"
+                  },
+                  {
+                    "label": "Text alignment",
+                    "description": "Only used when no feedback image is set. With an image, text alignment follows image position (left/right: left aligned, above: centered).",
+                    "options": [
+                      {
+                        "label": "Left"
+                      },
+                      {
+                        "label": "Center"
+                      },
+                      {
+                        "label": "Right"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Feedback image"
+                  },
+                  {
+                    "label": "Image position",
+                    "options": [
+                      {
+                        "label": "Above text"
+                      },
+                      {
+                        "label": "Left of text"
+                      },
+                      {
+                        "label": "Right of text"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -75,99 +417,335 @@
       ]
     },
     {
-      "label": "การแปลงอินเตอร์เฟซผู้ใช้สำหรับการตอบหลายตัวเลือก",
+      "label": "User interface translations for multichoice",
       "fields": [
         {
-          "label": "ป้ายปุ่ม \"ตรวจสอบคำตอบ\"",
-          "default": "ตรวจสอบ"
+          "label": "Check answer button label",
+          "default": "Check"
         },
         {
-          "label": "ป้ายปุ่ม \"ส่งคำตอบ\"",
-          "default": "ส่ง"
+          "label": "Submit answer button label",
+          "default": "Submit"
         },
         {
-          "label": "ป้ายปุ่ม \"แสดงคำตอบ\"",
-          "default": "แสดงคำตอบ"
+          "label": "Show solution button label",
+          "default": "Show solution"
         },
         {
-          "label": "ป้ายปุ่ม \"ลองใหม่\"",
-          "default": "ลองใหม่"
+          "label": "Retry button label",
+          "default": "Retry"
         },
         {
-          "label": "ป้ายปุ่ม \"แสดงเคล็ดลับ\"",
-          "default": "แสดงเคล็ดลับ"
+          "label": "Tip label",
+          "default": "Show tip"
         },
         {
-          "label": "การแสดงผลแถบคะแนนเป็นข้อความสำหรับผู้ใช้ที่ใช้ Readspeaker",
-          "description": "ตัวแปรที่ใช้ได้คือ :num และ :total",
-          "default": "คุณได้ :num จาก :total คะแนน"
+          "label": "Textual representation of the score bar for those using a readspeaker",
+          "description": "Available variables are :num and :total",
+          "default": "You got :num out of :total points"
         },
         {
-          "label": "มีเคล็ดลับที่ใช้ได้ (ไม่แสดง)",
-          "default": "มีเคล็ดลับที่ใช้ได้",
-          "description": "ข้อความเพื่อให้การเข้าถึงสำหรับ Readspeaker"
+          "label": "Feedback popup close button label",
+          "default": "Close"
         },
         {
-          "label": "มีคำติชมที่ใช้ได้ (ไม่แสดง)",
-          "default": "มีคำติชมที่ใช้ได้",
-          "description": "ข้อความเพื่อให้การเข้าถึงสำหรับ Readspeaker"
+          "label": "Show feedback button label",
+          "default": "Show feedback"
         },
         {
-          "label": "อ่านคำติชม (ไม่แสดง)",
-          "default": "อ่านคำติชม",
-          "description": "ข้อความเพื่อให้การเข้าถึงสำหรับ Readspeaker"
+          "label": "Tip Available (not displayed)",
+          "default": "Tip available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "คำตอบผิด (ไม่แสดง)",
-          "default": "คำตอบผิด",
-          "description": "ข้อความเพื่อให้การเข้าถึงสำหรับ Readspeaker"
+          "label": "Feedback Available (not displayed)",
+          "default": "Feedback available",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "คำตอบถูก (ไม่แสดง)",
-          "default": "คำตอบถูก",
-          "description": "ข้อความเพื่อให้การเข้าถึงสำหรับ Readspeaker"
+          "label": "Read Feedback (not displayed)",
+          "default": "Read feedback",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "ตัวเลือกควรถูกเลือก",
-          "default": "ควรถูกเลือก"
+          "label": "Wrong Answer (not displayed)",
+          "default": "Wrong answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "ตัวเลือกไม่ควรถูกเลือก",
-          "default": "ไม่ควรถูกเลือก"
+          "label": "Correct Answer (not displayed)",
+          "default": "Correct answer",
+          "description": "Accessibility text used for readspeakers"
         },
         {
-          "label": "ข้อความสำหรับข้อความ \"ต้องตอบคำถามก่อนที่จะดูคำตอบ\"",
-          "default": "กรุณาตอบคำถามก่อนที่จะดูคำตอบ"
+          "label": "Option should have been checked",
+          "default": "Should have been checked"
         },
         {
-          "label": "คำอธิบายเทคโนโลยีช่วยในปุ่ม \"ตรวจสอบ\"",
-          "default": "ตรวจสอบคำตอบ ระบบจะทำเครื่องหมายว่าถูกต้อง ไม่ถูกต้อง หรือไม่ได้ตอบ"
+          "label": "Option should not have been checked",
+          "default": "Should not have been checked"
         },
         {
-          "label": "คำอธิบายเทคโนโลยีช่วยในปุ่ม \"แสดงคำตอบ\"",
-          "default": "แสดงคำตอบ งานจะถูกทำเครื่องหมายด้วยคำตอบที่ถูกต้อง"
+          "label": "Text for \"Requires answer\" message",
+          "default": "Please answer before viewing the solution"
         },
         {
-          "label": "คำอธิบายเทคโนโลยีช่วยในปุ่ม \"ลองใหม่\"",
-          "default": "ลองทำงานใหม่ รีเซ็ตคำตอบทั้งหมดและเริ่มงานใหม่อีกครั้ง"
+          "label": "Assistive technology description for \"Check\" button",
+          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+        },
+        {
+          "label": "Assistive technology description for \"Show Solution\" button",
+          "default": "Show the solution. The task will be marked with its correct solution."
+        },
+        {
+          "label": "Assistive technology description for \"Retry\" button",
+          "default": "Retry the task. Reset all responses and start the task over again."
         }
       ]
     },
     {
-      "label": "การตั้งค่าพฤติกรรม",
-      "description": "ตัวเลือกเหล่านี้จะช่วยคุณควบคุมพฤติกรรมของงาน",
+      "label": "Alternative labels",
       "fields": [
         {
-          "label": "เปิดใช้งานปุ่ม \"ลองใหม่\""
+          "label": "Show labels on alternatives",
+          "default": false
         },
         {
-          "label": "เปิดใช้งานปุ่ม \"แสดงคำตอบ\""
+          "label": "Label style",
+          "default": "uppercase",
+          "options": [
+            {
+              "label": "Numbers (1, 2, 3)"
+            },
+            {
+              "label": "Uppercase letters (A, B, C)"
+            },
+            {
+              "label": "Lowercase letters (a, b, c)"
+            },
+            {
+              "label": "Uppercase Roman numerals (I, II, III)"
+            },
+            {
+              "label": "Lowercase Roman numerals (i, ii, iii)"
+            }
+          ]
         },
         {
-          "label": "เปิดใช้งานปุ่ม \"แสดงเคล็ดลับ\""
+          "label": "Separator after label",
+          "default": "period",
+          "options": [
+            {
+              "label": "Period (A.)"
+            },
+            {
+              "label": "Parenthesis ((A))"
+            },
+            {
+              "label": "None (A)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Appearance",
+      "fields": [
+        {
+          "label": "Play area background color"
         },
         {
-          "label": "เปิดใช้งานปุ่ม \"ตรวจสอบคำตอบ\"",
+          "label": "Alternative colors",
+          "fields": [
+            {
+              "label": "Alternative background color"
+            },
+            {
+              "label": "Alternative hover background color"
+            },
+            {
+              "label": "Selected alternative background color"
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Alternative border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use alternative border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Question area",
+          "fields": [
+            {
+              "label": "Question background color",
+              "description": "Leave empty for a transparent background."
+            },
+            {
+              "label": "Question padding",
+              "description": "Inner padding in em units on all sides."
+            },
+            {
+              "label": "Question border radius",
+              "description": "Corner roundness in em units."
+            },
+            {
+              "label": "Use question border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Border width",
+                  "description": "Thickness in em units."
+                },
+                {
+                  "label": "Border color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Text colors",
+          "fields": [
+            {
+              "label": "Question text color"
+            },
+            {
+              "label": "Context text color"
+            },
+            {
+              "label": "Alternative label prefix color"
+            }
+          ]
+        },
+        {
+          "label": "Correct answer colors",
+          "fields": [
+            {
+              "label": "Correct answer background color"
+            },
+            {
+              "label": "Correct answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Wrong answer colors",
+          "fields": [
+            {
+              "label": "Wrong answer background color"
+            },
+            {
+              "label": "Wrong answer text color"
+            }
+          ]
+        },
+        {
+          "label": "Icon colors",
+          "fields": [
+            {
+              "label": "Correct answer icon color",
+              "description": "Defaults to the correct answer text color when not set."
+            },
+            {
+              "label": "Wrong answer icon color",
+              "description": "Defaults to the wrong answer text color when not set."
+            },
+            {
+              "label": "Solution list icon color",
+              "description": "Checkmark shown when viewing the solution."
+            }
+          ]
+        },
+        {
+          "label": "Action buttons (Check, Retry and Show solution)",
+          "description": "Shared style for Check, Try again and Show solution buttons. Border colors apply only when border is enabled.",
+          "fields": [
+            {
+              "label": "Use gradient background"
+            },
+            {
+              "label": "Button background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Button text color"
+            },
+            {
+              "label": "Button hover background color"
+            },
+            {
+              "label": "Button hover text color"
+            },
+            {
+              "label": "Use button border"
+            },
+            {
+              "label": "Border settings",
+              "fields": [
+                {
+                  "label": "Button border color"
+                },
+                {
+                  "label": "Button hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Button border radius",
+              "description": "Default is 2em (Joubel UI). Lower values are sharper; higher values are more rounded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Enable \"Retry\" button"
+        },
+        {
+          "label": "Enable \"Show Solution\" button"
+        },
+        {
+          "label": "Enable \"Check\" button"
+        },
+        {
+          "label": "Question Type",
           "description": "Select the look and behaviour of the question.",
           "options": [
             {
@@ -182,7 +760,7 @@
           ]
         },
         {
-          "label": "เปิดใช้งานปุ่ม \"ส่งคำตอบ\"",
+          "label": "Give one point for the whole task",
           "description": "Enable to give a total of one point for multiple correct answers. This will not be an option in \"Single answer\" mode."
         },
         {
@@ -213,46 +791,46 @@
       ]
     },
     {
-      "label": "การตั้งค่าสำหรับผู้ใช้ด้วยเอง",
-      "fields": [
-        {
-          "label": "สามารถกดปุ่ม \"ลองใหม่\" ได้",
-          "default": "Finish ?"
-        },
-        {
-          "label": "สามารถกดปุ่ม \"แสดงคำตอบ\" ได้",
-          "default": "Are you sure you wish to finish ?"
-        },
-        {
-          "label": "สามารถกดปุ่ม \"แสดงเคล็ดลับ\" ได้",
-          "default": "Cancel"
-        },
-        {
-          "label": "สามารถกดปุ่ม \"ตรวจสอบคำตอบ\" ได้",
-          "default": "Finish"
-        }
-      ]
-    },
-    {
+      "label": "Check confirmation dialog",
       "fields": [
         {
           "label": "Header text",
-          "default": "Retry ?"
+          "default": "Finish ?"
         },
         {
-          "default": "Are you sure you wish to retry ?",
-          "label": "Body text"
+          "label": "Body text",
+          "default": "Are you sure you wish to finish ?"
         },
         {
           "label": "Cancel button label",
           "default": "Cancel"
         },
         {
-          "default": "Confirm",
-          "label": "Confirm button label"
+          "label": "Confirm button label",
+          "default": "Finish"
         }
-      ],
-      "label": "Retry confirmation dialog"
+      ]
+    },
+    {
+      "label": "Retry confirmation dialog",
+      "fields": [
+        {
+          "label": "Header text",
+          "default": "Retry ?"
+        },
+        {
+          "label": "Body text",
+          "default": "Are you sure you wish to retry ?"
+        },
+        {
+          "label": "Cancel button label",
+          "default": "Cancel"
+        },
+        {
+          "label": "Confirm button label",
+          "default": "Confirm"
+        }
+      ]
     }
   ]
 }
