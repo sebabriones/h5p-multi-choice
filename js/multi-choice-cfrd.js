@@ -47,16 +47,16 @@ var H5P = H5P || {};
  * @param {Options} options
  * @param {number} contentId
  * @param {Object} contentData
- * @returns {H5P.MultiChoice}
+ * @returns {H5P.MultiChoiceCFRD}
  * @constructor
  */
-H5P.MultiChoice = function (options, contentId, contentData) {
-  if (!(this instanceof H5P.MultiChoice))
-    return new H5P.MultiChoice(options, contentId, contentData);
+H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
+  if (!(this instanceof H5P.MultiChoiceCFRD))
+    return new H5P.MultiChoiceCFRD(options, contentId, contentData);
   var self = this;
   this.contentId = contentId;
   this.contentData = contentData;
-  H5P.Question.call(self, 'multichoice');
+  H5P.QuestionCFRD.call(self, 'multichoice');
   var $ = H5P.jQuery;
 
   var defaults = {
@@ -185,7 +185,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   };
 
   /**
-   * Register the different parts of the task with the H5P.Question structure.
+   * Register the different parts of the task with the H5P.QuestionCFRD structure.
    */
   self.registerDomElements = function () {
     var media = params.media;
@@ -742,7 +742,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   var getFeedbackText = function (score, max) {
     var ratio = (score / max);
 
-    var feedback = H5P.Question.determineOverallFeedback(params.overallFeedback, ratio);
+    var feedback = H5P.QuestionCFRD.determineOverallFeedback(params.overallFeedback, ratio);
 
     return feedback.replace('@score', score).replace('@total', max);
   };
@@ -755,7 +755,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   this.showCheckSolution = function (skipFeedback) {
     var scorePoints;
     if (!(params.behaviour.singleAnswer || params.behaviour.singlePoint || !params.behaviour.showScorePoints)) {
-      scorePoints = new H5P.Question.ScorePoints();
+      scorePoints = new H5P.QuestionCFRD.ScorePoints();
     }
 
     $myDom.find('.h5p-answer').each(function (i, e) {
@@ -1067,9 +1067,9 @@ H5P.MultiChoice = function (options, contentId, contentData) {
     }
   }
 
-  H5P.MultiChoice.counter = (H5P.MultiChoice.counter === undefined ? 0 : H5P.MultiChoice.counter + 1);
+  H5P.MultiChoiceCFRD.counter = (H5P.MultiChoiceCFRD.counter === undefined ? 0 : H5P.MultiChoiceCFRD.counter + 1);
   params.role = (params.behaviour.singleAnswer ? 'radiogroup' : 'group');
-  params.labelId = 'h5p-mcq' + H5P.MultiChoice.counter;
+  params.labelId = 'h5p-mcq' + H5P.MultiChoiceCFRD.counter;
 
   /**
    * Pack the current state of the interactivity into a object that can be
@@ -1113,5 +1113,5 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   };
 };
 
-H5P.MultiChoice.prototype = Object.create(H5P.Question.prototype);
-H5P.MultiChoice.prototype.constructor = H5P.MultiChoice;
+H5P.MultiChoiceCFRD.prototype = Object.create(H5P.QuestionCFRD.prototype);
+H5P.MultiChoiceCFRD.prototype.constructor = H5P.MultiChoiceCFRD;
