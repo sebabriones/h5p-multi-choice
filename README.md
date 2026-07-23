@@ -19,7 +19,7 @@ Fork CFRD de **H5P.MultiChoice** (upstream 1.16.14, `coreApi` 1.23, Lumi).
 - **Apariencia por actividad** — colores y fondos en `appearance` (selectores en semantics); upgrade **17** aplica defaults
 - **Layout Lumi** — fondo en contenedor raíz, márgenes `h5p-no-frame`, centrado vertical con scroll seguro
 
-Documentación de layout 1.0: [docs/.../17-convenciones-layout-piloto.md §10](../../../docs/desarrollo-librerias/17-convenciones-layout-piloto.md#10-layout-en-línea-10-lumi).
+Documentación de layout 1.0: [docs/.../17-convenciones-layout-gestor.md §10](../../../docs/desarrollo-librerias/17-convenciones-layout-gestor.md#10-layout-en-línea-10).
 
 Ciclo de vida del player (QuestionCFRD, botones, xAPI): [doc 18](../../../docs/desarrollo-librerias/18-ciclo-vida-player-question-cfrd.md).
 
