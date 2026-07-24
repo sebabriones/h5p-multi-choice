@@ -507,13 +507,21 @@
   overflow: hidden;
 }
 
+/* Reserve room for the instructions tab; keep a floor so small widths do not collide */
 .h5p-mc-play-area:has(.h5p-instructions-tab-root) .h5p-question-main-content {
-  padding-top: calc(2.75rem * var(--mc-scale, 1));
+  padding-top: max(3.25rem * var(--mc-scale, 1), 2.75rem);
 }
 
 .h5p-mc-play-area .h5p-question-image,
-.h5p-mc-play-area .h5p-question-introduction {
+.h5p-mc-play-area .h5p-question-introduction,
+.h5p-mc-play-area .h5p-mc-question-intro {
   flex-shrink: 0;
+}
+
+/* Tighten QuestionCFRD 1em+1em gap between question and alternatives */
+.h5p-mc-play-area .h5p-question-introduction,
+.h5p-mc-play-area .h5p-mc-question-intro {
+  margin: 1em 1em 0.25em 1em;
 }
 
 .h5p-mc-play-area .h5p-question-content {
@@ -521,17 +529,22 @@
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  margin: 0 1em 1em 1em;
+}
+
+.h5p-mc-play-area .h5p-answers {
+  margin: 0.25em 0;
 }
 
 /* Vertically center question + alternatives when content is shorter than the play area */
 .h5p-mc-play-area:not(:has(.h5p-mc-with-context)) .h5p-question-introduction {
-  margin-top: auto;
+  margin: auto 1em 0.25em 1em;
 }
 
 .h5p-mc-play-area:not(:has(.h5p-mc-with-context)) .h5p-question-content {
   flex: 0 1 auto;
   max-height: 100%;
-  margin-bottom: auto;
+  margin: 0 1em auto 1em;
 }
 
 .h5p-multichoice > .h5p-question-feedback:not(.h5p-question-popup):has(.h5p-question-feedback-content:not(.has-content)) {
