@@ -7,7 +7,7 @@
   "author": "sbriones (CFRD-UDEC)",
   "majorVersion": 1,
   "minorVersion": 0,
-  "patchVersion": 13,
+  "patchVersion": 14,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -74,9 +74,9 @@
       "minorVersion": 0
     },
     {
-      "machineName": "H5PEditor.ColorSelector",
+      "machineName": "H5PEditor.ColorSelectorCFRD",
       "majorVersion": 1,
-      "minorVersion": 3
+      "minorVersion": 0
     }
   ]
 }
