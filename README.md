@@ -5,9 +5,9 @@ Fork CFRD de **H5P.MultiChoice** (upstream 1.16.14, `coreApi` 1.23, Lumi).
 | Campo | Valor |
 |-------|-------|
 | `machineName` | `H5P.MultiChoiceCFRD` |
-| Versión actual | **1.0.12** |
+| Versión actual | **1.0.15** |
 | Constructor JS | `H5P.MultiChoiceCFRD` |
-| Editor | `semantics.json` + widgets upstream (`H5PEditor.RangeList`, `H5PEditor.ShowWhen`, etc.) — sin editor dedicado |
+| Editor | `semantics.json` + widgets (`H5PEditor.RangeList`, `H5PEditor.ShowWhen`, `H5PEditor.ColorSelectorCFRD`, etc.) — sin editor dedicado |
 | Rama git | `multi-choice-cfrd-1.0.0` |
 
 ## Características CFRD (1.0.x)

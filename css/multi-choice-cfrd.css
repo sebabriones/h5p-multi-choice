@@ -89,7 +89,11 @@
   background-color: #ececec;
 }
 
+/* Mouse/touch: no inset outline on click. Keyboard: keep a visible focus ring. */
 .h5p-multichoice .h5p-answer:not([aria-disabled="true"]):focus .h5p-alternative-container {
+  outline: none;
+}
+.h5p-multichoice .h5p-answer:not([aria-disabled="true"]):focus-visible .h5p-alternative-container {
   outline-style: inset;
   outline-width: 2px;
 }
