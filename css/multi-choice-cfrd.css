@@ -341,11 +341,11 @@
 }
 
 .h5p-multichoice .h5p-feedback-text::-webkit-scrollbar {
-  width: 0.4em;
+  width: var(--mc-scrollbar-width, 8px);
 }
 .h5p-multichoice .h5p-feedback-text::-webkit-scrollbar-thumb {
   border-radius: 0.2em;
-  background: #aaa;
+  background: var(--mc-scrollbar-thumb, #b0b0b0);
 }
 
 /* Tip icon*/
@@ -412,6 +412,10 @@
 
 .h5p-multichoice {
   --mc-play-area-bg: #ffffff;
+  --mc-scrollbar-width: 8px;
+  --mc-scrollbar-track: #e8e8e8;
+  --mc-scrollbar-thumb: #b0b0b0;
+  --mc-scrollbar-thumb-hover: #888888;
   background-color: var(--mc-play-area-bg);
 }
 
@@ -478,6 +482,10 @@
   --mc-question-border-color: transparent;
   --mc-feedback-bg: #ffffff;
   --mc-feedback-color: #333333;
+  --mc-scrollbar-width: 8px;
+  --mc-scrollbar-track: #e8e8e8;
+  --mc-scrollbar-thumb: #b0b0b0;
+  --mc-scrollbar-thumb-hover: #888888;
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -817,4 +825,48 @@
 
 .h5p-mc-play-area .h5p-question-feedback.h5p-question-popup .h5p-question-feedback-content {
   max-height: min(50vh, 60%);
+}
+
+/* Scrollbar (configurable from appearance) */
+.h5p-mc-play-area .h5p-question-content,
+.h5p-mc-play-area .h5p-mc-context,
+.h5p-mc-play-area .h5p-mc-question-column,
+.h5p-mc-play-area .h5p-mc-with-context .h5p-answers,
+.h5p-multichoice .h5p-feedback-text {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mc-scrollbar-thumb) var(--mc-scrollbar-track);
+}
+
+.h5p-mc-play-area .h5p-question-content::-webkit-scrollbar,
+.h5p-mc-play-area .h5p-mc-context::-webkit-scrollbar,
+.h5p-mc-play-area .h5p-mc-question-column::-webkit-scrollbar,
+.h5p-mc-play-area .h5p-mc-with-context .h5p-answers::-webkit-scrollbar,
+.h5p-multichoice .h5p-feedback-text::-webkit-scrollbar {
+  width: var(--mc-scrollbar-width);
+}
+
+.h5p-mc-play-area .h5p-question-content::-webkit-scrollbar-track,
+.h5p-mc-play-area .h5p-mc-context::-webkit-scrollbar-track,
+.h5p-mc-play-area .h5p-mc-question-column::-webkit-scrollbar-track,
+.h5p-mc-play-area .h5p-mc-with-context .h5p-answers::-webkit-scrollbar-track,
+.h5p-multichoice .h5p-feedback-text::-webkit-scrollbar-track {
+  background: var(--mc-scrollbar-track);
+  border-radius: 999px;
+}
+
+.h5p-mc-play-area .h5p-question-content::-webkit-scrollbar-thumb,
+.h5p-mc-play-area .h5p-mc-context::-webkit-scrollbar-thumb,
+.h5p-mc-play-area .h5p-mc-question-column::-webkit-scrollbar-thumb,
+.h5p-mc-play-area .h5p-mc-with-context .h5p-answers::-webkit-scrollbar-thumb,
+.h5p-multichoice .h5p-feedback-text::-webkit-scrollbar-thumb {
+  background: var(--mc-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+.h5p-mc-play-area .h5p-question-content::-webkit-scrollbar-thumb:hover,
+.h5p-mc-play-area .h5p-mc-context::-webkit-scrollbar-thumb:hover,
+.h5p-mc-play-area .h5p-mc-question-column::-webkit-scrollbar-thumb:hover,
+.h5p-mc-play-area .h5p-mc-with-context .h5p-answers::-webkit-scrollbar-thumb:hover,
+.h5p-multichoice .h5p-feedback-text::-webkit-scrollbar-thumb:hover {
+  background: var(--mc-scrollbar-thumb-hover);
 }

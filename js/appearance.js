@@ -31,7 +31,12 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     feedbackTextColor: '#333333',
     correctIcon: '#255c41',
     wrongIcon: '#b71c1c',
-    solutionIcon: '#255c41'
+    solutionIcon: '#255c41',
+    scrollbarWidth: 8,
+    scrollbarShowTrack: true,
+    scrollbarTrack: '#e8e8e8',
+    scrollbarThumb: '#b0b0b0',
+    scrollbarThumbHover: '#888888'
   };
 
   var CSS_VAR_KEYS = {
@@ -57,13 +62,20 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     wrongIcon: '--mc-wrong-icon-color',
     solutionIcon: '--mc-solution-icon-color',
     feedbackBackground: '--mc-feedback-bg',
-    feedbackTextColor: '--mc-feedback-color'
+    feedbackTextColor: '--mc-feedback-color',
+    scrollbarTrack: '--mc-scrollbar-track',
+    scrollbarThumb: '--mc-scrollbar-thumb',
+    scrollbarThumbHover: '--mc-scrollbar-thumb-hover'
   };
 
   var CSS_EM_VAR_KEYS = {
     questionPadding: '--mc-question-padding',
     questionBorderRadius: '--mc-question-border-radius',
     alternativeBorderRadius: '--mc-alternative-border-radius'
+  };
+
+  var CSS_PX_VAR_KEYS = {
+    scrollbarWidth: '--mc-scrollbar-width'
   };
 
   /**
@@ -81,6 +93,23 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     }
 
     return num + 'em';
+  }
+
+  /**
+   * @param {number|string} value
+   * @param {number|string} fallback
+   * @returns {string}
+   */
+  function toPx(value, fallback) {
+    var num = (value !== undefined && value !== null && value !== '') ?
+      Number(value) :
+      Number(fallback);
+
+    if (isNaN(num)) {
+      num = Number(fallback);
+    }
+
+    return num + 'px';
   }
 
   /**
@@ -154,6 +183,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     var wrong = (appearance && appearance.wrongColors) || {};
     var icons = (appearance && appearance.iconColors) || {};
     var questionArea = (appearance && appearance.questionArea) || {};
+    var scrollbar = (appearance && appearance.scrollbar) || {};
 
     return {
       playAreaBackground: appearance && appearance.playAreaBackground,
@@ -174,7 +204,12 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
       wrongText: wrong.text,
       correctIcon: icons.correct,
       wrongIcon: icons.wrong,
-      solutionIcon: icons.solution
+      solutionIcon: icons.solution,
+      scrollbarWidth: scrollbar.width,
+      scrollbarShowTrack: scrollbar.showTrack,
+      scrollbarTrack: scrollbar.track,
+      scrollbarThumb: scrollbar.thumb,
+      scrollbarThumbHover: scrollbar.thumbHover
     };
   }
 
@@ -229,6 +264,11 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
       }
     }
 
+    // Boolean false must be preserved (empty-string guard above skips it intentionally for colors).
+    if (fields.scrollbarShowTrack === false || fields.scrollbarShowTrack === true) {
+      merged.scrollbarShowTrack = fields.scrollbarShowTrack;
+    }
+
     merged.feedbackBackground = feedbackColors.feedbackBackground;
     merged.feedbackTextColor = feedbackColors.feedbackTextColor;
 
@@ -238,6 +278,10 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     applyIconDefaults(merged, fields);
     applyBorderAppearance(merged, appearance);
+
+    if (merged.scrollbarShowTrack === false) {
+      merged.scrollbarTrack = 'transparent';
+    }
 
     return merged;
   }
@@ -250,6 +294,10 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   function getCssVarValue(merged, key) {
     if (Object.prototype.hasOwnProperty.call(CSS_EM_VAR_KEYS, key)) {
       return toEm(merged[key], APPEARANCE_DEFAULTS[key]);
+    }
+
+    if (Object.prototype.hasOwnProperty.call(CSS_PX_VAR_KEYS, key)) {
+      return toPx(merged[key], APPEARANCE_DEFAULTS[key]);
     }
 
     return merged[key];
@@ -289,6 +337,12 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
           el.style.setProperty(CSS_EM_VAR_KEYS[key], getCssVarValue(merged, key));
         }
       }
+
+      for (key in CSS_PX_VAR_KEYS) {
+        if (Object.prototype.hasOwnProperty.call(CSS_PX_VAR_KEYS, key)) {
+          el.style.setProperty(CSS_PX_VAR_KEYS[key], getCssVarValue(merged, key));
+        }
+      }
     }
 
     return merged;
@@ -322,6 +376,10 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
       el.style.setProperty('--mc-play-area-bg', bg);
       el.style.backgroundColor = bg;
+      el.style.setProperty('--mc-scrollbar-width', toPx(merged.scrollbarWidth, APPEARANCE_DEFAULTS.scrollbarWidth));
+      el.style.setProperty('--mc-scrollbar-track', merged.scrollbarTrack);
+      el.style.setProperty('--mc-scrollbar-thumb', merged.scrollbarThumb);
+      el.style.setProperty('--mc-scrollbar-thumb-hover', merged.scrollbarThumbHover);
     }
 
     return merged;
