@@ -14,6 +14,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     questionText: '#333333',
     contextText: '#555555',
     labelPrefixText: '#333333',
+    questionFontSize: 1,
+    contextFontSize: 1,
     correctBackground: '#b6e4ce',
     correctText: '#255c41',
     wrongBackground: '#fbd7d8',
@@ -71,7 +73,9 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   var CSS_EM_VAR_KEYS = {
     questionPadding: '--mc-question-padding',
     questionBorderRadius: '--mc-question-border-radius',
-    alternativeBorderRadius: '--mc-alternative-border-radius'
+    alternativeBorderRadius: '--mc-alternative-border-radius',
+    questionFontSize: '--mc-question-font-size',
+    contextFontSize: '--mc-context-font-size'
   };
 
   var CSS_PX_VAR_KEYS = {
@@ -194,6 +198,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
       alternativeBorderRadius: alt.borderRadius,
       questionText: text.question,
       contextText: text.context,
+      questionFontSize: text.questionFontSize,
+      contextFontSize: text.contextFontSize,
       labelPrefixText: text.labelPrefix,
       questionBackground: questionArea.background,
       questionPadding: questionArea.padding,
