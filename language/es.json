@@ -602,16 +602,76 @@
           "label": "Colores de alternativas",
           "fields": [
             {
+              "label": "Usar fondo en degradado"
+            },
+            {
               "label": "Color de fondo de alternativas"
+            },
+            {
+              "label": "Fondo en degradado",
+              "fields": [
+                {
+                  "label": "Ángulo del degradado",
+                  "description": "Dirección en grados (0 = hacia arriba, 180 = hacia abajo)."
+                },
+                {
+                  "label": "Color inicial del degradado"
+                },
+                {
+                  "label": "Color final del degradado"
+                }
+              ]
+            },
+            {
+              "label": "Color de texto de alternativas"
+            },
+            {
+              "label": "Usar fondo en degradado al pasar el cursor"
             },
             {
               "label": "Color de fondo de alternativas al pasar el cursor"
             },
             {
+              "label": "Fondo en degradado al pasar el cursor",
+              "fields": [
+                {
+                  "label": "Ángulo del degradado",
+                  "description": "Dirección en grados (0 = hacia arriba, 180 = hacia abajo)."
+                },
+                {
+                  "label": "Color inicial del degradado"
+                },
+                {
+                  "label": "Color final del degradado"
+                }
+              ]
+            },
+            {
+              "label": "Color de texto de alternativas al pasar el cursor"
+            },
+            {
+              "label": "Usar fondo en degradado al seleccionar"
+            },
+            {
               "label": "Color al seleccionar alternativa"
             },
             {
-              "label": "Color de texto de alternativas"
+              "label": "Fondo en degradado al seleccionar",
+              "fields": [
+                {
+                  "label": "Ángulo del degradado",
+                  "description": "Dirección en grados (0 = hacia arriba, 180 = hacia abajo)."
+                },
+                {
+                  "label": "Color inicial del degradado"
+                },
+                {
+                  "label": "Color final del degradado"
+                }
+              ]
+            },
+            {
+              "label": "Color de texto de alternativas al seleccionar"
             },
             {
               "label": "Radio de borde de alternativas",
@@ -629,6 +689,25 @@
                 },
                 {
                   "label": "Color del borde"
+                },
+                {
+                  "label": "Color del borde al pasar el cursor"
+                }
+              ]
+            },
+            {
+              "label": "Usar borde al seleccionar",
+              "description": "Si está activado, las alternativas seleccionadas muestran un borde distinto. Si está desactivado, se aplican los ajustes de borde normales."
+            },
+            {
+              "label": "Ajustes del borde al seleccionar",
+              "fields": [
+                {
+                  "label": "Grosor del borde al seleccionar",
+                  "description": "Grosor en unidades em. El valor por defecto equivale al borde fijo anterior de 2px (~0.125em)."
+                },
+                {
+                  "label": "Color del borde al seleccionar"
                 }
               ]
             }

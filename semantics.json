@@ -1546,43 +1546,260 @@
         "optional": true,
         "fields": [
           {
+            "name": "useGradientBackground",
+            "type": "boolean",
+            "label": "Use gradient background",
+            "default": false
+          },
+          {
             "name": "background",
             "type": "text",
-            "widget": "colorSelector",
             "label": "Alternative background color",
             "default": "#dddddd",
             "optional": true,
             "spectrum": {
               "showInput": true
+            },
+            "widget": "showWhen",
+            "showWhen": {
+              "widget": "colorSelector",
+              "rules": [
+                {
+                  "field": "useGradientBackground",
+                  "equals": false
+                }
+              ]
             }
           },
           {
-            "name": "hoverBackground",
-            "type": "text",
-            "widget": "colorSelector",
-            "label": "Alternative hover background color",
-            "default": "#ececec",
-            "optional": true,
-            "spectrum": {
-              "showInput": true
-            }
-          },
-          {
-            "name": "progressBackground",
-            "type": "text",
-            "widget": "colorSelector",
-            "label": "Selected alternative background color",
-            "default": "#cee0f4",
-            "optional": true,
-            "spectrum": {
-              "showInput": true
-            }
+            "name": "gradientBackground",
+            "type": "group",
+            "label": "Gradient background",
+            "importance": "low",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "useGradientBackground",
+                  "equals": true
+                }
+              ]
+            },
+            "fields": [
+              {
+                "name": "angle",
+                "type": "number",
+                "label": "Gradient angle",
+                "description": "Direction in degrees (0 = upward, 180 = downward).",
+                "default": 180,
+                "min": 0,
+                "max": 360,
+                "step": 1,
+                "unit": "°"
+              },
+              {
+                "name": "colorStart",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient start color",
+                "default": "#dddddd",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              },
+              {
+                "name": "colorEnd",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient end color",
+                "default": "#dddddd",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              }
+            ]
           },
           {
             "name": "text",
             "type": "text",
             "widget": "colorSelector",
             "label": "Alternative text color",
+            "default": "#333333",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            }
+          },
+          {
+            "name": "useHoverGradientBackground",
+            "type": "boolean",
+            "label": "Use gradient background on hover",
+            "default": false
+          },
+          {
+            "name": "hoverBackground",
+            "type": "text",
+            "label": "Alternative hover background color",
+            "default": "#ececec",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            },
+            "widget": "showWhen",
+            "showWhen": {
+              "widget": "colorSelector",
+              "rules": [
+                {
+                  "field": "useHoverGradientBackground",
+                  "equals": false
+                }
+              ]
+            }
+          },
+          {
+            "name": "hoverGradientBackground",
+            "type": "group",
+            "label": "Hover gradient background",
+            "importance": "low",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "useHoverGradientBackground",
+                  "equals": true
+                }
+              ]
+            },
+            "fields": [
+              {
+                "name": "angle",
+                "type": "number",
+                "label": "Gradient angle",
+                "description": "Direction in degrees (0 = upward, 180 = downward).",
+                "default": 180,
+                "min": 0,
+                "max": 360,
+                "step": 1,
+                "unit": "°"
+              },
+              {
+                "name": "colorStart",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient start color",
+                "default": "#ececec",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              },
+              {
+                "name": "colorEnd",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient end color",
+                "default": "#ececec",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              }
+            ]
+          },
+          {
+            "name": "hoverText",
+            "type": "text",
+            "widget": "colorSelector",
+            "label": "Alternative hover text color",
+            "default": "#333333",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            }
+          },
+          {
+            "name": "useProgressGradientBackground",
+            "type": "boolean",
+            "label": "Use gradient background when selected",
+            "default": false
+          },
+          {
+            "name": "progressBackground",
+            "type": "text",
+            "label": "Selected alternative background color",
+            "default": "#cee0f4",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            },
+            "widget": "showWhen",
+            "showWhen": {
+              "widget": "colorSelector",
+              "rules": [
+                {
+                  "field": "useProgressGradientBackground",
+                  "equals": false
+                }
+              ]
+            }
+          },
+          {
+            "name": "progressGradientBackground",
+            "type": "group",
+            "label": "Selected gradient background",
+            "importance": "low",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "useProgressGradientBackground",
+                  "equals": true
+                }
+              ]
+            },
+            "fields": [
+              {
+                "name": "angle",
+                "type": "number",
+                "label": "Gradient angle",
+                "description": "Direction in degrees (0 = upward, 180 = downward).",
+                "default": 180,
+                "min": 0,
+                "max": 360,
+                "step": 1,
+                "unit": "°"
+              },
+              {
+                "name": "colorStart",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient start color",
+                "default": "#cee0f4",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              },
+              {
+                "name": "colorEnd",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Gradient end color",
+                "default": "#cee0f4",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              }
+            ]
+          },
+          {
+            "name": "progressText",
+            "type": "text",
+            "widget": "colorSelector",
+            "label": "Selected alternative text color",
             "default": "#333333",
             "optional": true,
             "spectrum": {
@@ -1638,6 +1855,63 @@
                 "widget": "colorSelector",
                 "label": "Border color",
                 "default": "#999999",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              },
+              {
+                "name": "hoverBorderColor",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Hover border color",
+                "default": "#999999",
+                "optional": true,
+                "spectrum": {
+                  "showInput": true
+                }
+              }
+            ]
+          },
+          {
+            "name": "useSelectedBorder",
+            "type": "boolean",
+            "label": "Use border when selected",
+            "description": "When enabled, selected alternatives show a distinct border. When disabled, the normal border settings apply.",
+            "default": true
+          },
+          {
+            "name": "selectedBorderSettings",
+            "type": "group",
+            "label": "Selected border settings",
+            "importance": "low",
+            "widget": "showWhen",
+            "showWhen": {
+              "rules": [
+                {
+                  "field": "useSelectedBorder",
+                  "equals": true
+                }
+              ]
+            },
+            "fields": [
+              {
+                "name": "borderWidth",
+                "type": "number",
+                "label": "Selected border width",
+                "description": "Thickness in em units. Default matches the previous fixed 2px look (~0.125em).",
+                "default": 0.125,
+                "min": 0,
+                "max": 0.5,
+                "decimals": 3,
+                "unit": "em"
+              },
+              {
+                "name": "borderColor",
+                "type": "text",
+                "widget": "colorSelector",
+                "label": "Selected border color",
+                "default": "#388eff",
                 "optional": true,
                 "spectrum": {
                   "showInput": true

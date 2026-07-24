@@ -11,6 +11,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeHoverBackground: '#ececec',
     alternativeProgressBackground: '#cee0f4',
     alternativeText: '#333333',
+    alternativeHoverText: '#333333',
+    alternativeProgressText: '#333333',
     questionText: '#333333',
     contextText: '#555555',
     labelPrefixText: '#333333',
@@ -26,7 +28,10 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBorderRadius: 0.3,
     alternativeBorderWidth: '0',
     alternativeBorderColor: 'transparent',
+    alternativeHoverBorderColor: 'transparent',
     alternativeBoxShadow: '0 0.1em 0 rgba(0,0,0,0.3)',
+    selectedBorderWidth: '0.125em',
+    selectedBorderColor: '#388eff',
     questionBorderWidth: '0',
     questionBorderColor: 'transparent',
     feedbackBackground: '#ffffff',
@@ -47,13 +52,18 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeHoverBackground: '--mc-alternative-hover-bg',
     alternativeProgressBackground: '--mc-alternative-progress-bg',
     alternativeText: '--mc-alternative-color',
+    alternativeHoverText: '--mc-alternative-hover-color',
+    alternativeProgressText: '--mc-alternative-progress-color',
     questionText: '--mc-question-color',
     contextText: '--mc-context-color',
     labelPrefixText: '--mc-label-prefix-color',
     questionBackground: '--mc-question-bg',
     alternativeBorderWidth: '--mc-alternative-border-width',
     alternativeBorderColor: '--mc-alternative-border-color',
+    alternativeHoverBorderColor: '--mc-alternative-hover-border-color',
     alternativeBoxShadow: '--mc-alternative-box-shadow',
+    selectedBorderWidth: '--mc-selected-border-width',
+    selectedBorderColor: '--mc-selected-border-color',
     questionBorderWidth: '--mc-question-border-width',
     questionBorderColor: '--mc-question-border-color',
     correctBackground: '--mc-correct-bg',
@@ -125,6 +135,74 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   }
 
   /**
+   * @param {*} value
+   * @param {string} fallback
+   * @returns {string}
+   */
+  function pickString(value, fallback) {
+    return (value === undefined || value === null || value === '') ?
+      fallback :
+      String(value);
+  }
+
+  /**
+   * @param {*} value
+   * @param {number} fallback
+   * @returns {number}
+   */
+  function normalizeAngle(value, fallback) {
+    var normalized = parseInt(value, 10);
+
+    if (isNaN(normalized)) {
+      normalized = fallback;
+    }
+
+    return Math.max(0, Math.min(360, normalized));
+  }
+
+  /**
+   * @param {number} angle
+   * @param {string} colorStart
+   * @param {string} colorEnd
+   * @returns {string}
+   */
+  function buildLinearGradient(angle, colorStart, colorEnd) {
+    return 'linear-gradient(' + angle + 'deg, ' + colorStart + ', ' + colorEnd + ')';
+  }
+
+  /**
+   * Resolve solid or gradient fill from editor fields.
+   *
+   * @param {Object} [group]
+   * @param {Object} options
+   * @param {string} options.solidKey
+   * @param {string} [options.useGradientKey]
+   * @param {string} [options.gradientKey]
+   * @param {string} options.fallbackSolid
+   * @returns {string}
+   */
+  function resolveFill(group, options) {
+    var useGradientKey = options.useGradientKey || 'useGradientBackground';
+    var gradientKey = options.gradientKey || 'gradientBackground';
+    var solid = pickString(group && group[options.solidKey], options.fallbackSolid);
+    var gradient;
+    var angle;
+    var colorStart;
+    var colorEnd;
+
+    if (!isTruthy(group && group[useGradientKey])) {
+      return solid;
+    }
+
+    gradient = (group && group[gradientKey]) || {};
+    angle = normalizeAngle(gradient.angle, 180);
+    colorStart = pickString(gradient.colorStart, solid);
+    colorEnd = pickString(gradient.colorEnd, colorStart);
+
+    return buildLinearGradient(angle, colorStart, colorEnd);
+  }
+
+  /**
    * @param {Object} merged
    * @param {Object} [appearance]
    * @returns {Object}
@@ -132,18 +210,32 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   function applyBorderAppearance(merged, appearance) {
     var alt = (appearance && appearance.alternativeColors) || {};
     var altBorder = alt.borderSettings || {};
+    var selectedBorder = alt.selectedBorderSettings || {};
     var questionArea = (appearance && appearance.questionArea) || {};
     var questionBorder = questionArea.borderSettings || {};
 
     if (isTruthy(alt.useBorder)) {
-      merged.alternativeBorderWidth = toEm(altBorder.borderWidth, 0.1);
+      merged.alternativeBorderWidth = toEm(altBorder.borderWidth, 0.05);
       merged.alternativeBorderColor = altBorder.borderColor || '#999999';
+      merged.alternativeHoverBorderColor = altBorder.hoverBorderColor ||
+        merged.alternativeBorderColor;
       merged.alternativeBoxShadow = 'none';
     }
     else {
       merged.alternativeBorderWidth = '0';
       merged.alternativeBorderColor = 'transparent';
+      merged.alternativeHoverBorderColor = 'transparent';
       merged.alternativeBoxShadow = '0 0.1em 0 rgba(0,0,0,0.3)';
+    }
+
+    // Default true when undefined (legacy content without the field).
+    if (alt.useSelectedBorder === false) {
+      merged.selectedBorderWidth = merged.alternativeBorderWidth;
+      merged.selectedBorderColor = merged.alternativeBorderColor;
+    }
+    else {
+      merged.selectedBorderWidth = toEm(selectedBorder.borderWidth, 0.125);
+      merged.selectedBorderColor = selectedBorder.borderColor || '#388eff';
     }
 
     if (isTruthy(questionArea.useBorder)) {
@@ -191,10 +283,25 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     return {
       playAreaBackground: appearance && appearance.playAreaBackground,
-      alternativeBackground: alt.background,
-      alternativeHoverBackground: alt.hoverBackground,
-      alternativeProgressBackground: alt.progressBackground,
+      alternativeBackground: resolveFill(alt, {
+        solidKey: 'background',
+        fallbackSolid: APPEARANCE_DEFAULTS.alternativeBackground
+      }),
+      alternativeHoverBackground: resolveFill(alt, {
+        solidKey: 'hoverBackground',
+        useGradientKey: 'useHoverGradientBackground',
+        gradientKey: 'hoverGradientBackground',
+        fallbackSolid: APPEARANCE_DEFAULTS.alternativeHoverBackground
+      }),
+      alternativeProgressBackground: resolveFill(alt, {
+        solidKey: 'progressBackground',
+        useGradientKey: 'useProgressGradientBackground',
+        gradientKey: 'progressGradientBackground',
+        fallbackSolid: APPEARANCE_DEFAULTS.alternativeProgressBackground
+      }),
       alternativeText: alt.text,
+      alternativeHoverText: alt.hoverText,
+      alternativeProgressText: alt.progressText,
       alternativeBorderRadius: alt.borderRadius,
       questionText: text.question,
       contextText: text.context,
@@ -280,6 +387,14 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     if (!fields.questionBackground) {
       merged.questionBackground = 'transparent';
+    }
+
+    if (!fields.alternativeHoverText) {
+      merged.alternativeHoverText = merged.alternativeText;
+    }
+
+    if (!fields.alternativeProgressText) {
+      merged.alternativeProgressText = merged.alternativeText;
     }
 
     applyIconDefaults(merged, fields);

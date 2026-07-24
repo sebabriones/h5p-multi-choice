@@ -651,16 +651,76 @@
           "label": "Alternative colors",
           "fields": [
             {
+              "label": "Use gradient background"
+            },
+            {
               "label": "Alternative background color"
+            },
+            {
+              "label": "Gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Alternative text color"
+            },
+            {
+              "label": "Use gradient background on hover"
             },
             {
               "label": "Alternative hover background color"
             },
             {
+              "label": "Hover gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Alternative hover text color"
+            },
+            {
+              "label": "Use gradient background when selected"
+            },
+            {
               "label": "Selected alternative background color"
             },
             {
-              "label": "Alternative text color"
+              "label": "Selected gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Selected alternative text color"
             },
             {
               "label": "Alternative border radius",
@@ -678,6 +738,25 @@
                 },
                 {
                   "label": "Border color"
+                },
+                {
+                  "label": "Hover border color"
+                }
+              ]
+            },
+            {
+              "label": "Use border when selected",
+              "description": "When enabled, selected alternatives show a distinct border. When disabled, the normal border settings apply."
+            },
+            {
+              "label": "Selected border settings",
+              "fields": [
+                {
+                  "label": "Selected border width",
+                  "description": "Thickness in em units. Default matches the previous fixed 2px look (~0.125em)."
+                },
+                {
+                  "label": "Selected border color"
                 }
               ]
             }
