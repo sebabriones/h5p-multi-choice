@@ -532,12 +532,15 @@
   overflow: hidden;
 }
 
-/* Inline evaluation footer: only when scorebar is a direct child (no popup) */
+/* Inline evaluation footer: only when scorebar is a direct child (no popup).
+   Use minmax(0, 1fr) so the buttons column cannot force the activity wider than the play area. */
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) {
   display: grid;
   grid-template-columns: 13em minmax(0, 1fr);
   align-items: center;
   column-gap: 0.5em;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-mc-play-area,
@@ -545,6 +548,8 @@
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-feedback:not(.h5p-question-popup),
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-hidden-read {
   grid-column: 1 / -1;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-scorebar.h5p-question-visible,
@@ -554,7 +559,7 @@
   display: block;
   width: 13em;
   max-width: calc(100% - 2em);
-  min-width: 13em;
+  min-width: 0;
   margin: 0 0 1em 1em;
   font-size: 1em;
 }
@@ -563,11 +568,25 @@
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-buttons.has-scorebar,
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-buttons.has-scorebar.wrap {
   grid-column: 2;
-  justify-self: end;
+  justify-self: stretch;
   float: none;
-  width: auto !important;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.25em;
+  width: 100% !important;
+  min-width: 0;
   max-width: 100%;
   margin: 0 1em 1em 0;
+  padding-left: 0.5em;
+}
+
+/* Keep labels visible: do not shrink buttons; wrap to next line instead of truncating to icon-only */
+.h5p-multichoice > .h5p-question-buttons .h5p-joubelui-button:not(.h5p-question-button-hidden) {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .h5p-mc-play-area .h5p-question-introduction,
