@@ -59,26 +59,130 @@
   width: 1em;
   position: absolute;
   left: 2.5em;
-  top: 0.25em;
+  top: var(--mc-selection-icon-top, 0.25em);
   margin: auto;
   text-decoration: none;
-  color: #494949;
+  color: var(--mc-selection-icon-color, #494949);
+  font-size: var(--mc-selection-icon-size, 1em);
+  box-sizing: content-box;
 }
 .h5p-multichoice .h5p-answer[role="radio"] .h5p-alternative-container:before {
   content: "\e600";
 }
 .h5p-multichoice .h5p-answer[role="radio"][aria-checked="true"] .h5p-alternative-container:before {
   content: "\e603";
+  color: var(--mc-selection-icon-selected-color, #494949);
 }
 .h5p-multichoice .h5p-answer[role="checkbox"] .h5p-alternative-container:before {
   content: "\e602";
 }
 .h5p-multichoice .h5p-answer[role="checkbox"][aria-checked="true"] .h5p-alternative-container:before {
   content: "\e601";
+  color: var(--mc-selection-icon-selected-color, #494949);
 }
-.h5p-multichoice .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-multichoice .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-multichoice .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+/* Hide selection glyphs after check — keep them when icons are outside */
+.h5p-mc-play-area:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: '';
+}
+
+/* Play-area icon position / style (configured in appearance) */
+.h5p-mc-play-area.h5p-mc-icons-none .h5p-answer .h5p-alternative-container:before {
+  display: none;
+}
+.h5p-mc-play-area.h5p-mc-icons-none .h5p-alternative-container {
+  text-indent: 0;
+  padding-left: 0.75em;
+}
+
+/* Outside: icon hangs left of the alternative; answer shifts right so the glyph fits */
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer {
+  margin-left: calc(1em + var(--mc-selection-icon-size, 1em));
+  max-width: calc(100% - (1em + var(--mc-selection-icon-size, 1em)));
+  box-sizing: border-box;
+}
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-alternative-container {
+  text-indent: 0;
+  padding-left: 0.75em;
+}
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer .h5p-alternative-container:before {
+  left: -2em;
+}
+
+/*
+ * After Check, disableInput() removes role and aria-checked, so the normal glyph
+ * selectors stop matching. Re-apply glyphs when icons are outside using classes
+ * that remain (h5p-selected / h5p-correct / h5p-wrong).
+ */
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: "\e600";
+  color: var(--mc-selection-icon-color, #494949);
+}
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: "\e603";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: "\e602";
+}
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-wrong .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: "\e601";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+/* Circle force overrides square/checkbox defaults above when both could apply */
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: "\e600";
+}
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: "\e603";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+/* Keep evaluation check/cross on the right when selection glyph stays outside */
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer-icon {
+  left: auto;
+  right: 0.75em;
+}
+
+.h5p-mc-play-area.h5p-mc-icons-circle .h5p-answer[role="radio"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-circle .h5p-answer[role="checkbox"] .h5p-alternative-container:before {
+  content: "\e600";
+}
+.h5p-mc-play-area.h5p-mc-icons-circle .h5p-answer[role="radio"][aria-checked="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-circle .h5p-answer[role="checkbox"][aria-checked="true"] .h5p-alternative-container:before {
+  content: "\e603";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-square .h5p-answer[role="radio"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-square .h5p-answer[role="checkbox"] .h5p-alternative-container:before {
+  content: "\e602";
+}
+.h5p-mc-play-area.h5p-mc-icons-square .h5p-answer[role="radio"][aria-checked="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-square .h5p-answer[role="checkbox"][aria-checked="true"] .h5p-alternative-container:before {
+  content: "\e601";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-circle:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-circle:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-circle:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before {
   content: '';
 }
 
@@ -485,6 +589,10 @@
   --mc-alternative-box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
   --mc-selected-border-width: 0.125em;
   --mc-selected-border-color: #388eff;
+  --mc-selection-icon-size: 1em;
+  --mc-selection-icon-top: 0.25em;
+  --mc-selection-icon-color: #494949;
+  --mc-selection-icon-selected-color: #494949;
   --mc-question-border-width: 0;
   --mc-question-border-color: transparent;
   --mc-feedback-bg: #ffffff;

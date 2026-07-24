@@ -1878,7 +1878,7 @@
             "type": "boolean",
             "label": "Use border when selected",
             "description": "When enabled, selected alternatives show a distinct border. When disabled, the normal border settings apply.",
-            "default": true
+            "default": false
           },
           {
             "name": "selectedBorderSettings",
@@ -2128,6 +2128,91 @@
             "widget": "colorSelector",
             "label": "Wrong answer text color",
             "default": "#b71c1c",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "selectionIcons",
+        "type": "group",
+        "label": "Selection icons",
+        "importance": "low",
+        "optional": true,
+        "description": "Radio/checkbox glyphs (IcoMoon) on alternatives before checking the answer.",
+        "fields": [
+          {
+            "name": "position",
+            "type": "select",
+            "label": "Icon position",
+            "description": "Inside the alternative, outside to the left, or hidden.",
+            "default": "inside",
+            "options": [
+              {
+                "value": "inside",
+                "label": "Inside"
+              },
+              {
+                "value": "outside",
+                "label": "Outside"
+              },
+              {
+                "value": "none",
+                "label": "None"
+              }
+            ]
+          },
+          {
+            "name": "style",
+            "type": "select",
+            "label": "Icon style",
+            "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both.",
+            "default": "auto",
+            "options": [
+              {
+                "value": "auto",
+                "label": "Automatic"
+              },
+              {
+                "value": "circle",
+                "label": "Circle"
+              },
+              {
+                "value": "square",
+                "label": "Square"
+              }
+            ]
+          },
+          {
+            "name": "size",
+            "type": "number",
+            "label": "Icon size",
+            "description": "Relative size in em units.",
+            "default": 1,
+            "min": 0.5,
+            "max": 3,
+            "decimals": 2,
+            "unit": "em"
+          },
+          {
+            "name": "color",
+            "type": "text",
+            "widget": "colorSelector",
+            "label": "Icon color",
+            "default": "#494949",
+            "optional": true,
+            "spectrum": {
+              "showInput": true
+            }
+          },
+          {
+            "name": "selectedColor",
+            "type": "text",
+            "widget": "colorSelector",
+            "label": "Selected icon color",
+            "default": "#494949",
             "optional": true,
             "spectrum": {
               "showInput": true

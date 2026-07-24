@@ -840,6 +840,52 @@
           ]
         },
         {
+          "label": "Selection icons",
+          "description": "Radio/checkbox glyphs (IcoMoon) on alternatives before checking the answer.",
+          "fields": [
+            {
+              "label": "Icon position",
+              "description": "Inside the alternative, outside to the left, or hidden.",
+              "options": [
+                {
+                  "label": "Inside"
+                },
+                {
+                  "label": "Outside"
+                },
+                {
+                  "label": "None"
+                }
+              ]
+            },
+            {
+              "label": "Icon style",
+              "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both.",
+              "options": [
+                {
+                  "label": "Automatic"
+                },
+                {
+                  "label": "Circle"
+                },
+                {
+                  "label": "Square"
+                }
+              ]
+            },
+            {
+              "label": "Icon size",
+              "description": "Relative size in em units."
+            },
+            {
+              "label": "Icon color"
+            },
+            {
+              "label": "Selected icon color"
+            }
+          ]
+        },
+        {
           "label": "Icon colors",
           "fields": [
             {

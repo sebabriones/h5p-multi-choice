@@ -445,6 +445,7 @@ var AppearanceModule = H5P.MultiChoiceCFRD && H5P.MultiChoiceCFRD.Appearance;
 function applyActivityAppearance(instance) {
   var appearance;
   var overallFeedback;
+  var appearanceOptions;
 
   if (!AppearanceModule || !instance) {
     return;
@@ -452,9 +453,17 @@ function applyActivityAppearance(instance) {
 
   appearance = instance.options.appearance;
   overallFeedback = instance.options.overallFeedback;
+  appearanceOptions = {
+    singleAnswer: !!(instance.options.behaviour && instance.options.behaviour.singleAnswer)
+  };
 
   if (instance.$playArea && instance.$playArea.length) {
-    AppearanceModule.scheduleAppearance(instance.$playArea, appearance, overallFeedback);
+    AppearanceModule.scheduleAppearance(
+      instance.$playArea,
+      appearance,
+      overallFeedback,
+      appearanceOptions
+    );
   }
 
   if (instance.$container && instance.$container.length) {

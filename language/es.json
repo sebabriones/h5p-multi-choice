@@ -791,6 +791,52 @@
           ]
         },
         {
+          "label": "Iconos de selección",
+          "description": "Glifos de radio/casilla (IcoMoon) en las alternativas antes de comprobar la respuesta.",
+          "fields": [
+            {
+              "label": "Posición del icono",
+              "description": "Dentro de la alternativa, fuera a la izquierda, u oculto.",
+              "options": [
+                {
+                  "label": "Dentro"
+                },
+                {
+                  "label": "Fuera"
+                },
+                {
+                  "label": "Ninguno"
+                }
+              ]
+            },
+            {
+              "label": "Estilo del icono",
+              "description": "Automático sigue selección única o múltiple. Círculo y cuadrado fuerzan el mismo glifo en ambos.",
+              "options": [
+                {
+                  "label": "Automático"
+                },
+                {
+                  "label": "Círculo"
+                },
+                {
+                  "label": "Cuadrado"
+                }
+              ]
+            },
+            {
+              "label": "Tamaño del icono",
+              "description": "Tamaño relativo en unidades em."
+            },
+            {
+              "label": "Color del icono"
+            },
+            {
+              "label": "Color del icono al seleccionar"
+            }
+          ]
+        },
+        {
           "label": "Colores de iconos",
           "fields": [
             {

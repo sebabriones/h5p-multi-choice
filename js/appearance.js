@@ -32,6 +32,10 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBoxShadow: '0 0.1em 0 rgba(0,0,0,0.3)',
     selectedBorderWidth: '0.125em',
     selectedBorderColor: '#388eff',
+    selectionIconSize: 1,
+    selectionIconTop: '0.25em',
+    selectionIconColor: '#494949',
+    selectionIconSelectedColor: '#494949',
     questionBorderWidth: '0',
     questionBorderColor: 'transparent',
     feedbackBackground: '#ffffff',
@@ -64,6 +68,9 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBoxShadow: '--mc-alternative-box-shadow',
     selectedBorderWidth: '--mc-selected-border-width',
     selectedBorderColor: '--mc-selected-border-color',
+    selectionIconTop: '--mc-selection-icon-top',
+    selectionIconColor: '--mc-selection-icon-color',
+    selectionIconSelectedColor: '--mc-selection-icon-selected-color',
     questionBorderWidth: '--mc-question-border-width',
     questionBorderColor: '--mc-question-border-color',
     correctBackground: '--mc-correct-bg',
@@ -85,7 +92,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     questionBorderRadius: '--mc-question-border-radius',
     alternativeBorderRadius: '--mc-alternative-border-radius',
     questionFontSize: '--mc-question-font-size',
-    contextFontSize: '--mc-context-font-size'
+    contextFontSize: '--mc-context-font-size',
+    selectionIconSize: '--mc-selection-icon-size'
   };
 
   var CSS_PX_VAR_KEYS = {
@@ -251,6 +259,68 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
   }
 
   /**
+   * @param {Object} merged
+   * @param {Object} [appearance]
+   * @returns {Object}
+   */
+  function applySelectionIconAppearance(merged, appearance) {
+    var icons = (appearance && appearance.selectionIcons) || {};
+    var position = icons.position || 'inside';
+
+    merged.selectionIconPosition = position;
+    merged.selectionIconStyle = icons.style || 'auto';
+    merged.selectionIconSize = (icons.size !== undefined && icons.size !== null && icons.size !== '') ?
+      icons.size :
+      APPEARANCE_DEFAULTS.selectionIconSize;
+    merged.selectionIconTop = toEm(0.25, 0.25);
+    merged.selectionIconColor = pickString(icons.color, APPEARANCE_DEFAULTS.selectionIconColor);
+    merged.selectionIconSelectedColor = pickString(
+      icons.selectedColor,
+      merged.selectionIconColor
+    );
+
+    return merged;
+  }
+
+  /**
+   * @param {Element} el
+   * @param {Object} merged
+   * @param {Object} [options]
+   * @param {boolean} [options.singleAnswer]
+   */
+  function applySelectionIconClasses(el, merged, options) {
+    var positions = ['inside', 'outside', 'none'];
+    var styles = ['auto', 'circle', 'square'];
+    var inputTypes = ['radio', 'checkbox'];
+    var i;
+    var position = merged.selectionIconPosition || 'inside';
+    var style = merged.selectionIconStyle || 'auto';
+    var inputType = (options && options.singleAnswer) ? 'radio' : 'checkbox';
+
+    if (!el || !el.classList) {
+      return;
+    }
+
+    for (i = 0; i < positions.length; i++) {
+      el.classList.remove('h5p-mc-icons-' + positions[i]);
+    }
+    for (i = 0; i < styles.length; i++) {
+      el.classList.remove('h5p-mc-icons-' + styles[i]);
+    }
+    for (i = 0; i < inputTypes.length; i++) {
+      el.classList.remove('h5p-mc-icons-' + inputTypes[i]);
+    }
+
+    el.classList.add('h5p-mc-icons-' + position);
+    el.classList.add('h5p-mc-icons-' + style);
+
+    // Needed after check: disableInput strips role, so auto style must be known on play area.
+    if (style === 'auto') {
+      el.classList.add('h5p-mc-icons-' + inputType);
+    }
+  }
+
+  /**
    * @param {Object} [overallFeedback]
    * @returns {{feedbackBackground: string, feedbackTextColor: string}}
    */
@@ -399,6 +469,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     applyIconDefaults(merged, fields);
     applyBorderAppearance(merged, appearance);
+    applySelectionIconAppearance(merged, appearance);
 
     if (merged.scrollbarShowTrack === false) {
       merged.scrollbarTrack = 'transparent';
@@ -428,9 +499,11 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
    * @param {jQuery} $container
    * @param {Object} [appearance]
    * @param {Object|Array} [overallFeedback]
+   * @param {Object} [options]
+   * @param {boolean} [options.singleAnswer]
    * @returns {Object}
    */
-  function applyAppearanceVars($container, appearance, overallFeedback) {
+  function applyAppearanceVars($container, appearance, overallFeedback, options) {
     var merged = mergeAppearance(appearance, overallFeedback);
     var key;
     var i;
@@ -464,6 +537,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
           el.style.setProperty(CSS_PX_VAR_KEYS[key], getCssVarValue(merged, key));
         }
       }
+
+      applySelectionIconClasses(el, merged, options);
     }
 
     return merged;
@@ -526,10 +601,12 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
    * @param {jQuery} $container
    * @param {Object} [appearance]
    * @param {Object|Array} [overallFeedback]
+   * @param {Object} [options]
+   * @param {boolean} [options.singleAnswer]
    */
-  function scheduleAppearance($container, appearance, overallFeedback) {
+  function scheduleAppearance($container, appearance, overallFeedback, options) {
     var apply = function () {
-      applyAppearanceVars($container, appearance, overallFeedback);
+      applyAppearanceVars($container, appearance, overallFeedback, options);
     };
 
     apply();
