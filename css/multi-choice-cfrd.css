@@ -521,12 +521,30 @@
   --mc-scrollbar-thumb: #b0b0b0;
   --mc-scrollbar-thumb-hover: #888888;
   background-color: var(--mc-play-area-bg);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .h5p-multichoice > .h5p-question-buttons,
 .h5p-multichoice > .h5p-question-scorebar,
 .h5p-multichoice > .h5p-question-feedback:not(.h5p-question-popup) {
   background-color: transparent;
+}
+
+/* Inline feedback is unused when overall feedback uses the popup */
+.h5p-multichoice > .h5p-question-feedback:not(.h5p-question-popup),
+.h5p-mc-play-area > .h5p-question-feedback:not(.h5p-question-popup) {
+  display: none !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 0 !important;
 }
 
 .h5p-no-frame > .h5p-question.h5p-multichoice > .h5p-question-buttons.h5p-question-visible {
@@ -604,7 +622,8 @@
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  flex: 1 1 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -660,37 +679,55 @@
   margin: 0 1em auto 1em;
 }
 
-.h5p-multichoice > .h5p-question-feedback:not(.h5p-question-popup):has(.h5p-question-feedback-content:not(.has-content)) {
-  display: none;
-  max-height: 0 !important;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+/* Buttons alone (before scorebar): stay inside the 16:9 root */
+.h5p-multichoice > .h5p-question-buttons.h5p-question-visible {
+  flex: 0 0 auto;
+  float: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
-/* Inline evaluation footer: only when scorebar is a direct child (no popup).
-   Use minmax(0, 1fr) so the buttons column cannot force the activity wider than the play area. */
+/* Inline evaluation footer inside the 16:9 root (play area + scorebar + buttons). */
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) {
   display: grid;
   grid-template-columns: 13em minmax(0, 1fr);
-  align-items: center;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
   column-gap: 0.5em;
   max-width: 100%;
   box-sizing: border-box;
 }
 
-.h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-mc-play-area,
+.h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-mc-play-area {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+}
+
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-explanation,
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-feedback:not(.h5p-question-popup),
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-hidden-read {
   grid-column: 1 / -1;
+  grid-row: 1;
+  height: 0;
   min-width: 0;
   max-width: 100%;
+  overflow: hidden;
 }
 
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-scorebar.h5p-question-visible,
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-scorebar.h5p-question-visible.full-width {
   grid-column: 1;
+  grid-row: 2;
+  align-self: center;
   float: none;
   display: block;
   width: 13em;
@@ -704,6 +741,8 @@
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-buttons.has-scorebar,
 .h5p-multichoice:has(> .h5p-question-scorebar.h5p-question-visible) > .h5p-question-buttons.has-scorebar.wrap {
   grid-column: 2;
+  grid-row: 2;
+  align-self: center;
   justify-self: stretch;
   float: none;
   box-sizing: border-box;
