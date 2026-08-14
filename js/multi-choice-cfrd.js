@@ -615,10 +615,10 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     }
 
     var design = self.playAreaSize;
-    var $parent;
-    var width;
-    var scale;
+    var rootEl;
+    var layout;
     var fontSize;
+    var scaleKey;
 
     if (!self.$playArea || !self.$playArea.length || !PlayArea || !design) {
       return;
@@ -629,21 +629,26 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
       return;
     }
 
-    $parent = self.$playArea.parent();
-    width = self.$playArea.width();
+    rootEl = (self.$container && self.$container.length) ?
+      self.$container[0] :
+      self.$playArea[0];
+    layout = PlayArea.getLayoutDimensions(rootEl);
+    scaleKey = layout.scale.toFixed(4);
+    fontSize = layout.fontSize + 'px';
 
-    if (width <= 0) {
-      width = $parent.width() || design.baseWidth;
+    if (self.$container && self.$container.length) {
+      self.$container.css({
+        width: layout.widthPx,
+        maxWidth: '100%',
+        height: layout.heightPx
+      });
     }
-
-    scale = PlayArea.getScale(width);
-    fontSize = (design.baseFontSize * scale) + 'px';
 
     self.$playArea.css({
       width: '100%',
       height: '',
       fontSize: fontSize,
-      '--mc-scale': scale.toFixed(4)
+      '--mc-scale': scaleKey
     });
 
     if (self.$playArea) {
