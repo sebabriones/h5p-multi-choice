@@ -1191,6 +1191,12 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     self.hideButton('show-feedback');
     enableInput();
     $myDom?.find('.h5p-feedback-available').remove();
+
+    // Nuevo intento: sin delete, setActivityStarted es no-op.
+    delete self.activityStartTime;
+    if (typeof self.setActivityStarted === 'function') {
+      self.setActivityStarted();
+    }
   };
 
   var calculateMaxScore = function () {
