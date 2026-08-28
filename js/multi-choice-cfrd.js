@@ -60,10 +60,25 @@ function getInstructionsOptions(instance) {
 }
 
 /**
+ * Embedded instances (Course Presentation, Interactive Video) delegate
+ * instructions to the host, which sizes them for the whole activity.
+ *
+ * @param {H5P.MultiChoiceCFRD} instance
+ * @returns {boolean}
+ */
+function isEmbeddedInstance(instance) {
+  return !!(instance && typeof instance.isRoot === 'function' && !instance.isRoot());
+}
+
+/**
  * @param {H5P.MultiChoiceCFRD} instance
  * @param {H5P.jQuery} $fallbackContainer
  */
 function scheduleInstructionsAttach(instance, $fallbackContainer) {
+  if (isEmbeddedInstance(instance)) {
+    return;
+  }
+
   [0, 200, 500].forEach(function (delay) {
     setTimeout(function () {
       var instructions = getInstructionsOptions(instance);
