@@ -841,7 +841,7 @@
         },
         {
           "label": "Selection icons",
-          "description": "Radio/checkbox glyphs (IcoMoon) on alternatives before checking the answer.",
+          "description": "Radio/checkbox glyphs on alternatives before checking the answer (IcoMoon or Font Awesome).",
           "fields": [
             {
               "label": "Icon position",
@@ -860,7 +860,7 @@
             },
             {
               "label": "Icon style",
-              "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both.",
+              "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both. Font Awesome checkbox uses square/check-square icons (PDD t2_e3 style).",
               "options": [
                 {
                   "label": "Automatic"
@@ -870,6 +870,33 @@
                 },
                 {
                   "label": "Square"
+                },
+                {
+                  "label": "Font Awesome checkbox"
+                }
+              ]
+            },
+            {
+              "label": "Icon vertical alignment",
+              "description": "Center aligns the selection glyph vertically on multi-line alternatives.",
+              "options": [
+                {
+                  "label": "Top"
+                },
+                {
+                  "label": "Center"
+                }
+              ]
+            },
+            {
+              "label": "Evaluation icon position",
+              "description": "Position of correct/wrong icons after checking. Left matches PDD t2_e3 (same side as selection icons).",
+              "options": [
+                {
+                  "label": "Right"
+                },
+                {
+                  "label": "Left"
                 }
               ]
             },

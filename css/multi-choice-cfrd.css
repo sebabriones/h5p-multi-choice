@@ -96,18 +96,47 @@
   padding-left: 0.75em;
 }
 
-/* Outside: icon hangs left of the alternative; answer shifts right so the glyph fits */
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer {
-  margin-left: calc(1em + var(--mc-selection-icon-size, 1em));
-  max-width: calc(100% - (1em + var(--mc-selection-icon-size, 1em)));
-  box-sizing: border-box;
+/* Outside: icon gutter on the answer row (PDD t2_e3 pattern).
+ * Pad and translateX both scale with the icon box (% / size factor) so em on
+ * :before (font-size = icon size) cannot desync padding vs shift. */
+.h5p-mc-play-area.h5p-mc-icons-outside {
+  /* 1.0 = icon width; extra fraction = gap + Font Awesome visual overhang */
+  --mc-outside-icon-pad: 1.35;
 }
+
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer {
+  box-sizing: border-box;
+  padding-left: calc(var(--mc-selection-icon-size, 1em) * var(--mc-outside-icon-pad));
+  min-height: calc(var(--mc-selection-icon-size, 1em) + 0.5em);
+}
+
 .h5p-mc-play-area.h5p-mc-icons-outside .h5p-alternative-container {
   text-indent: 0;
   padding-left: 0.75em;
+  width: 100%;
+  box-sizing: border-box;
 }
+
 .h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer .h5p-alternative-container:before {
-  left: -2em;
+  left: 0;
+  width: 1em;
+  height: auto;
+  line-height: 1;
+  text-align: center;
+  -webkit-transform: translateX(calc(-100% * var(--mc-outside-icon-pad)));
+  transform: translateX(calc(-100% * var(--mc-outside-icon-pad)));
+}
+
+/* Combine horizontal outside shift with vertical centering. */
+.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-valign-center .h5p-answer .h5p-alternative-container:before {
+  top: 50%;
+  -webkit-transform: translateX(calc(-100% * var(--mc-outside-icon-pad))) translateY(-50%);
+  transform: translateX(calc(-100% * var(--mc-outside-icon-pad))) translateY(-50%);
+}
+
+/* Avoid clipping oversized outside glyphs against the play-area edge. */
+.h5p-mc-play-area.h5p-mc-icons-outside .h5p-question-content {
+  overflow-x: visible;
 }
 
 /*
@@ -115,44 +144,44 @@
  * selectors stop matching. Re-apply glyphs when icons are outside using classes
  * that remain (h5p-selected / h5p-correct / h5p-wrong).
  */
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
   content: "\e600";
   color: var(--mc-selection-icon-color, #494949);
 }
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-wrong .h5p-alternative-container:before {
   content: "\e603";
   color: var(--mc-selection-icon-selected-color, #494949);
 }
 
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-square .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
   content: "\e602";
 }
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-checkbox .h5p-answer.h5p-wrong .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-square .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-wrong .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-square .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-square .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-square .h5p-answer.h5p-wrong .h5p-alternative-container:before {
   content: "\e601";
   color: var(--mc-selection-icon-selected-color, #494949);
 }
 
 /* Circle force overrides square/checkbox defaults above when both could apply */
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-circle .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
   content: "\e600";
 }
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-outside.h5p-mc-icons-circle .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-circle .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-circle .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-circle .h5p-answer.h5p-wrong .h5p-alternative-container:before {
   content: "\e603";
   color: var(--mc-selection-icon-selected-color, #494949);
 }
 
 /* Keep evaluation check/cross on the right when selection glyph stays outside */
-.h5p-mc-play-area.h5p-mc-icons-outside .h5p-answer-icon {
+.h5p-mc-play-area.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer-icon {
   left: auto;
   right: 0.75em;
 }
@@ -182,7 +211,127 @@
 .h5p-mc-play-area.h5p-mc-icons-circle:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before,
 .h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
 .h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
-.h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+.h5p-mc-play-area.h5p-mc-icons-square:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome:not(.h5p-mc-icons-outside) .h5p-answers .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: '';
+}
+
+/* Vertical alignment of selection glyphs */
+.h5p-mc-play-area.h5p-mc-icons-valign-center .h5p-answer .h5p-alternative-container:before {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* Font Awesome selection glyphs (PDD t2_e3 style) */
+.h5p-mc-play-area.h5p-mc-icons-fontawesome .h5p-answer .h5p-alternative-container:before {
+  font-family: 'H5PFontAwesome4';
+}
+
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-radio .h5p-answer[role="radio"] .h5p-alternative-container:before {
+  content: "\f10c";
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-radio .h5p-answer[role="radio"][aria-checked="true"] .h5p-alternative-container:before {
+  content: "\f058";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-checkbox .h5p-answer[role="checkbox"] .h5p-alternative-container:before {
+  content: "\f096";
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-checkbox .h5p-answer[role="checkbox"][aria-checked="true"] .h5p-alternative-container:before {
+  content: "\f14a";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: "\f10c";
+  color: var(--mc-selection-icon-color, #494949);
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: "\f096";
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left) .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: "\f058";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-fontawesome.h5p-mc-icons-outside:not(.h5p-mc-icons-eval-left).h5p-mc-icons-checkbox .h5p-answer.h5p-wrong .h5p-alternative-container:before {
+  content: "\f14a";
+  color: var(--mc-selection-icon-selected-color, #494949);
+}
+
+/* Evaluation icons on the left (PDD t2_e3) */
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer.h5p-correct .h5p-alternative-container,
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer.h5p-wrong .h5p-alternative-container {
+  padding-right: 0.75em;
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer-icon {
+  left: 0;
+  right: auto;
+  z-index: 2;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  letter-spacing: 0;
+  font-family: 'H5PFontAwesome4';
+  font-size: var(--mc-selection-icon-size, 1em);
+  line-height: 1;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer-icon:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-indent: 0;
+  display: block;
+  font-family: 'H5PFontAwesome4';
+  font-size: 1em;
+  line-height: 1;
+  width: auto;
+  height: auto;
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-correct .h5p-answer-icon:before {
+  content: "\f00c";
+  color: var(--mc-correct-icon-color, #255c41);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-wrong .h5p-answer-icon:before {
+  content: "\f00d";
+  color: var(--mc-wrong-icon-color, #b71c1c);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-fontawesome .h5p-correct .h5p-answer-icon:before {
+  content: "\f14a";
+  color: var(--mc-correct-icon-color, #255c41);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-fontawesome .h5p-wrong .h5p-answer-icon:before {
+  content: "\f00d";
+  color: var(--mc-wrong-icon-color, #b71c1c);
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-outside .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-outside .h5p-answer.h5p-wrong .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-outside .h5p-answer.h5p-selected[aria-disabled="true"] .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-eval-left.h5p-mc-icons-outside .h5p-answer[aria-disabled="true"] .h5p-alternative-container:before {
+  content: '';
+  display: none;
+}
+
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer.h5p-correct .h5p-alternative-container:before,
+.h5p-mc-play-area.h5p-mc-icons-eval-left .h5p-answer.h5p-wrong .h5p-alternative-container:before {
   content: '';
 }
 

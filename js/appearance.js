@@ -269,6 +269,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     merged.selectionIconPosition = position;
     merged.selectionIconStyle = icons.style || 'auto';
+    merged.selectionIconVerticalAlign = icons.verticalAlign || 'top';
+    merged.selectionIconEvaluationPosition = icons.evaluationIconPosition || 'right';
     merged.selectionIconSize = (icons.size !== undefined && icons.size !== null && icons.size !== '') ?
       icons.size :
       APPEARANCE_DEFAULTS.selectionIconSize;
@@ -290,11 +292,15 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
    */
   function applySelectionIconClasses(el, merged, options) {
     var positions = ['inside', 'outside', 'none'];
-    var styles = ['auto', 'circle', 'square'];
+    var styles = ['auto', 'circle', 'square', 'fontawesome'];
+    var verticalAlignments = ['top', 'center'];
+    var evaluationPositions = ['right', 'left'];
     var inputTypes = ['radio', 'checkbox'];
     var i;
     var position = merged.selectionIconPosition || 'inside';
     var style = merged.selectionIconStyle || 'auto';
+    var verticalAlign = merged.selectionIconVerticalAlign || 'top';
+    var evaluationPosition = merged.selectionIconEvaluationPosition || 'right';
     var inputType = (options && options.singleAnswer) ? 'radio' : 'checkbox';
 
     if (!el || !el.classList) {
@@ -307,15 +313,23 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     for (i = 0; i < styles.length; i++) {
       el.classList.remove('h5p-mc-icons-' + styles[i]);
     }
+    for (i = 0; i < verticalAlignments.length; i++) {
+      el.classList.remove('h5p-mc-icons-valign-' + verticalAlignments[i]);
+    }
+    for (i = 0; i < evaluationPositions.length; i++) {
+      el.classList.remove('h5p-mc-icons-eval-' + evaluationPositions[i]);
+    }
     for (i = 0; i < inputTypes.length; i++) {
       el.classList.remove('h5p-mc-icons-' + inputTypes[i]);
     }
 
     el.classList.add('h5p-mc-icons-' + position);
     el.classList.add('h5p-mc-icons-' + style);
+    el.classList.add('h5p-mc-icons-valign-' + verticalAlign);
+    el.classList.add('h5p-mc-icons-eval-' + evaluationPosition);
 
-    // Needed after check: disableInput strips role, so auto style must be known on play area.
-    if (style === 'auto') {
+    // Needed after check: disableInput strips role, so auto/fontawesome style must be known on play area.
+    if (style === 'auto' || style === 'fontawesome') {
       el.classList.add('h5p-mc-icons-' + inputType);
     }
   }

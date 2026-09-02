@@ -2143,7 +2143,7 @@
         "label": "Selection icons",
         "importance": "low",
         "optional": true,
-        "description": "Radio/checkbox glyphs (IcoMoon) on alternatives before checking the answer.",
+        "description": "Radio/checkbox glyphs on alternatives before checking the answer (IcoMoon or Font Awesome).",
         "fields": [
           {
             "name": "position",
@@ -2170,7 +2170,7 @@
             "name": "style",
             "type": "select",
             "label": "Icon style",
-            "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both.",
+            "description": "Automatic follows single vs multiple choice. Circle and square force the same glyph for both. Font Awesome checkbox uses square/check-square icons (PDD t2_e3 style).",
             "default": "auto",
             "options": [
               {
@@ -2184,6 +2184,44 @@
               {
                 "value": "square",
                 "label": "Square"
+              },
+              {
+                "value": "fontawesome",
+                "label": "Font Awesome checkbox"
+              }
+            ]
+          },
+          {
+            "name": "verticalAlign",
+            "type": "select",
+            "label": "Icon vertical alignment",
+            "description": "Center aligns the selection glyph vertically on multi-line alternatives.",
+            "default": "top",
+            "options": [
+              {
+                "value": "top",
+                "label": "Top"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              }
+            ]
+          },
+          {
+            "name": "evaluationIconPosition",
+            "type": "select",
+            "label": "Evaluation icon position",
+            "description": "Position of correct/wrong icons after checking. Left matches PDD t2_e3 (same side as selection icons).",
+            "default": "right",
+            "options": [
+              {
+                "value": "right",
+                "label": "Right"
+              },
+              {
+                "value": "left",
+                "label": "Left"
               }
             ]
           },

@@ -792,7 +792,7 @@
         },
         {
           "label": "Iconos de selección",
-          "description": "Glifos de radio/casilla (IcoMoon) en las alternativas antes de comprobar la respuesta.",
+          "description": "Glifos de radio/casilla en las alternativas antes de comprobar (IcoMoon o Font Awesome).",
           "fields": [
             {
               "label": "Posición del icono",
@@ -811,7 +811,7 @@
             },
             {
               "label": "Estilo del icono",
-              "description": "Automático sigue selección única o múltiple. Círculo y cuadrado fuerzan el mismo glifo en ambos.",
+              "description": "Automático sigue selección única o múltiple. Círculo y cuadrado fuerzan el mismo glifo. Font Awesome checkbox usa iconos cuadrado/marca (estilo PDD t2_e3).",
               "options": [
                 {
                   "label": "Automático"
@@ -821,6 +821,33 @@
                 },
                 {
                   "label": "Cuadrado"
+                },
+                {
+                  "label": "Font Awesome checkbox"
+                }
+              ]
+            },
+            {
+              "label": "Alineación vertical del icono",
+              "description": "Centro alinea el glifo verticalmente en alternativas de varias líneas.",
+              "options": [
+                {
+                  "label": "Superior"
+                },
+                {
+                  "label": "Centro"
+                }
+              ]
+            },
+            {
+              "label": "Posición del icono de evaluación",
+              "description": "Ubicación de los iconos correcto/incorrecto tras comprobar. Izquierda replica PDD t2_e3 (mismo lado que los iconos de selección).",
+              "options": [
+                {
+                  "label": "Derecha"
+                },
+                {
+                  "label": "Izquierda"
                 }
               ]
             },
