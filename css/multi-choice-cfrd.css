@@ -638,9 +638,10 @@
   overflow: hidden;
 }
 
-/* Reserve room for the instructions tab; keep a floor so small widths do not collide */
-.h5p-mc-play-area:has(.h5p-instructions-tab-root) .h5p-question-main-content {
-  padding-top: max(3.25rem * var(--mc-scale, 1), 2.75rem);
+/* Reserve room for the instructions tab (marker set by H5P.Instructions). */
+.h5p-has-instructions-tab .h5p-mc-play-area,
+.h5p-container:has(.h5p-instructions-tab-root) .h5p-mc-play-area {
+  padding-top: max(calc(3.25rem * var(--mc-scale, 1)), var(--h5p-ins-tab-clearance, 2.75rem));
 }
 
 .h5p-mc-play-area .h5p-question-image,
@@ -820,8 +821,15 @@
   box-sizing: border-box;
 }
 
-.h5p-mc-play-area:has(.h5p-instructions-tab-root) .h5p-mc-has-context .h5p-mc-slide-layout {
+.h5p-has-instructions-tab .h5p-mc-has-context .h5p-mc-slide-layout,
+.h5p-container:has(.h5p-instructions-tab-root) .h5p-mc-has-context .h5p-mc-slide-layout {
   padding-top: 0;
+}
+
+.h5p-has-instructions-tab .h5p-mc-has-context .h5p-mc-context,
+.h5p-container:has(.h5p-instructions-tab-root) .h5p-mc-has-context .h5p-mc-context {
+  padding-top: var(--mc-spacing-s, 0.5em);
+  box-sizing: border-box;
 }
 
 .h5p-mc-context {
