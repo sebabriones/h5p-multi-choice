@@ -723,6 +723,30 @@
               "label": "Selected alternative text color"
             },
             {
+              "label": "Use gradient background when selected and hovered"
+            },
+            {
+              "label": "Selected alternative hover background color"
+            },
+            {
+              "label": "Selected hover gradient background",
+              "fields": [
+                {
+                  "label": "Gradient angle",
+                  "description": "Direction in degrees (0 = upward, 180 = downward)."
+                },
+                {
+                  "label": "Gradient start color"
+                },
+                {
+                  "label": "Gradient end color"
+                }
+              ]
+            },
+            {
+              "label": "Selected alternative hover text color"
+            },
+            {
               "label": "Alternative border radius",
               "description": "Corner roundness in em units."
             },
@@ -757,6 +781,9 @@
                 },
                 {
                   "label": "Selected border color"
+                },
+                {
+                  "label": "Selected hover border color"
                 }
               ]
             }

@@ -13,6 +13,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeText: '#333333',
     alternativeHoverText: '#333333',
     alternativeProgressText: '#333333',
+    alternativeProgressHoverBackground: '#e6effc',
+    alternativeProgressHoverText: '#333333',
     questionText: '#333333',
     contextText: '#555555',
     labelPrefixText: '#333333',
@@ -32,6 +34,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBoxShadow: '0 0.1em 0 rgba(0,0,0,0.3)',
     selectedBorderWidth: '0.125em',
     selectedBorderColor: '#388eff',
+    selectedHoverBorderColor: '#388eff',
     selectionIconSize: 1,
     selectionIconTop: '0.25em',
     selectionIconColor: '#494949',
@@ -58,6 +61,8 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeText: '--mc-alternative-color',
     alternativeHoverText: '--mc-alternative-hover-color',
     alternativeProgressText: '--mc-alternative-progress-color',
+    alternativeProgressHoverBackground: '--mc-alternative-progress-hover-bg',
+    alternativeProgressHoverText: '--mc-alternative-progress-hover-color',
     questionText: '--mc-question-color',
     contextText: '--mc-context-color',
     labelPrefixText: '--mc-label-prefix-color',
@@ -68,6 +73,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBoxShadow: '--mc-alternative-box-shadow',
     selectedBorderWidth: '--mc-selected-border-width',
     selectedBorderColor: '--mc-selected-border-color',
+    selectedHoverBorderColor: '--mc-selected-hover-border-color',
     selectionIconTop: '--mc-selection-icon-top',
     selectionIconColor: '--mc-selection-icon-color',
     selectionIconSelectedColor: '--mc-selection-icon-selected-color',
@@ -240,10 +246,13 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     if (alt.useSelectedBorder === false) {
       merged.selectedBorderWidth = merged.alternativeBorderWidth;
       merged.selectedBorderColor = merged.alternativeBorderColor;
+      merged.selectedHoverBorderColor = merged.alternativeHoverBorderColor;
     }
     else {
       merged.selectedBorderWidth = toEm(selectedBorder.borderWidth, 0.125);
       merged.selectedBorderColor = selectedBorder.borderColor || '#388eff';
+      merged.selectedHoverBorderColor = selectedBorder.hoverBorderColor ||
+        merged.selectedBorderColor;
     }
 
     if (isTruthy(questionArea.useBorder)) {
@@ -383,9 +392,16 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
         gradientKey: 'progressGradientBackground',
         fallbackSolid: APPEARANCE_DEFAULTS.alternativeProgressBackground
       }),
+      alternativeProgressHoverBackground: resolveFill(alt, {
+        solidKey: 'progressHoverBackground',
+        useGradientKey: 'useProgressHoverGradientBackground',
+        gradientKey: 'progressHoverGradientBackground',
+        fallbackSolid: APPEARANCE_DEFAULTS.alternativeProgressHoverBackground
+      }),
       alternativeText: alt.text,
       alternativeHoverText: alt.hoverText,
       alternativeProgressText: alt.progressText,
+      alternativeProgressHoverText: alt.progressHoverText,
       alternativeBorderRadius: alt.borderRadius,
       questionText: text.question,
       contextText: text.context,
@@ -479,6 +495,16 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
 
     if (!fields.alternativeProgressText) {
       merged.alternativeProgressText = merged.alternativeText;
+    }
+
+    if (!fields.alternativeProgressHoverText) {
+      merged.alternativeProgressHoverText = merged.alternativeProgressText;
+    }
+
+    // If selected-hover background was not set, keep a soft tint of the selected color.
+    if (!fields.alternativeProgressHoverBackground) {
+      merged.alternativeProgressHoverBackground =
+        APPEARANCE_DEFAULTS.alternativeProgressHoverBackground;
     }
 
     applyIconDefaults(merged, fields);

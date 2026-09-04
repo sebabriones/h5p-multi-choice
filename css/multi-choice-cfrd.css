@@ -357,7 +357,9 @@
   box-shadow: none;
 }
 .h5p-multichoice .h5p-answer[aria-checked="true"]:not(.h5p-wrong):not(.h5p-correct):not([aria-disabled="true"]):hover .h5p-alternative-container {
-  background-color: #e6effc;
+  background-color: var(--mc-alternative-progress-hover-bg, #e6effc);
+  color: var(--mc-alternative-progress-hover-color, #333333);
+  border-color: var(--mc-selected-hover-border-color, #388eff);
   box-shadow: none;
 }
 
@@ -734,6 +736,8 @@
   --mc-alternative-color: #333333;
   --mc-alternative-hover-color: #333333;
   --mc-alternative-progress-color: #333333;
+  --mc-alternative-progress-hover-bg: #e6effc;
+  --mc-alternative-progress-hover-color: #333333;
   --mc-question-color: #333333;
   --mc-context-color: #555555;
   --mc-question-font-size: 1em;
@@ -756,6 +760,7 @@
   --mc-alternative-box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
   --mc-selected-border-width: 0.125em;
   --mc-selected-border-color: #388eff;
+  --mc-selected-hover-border-color: #388eff;
   --mc-selection-icon-size: 1em;
   --mc-selection-icon-top: 0.25em;
   --mc-selection-icon-color: #494949;
@@ -1094,8 +1099,11 @@
 }
 
 .h5p-mc-play-area .h5p-answer[aria-checked="true"]:not(.h5p-wrong):not(.h5p-correct):not([aria-disabled="true"]):hover .h5p-alternative-container {
-  filter: brightness(0.97);
+  background: var(--mc-alternative-progress-hover-bg);
+  color: var(--mc-alternative-progress-hover-color);
+  border-color: var(--mc-selected-hover-border-color);
   box-shadow: none;
+  filter: none;
 }
 
 .h5p-mc-play-area .h5p-answer.h5p-correct .h5p-alternative-container,

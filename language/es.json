@@ -674,6 +674,30 @@
               "label": "Color de texto de alternativas al seleccionar"
             },
             {
+              "label": "Usar fondo en degradado al seleccionar y pasar el cursor"
+            },
+            {
+              "label": "Color de fondo al seleccionar y pasar el cursor"
+            },
+            {
+              "label": "Fondo en degradado al seleccionar y pasar el cursor",
+              "fields": [
+                {
+                  "label": "Ángulo del degradado",
+                  "description": "Dirección en grados (0 = hacia arriba, 180 = hacia abajo)."
+                },
+                {
+                  "label": "Color inicial del degradado"
+                },
+                {
+                  "label": "Color final del degradado"
+                }
+              ]
+            },
+            {
+              "label": "Color de texto al seleccionar y pasar el cursor"
+            },
+            {
               "label": "Radio de borde de alternativas",
               "description": "Redondeo de esquinas en unidades em."
             },
@@ -708,6 +732,9 @@
                 },
                 {
                   "label": "Color del borde al seleccionar"
+                },
+                {
+                  "label": "Color del borde al seleccionar y pasar el cursor"
                 }
               ]
             }
