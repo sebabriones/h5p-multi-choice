@@ -999,6 +999,7 @@
     "tags": [
       "strong",
       "em",
+      "u",
       "sub",
       "sup",
       "h2",
@@ -1030,6 +1031,7 @@
           "tags": [
             "strong",
             "em",
+            "u",
             "sub",
             "sup",
             "code"
