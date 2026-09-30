@@ -31,7 +31,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     alternativeBorderWidth: '0',
     alternativeBorderColor: 'transparent',
     alternativeHoverBorderColor: 'transparent',
-    alternativeBoxShadow: '0 0.1em 0 rgba(0,0,0,0.3)',
+    alternativeBoxShadow: 'none',
     selectedBorderWidth: '0.125em',
     selectedBorderColor: '#388eff',
     selectedHoverBorderColor: '#388eff',
@@ -239,7 +239,7 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
       merged.alternativeBorderWidth = '0';
       merged.alternativeBorderColor = 'transparent';
       merged.alternativeHoverBorderColor = 'transparent';
-      merged.alternativeBoxShadow = '0 0.1em 0 rgba(0,0,0,0.3)';
+      merged.alternativeBoxShadow = 'none';
     }
 
     // Default true when undefined (legacy content without the field).

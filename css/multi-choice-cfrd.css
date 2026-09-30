@@ -45,9 +45,9 @@
   border: 0.1em solid transparent;
   font-weight: normal;
   background: #ddd;
-  -webkit-box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
   line-height: 1.5em;
   text-indent: -2em;
 }
@@ -368,14 +368,14 @@
   background: #b6e4ce;
   border-color: #b6e4ce;
   color: #255c41;
-  box-shadow: 0 0.1em 0 #a2bdb0;
+  box-shadow: none;
 }
 .h5p-multichoice .h5p-answer.h5p-wrong .h5p-alternative-container,
 .h5p-multichoice .h5p-answer.h5p-wrong:hover .h5p-alternative-container {
   background: #fbd7d8;
   border-color: #fbd7d8;
   color: #b71c1c;
-  box-shadow: 0 0.1em 0 #deb8b8;
+  box-shadow: none;
 }
 
 .h5p-multichoice .h5p-answer:last-child {
@@ -757,7 +757,7 @@
   --mc-alternative-border-width: 0;
   --mc-alternative-border-color: transparent;
   --mc-alternative-hover-border-color: transparent;
-  --mc-alternative-box-shadow: 0 0.1em 0 rgba(0, 0, 0, 0.3);
+  --mc-alternative-box-shadow: none;
   --mc-selected-border-width: 0.125em;
   --mc-selected-border-color: #388eff;
   --mc-selected-hover-border-color: #388eff;
