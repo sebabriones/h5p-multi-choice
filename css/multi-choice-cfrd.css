@@ -1072,6 +1072,17 @@
   overflow-y: auto;
 }
 
+/* Popup is hoisted to play-area (not content) so overflow on content cannot clip it. */
+.h5p-mc-play-area > .h5p-question-feedback.h5p-question-popup {
+  width: min(90%, 100%);
+  max-width: calc(100% - 2em);
+  z-index: 20;
+}
+
+.h5p-mc-play-area > .h5p-question-feedback-tail {
+  z-index: 19;
+}
+
 .h5p-mc-play-area .h5p-question-feedback.h5p-question-popup {
   width: min(90%, 100%);
   max-width: 100%;

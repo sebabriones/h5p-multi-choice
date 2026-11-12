@@ -181,8 +181,46 @@ function usesFeedbackPopup(content, popupSettings) {
 }
 
 /**
+ * QuestionCFRD appends the feedback popup inside .h5p-question-content, which scrolls
+ * and clips (overflow). Move popup + tail to .h5p-mc-play-area so they overlay the frame.
+ * Must run before Question's deferred positionFeedbackPopup (setTimeout 0) so the parent
+ * used for centering is already the play area.
+ *
+ * @param {H5P.MultiChoiceCFRD} instance
+ */
+function hoistFeedbackPopupToPlayArea(instance) {
+  var $ = H5P.jQuery;
+  var $playArea = instance && instance.$playArea;
+  var $popup;
+  var $tail;
+
+  if (!$playArea || !$playArea.length) {
+    return;
+  }
+
+  $popup = $playArea.find('.h5p-question-feedback.h5p-question-popup').first();
+  if (!$popup.length) {
+    return;
+  }
+
+  $tail = $popup.siblings('.h5p-question-feedback-tail');
+  if (!$tail.length) {
+    $tail = $playArea.find('.h5p-question-feedback-tail').first();
+  }
+
+  if (!$popup.parent().is($playArea)) {
+    $popup.appendTo($playArea);
+  }
+
+  if ($tail.length && !$tail.parent().is($playArea)) {
+    $tail.appendTo($playArea);
+  }
+}
+
+/**
  * Move inline scorebar/feedback out of the play area (QuestionCFRD insert() anchors
  * after content, which lives inside .h5p-mc-play-area after setupPlayAreaLayout).
+ * Popup feedback stays in the play area (direct child after hoist).
  *
  * @param {H5P.jQuery} $container
  */
@@ -535,6 +573,8 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     overallFeedback: {
       popupBackgroundColor: '#ffffff',
       feedbackTextColor: '#333333',
+      feedbackBodyFontSize: 1,
+      feedbackCloseIconSize: 1.2,
       overallFeedback: []
     },
     weight: 1,
@@ -584,13 +624,24 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     params.overallFeedback = {
       popupBackgroundColor: '#ffffff',
       feedbackTextColor: '#333333',
+      feedbackBodyFontSize: 1,
+      feedbackCloseIconSize: 1.2,
       overallFeedback: params.overallFeedback
     };
   }
-  else if (params.overallFeedback && typeof params.overallFeedback === 'object' &&
-      !params.overallFeedback.popupBackgroundColor) {
-    params.overallFeedback.popupBackgroundColor = '#ffffff';
-    params.overallFeedback.feedbackTextColor = '#333333';
+  else if (params.overallFeedback && typeof params.overallFeedback === 'object') {
+    if (!params.overallFeedback.popupBackgroundColor) {
+      params.overallFeedback.popupBackgroundColor = '#ffffff';
+    }
+    if (!params.overallFeedback.feedbackTextColor) {
+      params.overallFeedback.feedbackTextColor = '#333333';
+    }
+    if (params.overallFeedback.feedbackBodyFontSize == null) {
+      params.overallFeedback.feedbackBodyFontSize = 1;
+    }
+    if (params.overallFeedback.feedbackCloseIconSize == null) {
+      params.overallFeedback.feedbackCloseIconSize = 1.2;
+    }
   }
 
   self.playAreaSize = PlayArea ? PlayArea.getDesignSize() : null;
@@ -600,11 +651,22 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
     self.setFeedback = function (content, score, maxScore, scoreBarLabel, helpText, popupSettings) {
       var result = originalSetFeedback.apply(self, arguments);
 
-      if (self.$container && self.$container.length &&
-          !usesFeedbackPopup(content, popupSettings)) {
+      if (usesFeedbackPopup(content, popupSettings)) {
+        hoistFeedbackPopupToPlayArea(self);
+      }
+      else if (self.$container && self.$container.length) {
         scheduleInlineEvaluationLayout(self.$container, self);
       }
 
+      return result;
+    };
+  }
+
+  var originalShowFeedbackPopup = self.showFeedbackPopup;
+  if (typeof originalShowFeedbackPopup === 'function') {
+    self.showFeedbackPopup = function () {
+      var result = originalShowFeedbackPopup.apply(self, arguments);
+      hoistFeedbackPopupToPlayArea(self);
       return result;
     };
   }
@@ -1399,6 +1461,9 @@ H5P.MultiChoiceCFRD = function (options, contentId, contentData) {
         alwaysShowClose: true,
         dismissible: true,
         popupBackgroundColor: resolved.popupBackgroundColor,
+        feedbackBodyFontSize: resolved.feedbackBodyFontSize,
+        feedbackLeadFontSize: resolved.feedbackLeadFontSize,
+        feedbackCloseIconSize: resolved.feedbackCloseIconSize,
         plainText: resolved.plainText,
         onClose: function () {
           self.showButton('show-feedback');
