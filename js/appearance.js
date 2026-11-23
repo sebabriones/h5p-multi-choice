@@ -351,13 +351,13 @@ H5P.MultiChoiceCFRD = H5P.MultiChoiceCFRD || {};
     var config = (H5P.QuestionCFRD && H5P.QuestionCFRD.normalizeOverallFeedbackConfig) ?
       H5P.QuestionCFRD.normalizeOverallFeedbackConfig(overallFeedback) :
       {
-        popupBackgroundColor: '#ffffff',
-        feedbackTextColor: '#333333'
+        popupBackgroundColor: '#ffffff'
       };
 
+    // Default text color for unstyled HTML; fragment colors come from the feedback editor.
     return {
       feedbackBackground: config.popupBackgroundColor || '#ffffff',
-      feedbackTextColor: config.feedbackTextColor || '#333333'
+      feedbackTextColor: '#333333'
     };
   }
 

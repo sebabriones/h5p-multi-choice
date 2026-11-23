@@ -369,13 +369,19 @@ H5PUpgrades['H5P.MultiChoiceCFRD'] = (function () {
         if (Array.isArray(overallFeedback)) {
           parameters.overallFeedback = {
             popupBackgroundColor: '#ffffff',
-            feedbackTextColor: '#333333',
+            feedbackBodyFontSize: 1,
+            feedbackCloseIconSize: 1.2,
             overallFeedback: overallFeedback
           };
         }
         else if (overallFeedback && typeof overallFeedback === 'object' && !overallFeedback.popupBackgroundColor) {
           overallFeedback.popupBackgroundColor = '#ffffff';
-          overallFeedback.feedbackTextColor = '#333333';
+          if (overallFeedback.feedbackBodyFontSize == null) {
+            overallFeedback.feedbackBodyFontSize = 1;
+          }
+          if (overallFeedback.feedbackCloseIconSize == null) {
+            overallFeedback.feedbackCloseIconSize = 1.2;
+          }
         }
 
         finished(null, parameters);
